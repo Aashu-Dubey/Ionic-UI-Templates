@@ -1,0 +1,31 @@
+ion-toolbar {
+  --background: white;
+
+  @media (prefers-color-scheme: dark) {
+    --background: var(--ion-background-color);
+  }
+}
+
+.md ion-toolbar {
+  --padding-top: var(--status-bar-height);
+}
+
+ion-title {
+  font-size: 22px;
+  font-family: WorkSans-Bold;
+  color: var(--color-darkText);
+}
+
+ion-title.md {
+  text-align: center;
+}
+
+ion-item {
+  --padding-end: 0px;
+  --inner-padding-end: 0px;
+  border-radius: 4px;
+}
+
+.material-icons.darkgrey {
+  color: var(--color-darkgrey);
+}

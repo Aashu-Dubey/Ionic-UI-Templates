@@ -1,0 +1,92 @@
+$grey: #3a5160;
+
+:root {
+  --color-notWhite: rgba(237, 240, 242, 0.5);
+  --color-darkgrey: #313a44;
+  --color-nearlyBlack: #213333;
+  --color-darkText: #253840;
+  --color-username: $grey;
+  --shadow-color: rgb(128, 128, 128, 0.6);
+  --shadow-color2: rgb(158, 158, 158, 0.6);
+
+  --feedback-input-bg: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-notWhite: rgb(33, 37, 41);
+    --color-darkgrey: #fefefe;
+    --color-nearlyBlack: #fefefe;
+    --color-darkText: #fefefe;
+    --color-username: #fefefe;
+    --shadow-color: #000000;
+    --shadow-color2: #212121;
+
+    --feedback-input-bg: rgb(255, 255, 255, 0.04);
+  }
+
+  .ios body,
+  .md body {
+    --ion-background-color: rgb(44, 48, 54);
+  }
+}
+
+.divider {
+  height: 0.5px;
+  background-color: rgba(58, 81, 96, 0.4);
+}
+
+@font-face {
+  font-family: "WorkSans-Bold";
+  src: url(../assets/fonts/WorkSans-Bold.ttf);
+}
+
+@font-face {
+  font-family: "WorkSans-Medium";
+  src: url(../assets/fonts/WorkSans-Medium.ttf);
+}
+
+@font-face {
+  font-family: "WorkSans-Regular";
+  src: url(../assets/fonts/WorkSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: "WorkSans-SemiBold";
+  src: url(../assets/fonts/WorkSans-SemiBold.ttf);
+}
+
+// ref: 'https://stackoverflow.com/a/50270004', 'https://developers.google.com/fonts/docs/material_icons#setup_method_2_self_hosting'
+$font-path: "../assets/fonts";
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Material Icons"), local("MaterialIcons-Regular"),
+    url($font-path + "/MaterialIcons-Regular.ttf") format("truetype");
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: "liga";
+}

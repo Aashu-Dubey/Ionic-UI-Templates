@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons> -->
+    <ion-title>Ionic UI</ion-title>
+    <ion-buttons slot="end" (click)="multiple = !multiple">
+      <ion-button>
+        <i class="material-icons darkgrey" slot="icon-only">
+          {{multiple ? 'dashboard' : 'view_agenda'}}
+        </i>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <!-- Initial 'opacity: 0' and timer just to fix list flicker issue especially on Android -->
+      <ion-col
+        style="opacity: 0"
+        [size]="multiple ? 6 : 12"
+        *ngFor="let temp of templates; trackBy: listKeyExtractor"
+        #templateList
+      >
+        <ion-item
+          class="ion-no-padding ion-activatable"
+          lines="none"
+          (click)="onScreenClick()"
+        >
+          <ion-img [src]="temp.background"> </ion-img>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

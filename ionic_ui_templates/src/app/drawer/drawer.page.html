@@ -1,0 +1,96 @@
+<div>
+  <ion-split-pane contentId="main-content">
+    <ion-menu
+      class="menu-type-reveal"
+      style="--width: {{drawerWidth}}px"
+      side="start"
+      menuId="main-menu"
+      contentId="main-content"
+      type="my-reveal"
+      [maxEdgeStart]="platform.width()"
+    >
+      <div class="headerToolbar">
+        <ion-avatar class="userImage" #userAvatar>
+          <ion-img src="assets/home/userImage.png" alt="User Image"></ion-img>
+        </ion-avatar>
+        <div class="nameContainer">
+          <ion-label class="userName">Chris Hemsworth</ion-label>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <ion-content>
+        <ion-list class="ion-no-padding">
+          <ion-menu-toggle
+            auto-hide="false"
+            *ngFor="let p of appPages"
+            #drawerItemList
+          >
+            <ion-item
+              class="drawerItem"
+              lines="none"
+              detail="false"
+              routerDirection="root"
+              [routerLink]="p.url ? [p.url] : []"
+              (click)="onDrawerNavigate(p)"
+            >
+              <ion-item
+                class="drawerInnerItem"
+                [style.--width]="rowWidth + 'px'"
+                [style.--background]="activeTab === p.name ? 'rgba(33, 150, 243, 0.2)' : 'transparent'"
+                lines="none"
+              ></ion-item>
+              <i
+                *ngIf="!p.isAsset"
+                [style.color]="activeTab === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
+                class="material-icons icon-margin"
+              >
+                {{p.icon}}
+              </i>
+              <ion-img
+                *ngIf="p.isAsset"
+                style="width: 24px; height: 24px"
+                class="icon-margin"
+                [ngClass]="{'imgTintBlue': activeTab === p.name, 'imgTintBlack': activeTab !== p.name}"
+                src="assets/home/supportIcon.png"
+                [alt]="p.name"
+              ></ion-img>
+              <ion-label
+                style="font-weight: 500; font-size: 16px; margin-left: 8px"
+                [style.color]="activeTab === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
+                >{{p.name}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+      <div class="divider"></div>
+      <ion-footer class="ion-no-border">
+        <ion-toolbar class="ion-no-padding">
+          <ion-item button="true" detail="false" lines="none">
+            <ion-label class="sign-out-text">Sign Out</ion-label>
+            <i class="material-icons colorRed">power_settings_new</i>
+          </ion-item>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-menu>
+
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+
+  <!-- Reference:- https://codepen.io/carlosriera/pen/qNgAEo/ -->
+  <!-- [ngClass]="{'open': isMenuActive === true}" -->
+  <div
+    style="position: absolute"
+    class="menu menu--back5 ion-activatable"
+    (click)="onMenuClick()"
+    [hidden]="isSplitPane"
+    #menuIcon
+  >
+    <div class="menu__icon">
+      <div class="menu__line menu__line--1"></div>
+      <div class="menu__line menu__line--2"></div>
+      <div class="menu__line menu__line--3"></div>
+    </div>
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+  </div>
+</div>

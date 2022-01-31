@@ -1,0 +1,161 @@
+// set menu's background color, instead of setting it on all elements
+// ref:- 'https://stackoverflow.com/a/52377135'
+ion-menu {
+  --ion-background-color: var(--color-notWhite, white);
+
+  ion-toolbar {
+    --background: var(--color-notWhite, white);
+  }
+}
+
+ion-list,
+ion-item {
+  --ion-item-background: transparent; // especially for dark mode
+}
+
+.headerToolbar {
+  padding: 56px 16px 16px;
+  background-color: var(--color-notWhite, white); // especially for dark mode
+
+  ion-avatar.userImage {
+    width: 120px;
+    height: 120px;
+    box-shadow: 2px 4px 8px 0px var(--shadow-color);
+  }
+
+  div.nameContainer {
+    margin-top: 8px;
+    margin-left: 4px;
+
+    .userName {
+      font-size: 18px;
+      font-family: WorkSans-SemiBold;
+      color: var(--color-username); // grey
+    }
+  }
+}
+
+ion-item.drawerItem {
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  --padding-start: 0px;
+  --padding-end: 0px;
+  overflow: hidden;
+  // Just to fix radius gets removed on iOS after translateX animation issue
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+
+  ion-item.drawerInnerItem {
+    --background: var(--background);
+    width: var(--width);
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
+    position: absolute;
+  }
+
+  .icon-margin {
+    margin-left: 14px;
+  }
+
+  // I couldn't found a way to tint an icon in css, this is a workaround
+  // get values from here "https://codepen.io/sosuke/pen/Pjoqqp"
+  $blueTint: invert(46%) sepia(90%) saturate(2764%) hue-rotate(189deg)
+    brightness(104%) contrast(91%);
+  $blackTint: brightness(0%);
+
+  .imgTintBlue {
+    filter: $blueTint;
+  }
+  .imgTintBlack {
+    filter: $blackTint;
+
+    @media (prefers-color-scheme: dark) {
+      filter: $blackTint invert(1);
+    }
+  }
+}
+
+.sign-out-text {
+  font-size: 16px;
+  font-family: WorkSans-SemiBold;
+  color: var(--color-darkText);
+}
+
+.material-icons.colorRed {
+  color: red;
+}
+
+$size: 40px;
+$height: 14px;
+$width: 20px;
+$line-size: 2px;
+$line-color: var(--color-darkgrey);
+$line-radius: $line-size;
+.menu {
+  position: relative;
+  height: $size;
+  width: $size;
+  cursor: pointer;
+  margin-left: 8px;
+  overflow: hidden;
+
+  margin-top: calc(var(--status-bar-height) + 4px);
+
+  &__icon {
+    position: absolute;
+    width: $width;
+    height: $height;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &__line {
+    position: absolute;
+    left: 0;
+    background-color: $line-color;
+    height: $line-size;
+    width: 100%;
+    border-radius: $line-radius;
+    pointer-events: none;
+    &--1 {
+      top: 0;
+    }
+    &--2 {
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    &--3 {
+      bottom: 0;
+    }
+  }
+
+  /* &--back5 &__icon {
+    transition: transform 0.3s ease-in-out;
+  }
+  &--back5 &__line--1,
+  &--back5 &__line--3 {
+    transition: transform 0.3s ease-in-out;
+  } */
+  /* // Open
+  &--back5.open &__icon {
+    transform: rotate(180deg) translate(50%, 50%);
+    // transition: transform .3s ease-in-out;
+  }
+  &--back5.open &__line--1 {
+    transform: translate3d(6.5px, 2px, 0) rotate(45deg) scaleX(0.6);
+    // transition: transform .3s ease-in-out;
+  }
+  &--back5.open &__line--3 {
+    transform: translate3d(6.5px, -2px, 0) rotate(-45deg) scaleX(0.6);
+    // transition: transform .3s ease-in-out;
+  } */
+}
+
+.ios :host .menu {
+  margin-top: calc(var(--ion-safe-area-top) + 4px);
+}
