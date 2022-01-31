@@ -8,7 +8,7 @@ You can also check my alternate and more complete version of this project in **R
 
 ### Android
 
-You can run app on Android following [these](ionic_ui_templates/README.md#running-locally) steps or download the latest APK [here](images/31-01-2022.apk).
+You can run app on Android following [these](ionic_ui_templates/README.md#running-locally) steps or download the latest APK [here](https://github.com/Aashu-Dubey/Ionic_UI_Templates/raw/main/images/31-01-2022.apk).
 
 ### iOS
 
