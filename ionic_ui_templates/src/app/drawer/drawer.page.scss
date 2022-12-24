@@ -133,27 +133,6 @@ $line-radius: $line-size;
       bottom: 0;
     }
   }
-
-  /* &--back5 &__icon {
-    transition: transform 0.3s ease-in-out;
-  }
-  &--back5 &__line--1,
-  &--back5 &__line--3 {
-    transition: transform 0.3s ease-in-out;
-  } */
-  /* // Open
-  &--back5.open &__icon {
-    transform: rotate(180deg) translate(50%, 50%);
-    // transition: transform .3s ease-in-out;
-  }
-  &--back5.open &__line--1 {
-    transform: translate3d(6.5px, 2px, 0) rotate(45deg) scaleX(0.6);
-    // transition: transform .3s ease-in-out;
-  }
-  &--back5.open &__line--3 {
-    transform: translate3d(6.5px, -2px, 0) rotate(-45deg) scaleX(0.6);
-    // transition: transform .3s ease-in-out;
-  } */
 }
 
 .ios :host .menu {

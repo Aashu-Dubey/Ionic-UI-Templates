@@ -28,10 +28,7 @@ export const revealAnimation: AnimationBuilder = (
   const contentOpen = createAnimation()
     .addElement(menu.contentEl)
     .fromTo('transform', 'translateX(0px)', `translateX(${openedX})`);
-  /* menu.contentEl.insertAdjacentHTML(
-    'afterbegin',
-    '<div style="margin-top: 50px">inserted text</div>'
-  ); */
+
   return createAnimation()
     .duration(400)
     .addAnimation(contentOpen)
@@ -44,9 +41,9 @@ export const revealAnimation: AnimationBuilder = (
   styleUrls: ['./drawer.page.scss'],
 })
 export class DrawerPage implements AfterViewInit {
-  @ViewChild('userAvatar', { read: ElementRef, static: true })
+  @ViewChild('userAvatar', { read: ElementRef })
   userAvatarRef: ElementRef;
-  @ViewChild('menuIcon', { read: ElementRef, static: true })
+  @ViewChild('menuIcon', { read: ElementRef })
   menuIconRef: ElementRef;
   @ViewChildren('drawerItemList', { read: ElementRef })
   drawerItemListRef: QueryList<ElementRef>;
@@ -113,7 +110,7 @@ export class DrawerPage implements AfterViewInit {
         .fromTo(
           'transform',
           `translateX(-${this.rowWidth}px)`,
-          'translateX(-0px)'
+          'translateX(0px)'
         );
       drawerItems.push(drawerItemAnim);
     }
