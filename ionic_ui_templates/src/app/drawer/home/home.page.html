@@ -27,7 +27,9 @@
         <ion-item
           class="ion-no-padding ion-activatable"
           lines="none"
-          (click)="onScreenClick()"
+          detail="false"
+          (click)="onScreenClick(temp)"
+          [routerLink]="temp.screenPath ? [temp.screenPath] : []"
         >
           <ion-img [src]="temp.background"> </ion-img>
           <ion-ripple-effect></ion-ripple-effect>

@@ -16,24 +16,24 @@ import { Template } from 'src/app/types/home';
 export class HomePage implements AfterViewInit {
   // ref: "https://ionicframework.com/blog/building-interactive-ionic-apps-with-gestures-and-animations/"
   @ViewChildren('templateList', { read: ElementRef })
-  templateListRef: QueryList<ElementRef>;
+  templateListRef?: QueryList<ElementRef>;
 
   templates: Template[] = [
     {
       id: 0,
       background: 'assets/hotel/hotel_booking.png',
       // screenPath: 'hotel-booking',
-      screenPath: '',
+      screenPath: undefined,
     },
     {
       id: 1,
       background: 'assets/fitness_app/fitness_app.png',
-      screenPath: '',
+      screenPath: undefined,
     },
     {
       id: 2,
       background: 'assets/design_course/design_course.png',
-      screenPath: '',
+      screenPath: undefined,
     },
   ];
   multiple = true;
@@ -54,9 +54,9 @@ export class HomePage implements AfterViewInit {
   }
 
   initListAnimation() {
-    const itemRefArray = this.templateListRef.toArray();
-    for (let i = 0; i < itemRefArray.length; i++) {
-      const element = itemRefArray[i].nativeElement;
+    const itemRefArray = this.templateListRef?.toArray();
+    for (let i = 0; i < itemRefArray!.length; i++) {
+      const element = itemRefArray![i].nativeElement;
 
       this.animationCtrl
         .create()
@@ -70,12 +70,14 @@ export class HomePage implements AfterViewInit {
     }
   }
 
-  async onScreenClick() {
-    const toast = await this.toastController.create({
-      message: 'Coming soon...',
-      duration: 2000,
-    });
-    toast.present();
+  async onScreenClick(temp: Template) {
+    if (!temp.screenPath) {
+      const toast = await this.toastController.create({
+        message: 'Coming soon...',
+        duration: 2000,
+      });
+      toast.present();
+    }
   }
 
   listKeyExtractor(i: number, screen: Template): number {

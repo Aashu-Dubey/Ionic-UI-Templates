@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonRouterOutlet, Platform } from '@ionic/angular';
-import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
+import { StatusBar } from '@capacitor/status-bar';
 import StatusBarAndroid from './myPlugin/StatusBarAndroid';
 import { App } from '@capacitor/app';
 
@@ -11,16 +11,16 @@ import { App } from '@capacitor/app';
 })
 export class AppComponent {
   // https://github.com/ionic-team/ionic-framework/issues/21630#issuecomment-683007162
-  @ViewChild(IonRouterOutlet, { static: true }) routerOutlet: IonRouterOutlet;
+  @ViewChild(IonRouterOutlet, { static: true }) routerOutlet?: IonRouterOutlet;
 
-  constructor(private platform: Platform, private statusBar: StatusBar) {
+  constructor(private platform: Platform) {
     this.platform.ready().then(() => {
       this.handleStatusBar();
     });
 
     // By default Ionic doesn't close app on back click, so we handle that here
     this.platform.backButton.subscribeWithPriority(-1, () => {
-      if (!this.routerOutlet.canGoBack()) {
+      if (!this.routerOutlet?.canGoBack()) {
         App.exitApp();
       }
     });
@@ -43,6 +43,6 @@ export class AppComponent {
     const barHeight = isAndroid ? statusBarHeight : safeArea;
     elStyle.setProperty('--status-bar-height', barHeight);
 
-    this.statusBar.overlaysWebView(true);
+    StatusBar.setOverlaysWebView({ overlay: true });
   }
 }

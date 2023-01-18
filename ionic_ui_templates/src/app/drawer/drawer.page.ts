@@ -26,7 +26,7 @@ export const revealAnimation: AnimationBuilder = (
 ) => {
   const openedX = menu.width * (menu.isEndSide ? -1 : 1) + 'px';
   const contentOpen = createAnimation()
-    .addElement(menu.contentEl)
+    .addElement(menu.contentEl!)
     .fromTo('transform', 'translateX(0px)', `translateX(${openedX})`);
 
   return createAnimation()
@@ -42,11 +42,11 @@ export const revealAnimation: AnimationBuilder = (
 })
 export class DrawerPage implements AfterViewInit {
   @ViewChild('userAvatar', { read: ElementRef })
-  userAvatarRef: ElementRef;
+  userAvatarRef?: ElementRef;
   @ViewChild('menuIcon', { read: ElementRef })
-  menuIconRef: ElementRef;
+  menuIconRef?: ElementRef;
   @ViewChildren('drawerItemList', { read: ElementRef })
-  drawerItemListRef: QueryList<ElementRef>;
+  drawerItemListRef?: QueryList<ElementRef>;
 
   appPages: DrawerScreen[] = [
     { name: 'Home', icon: 'home', url: '/menu/home' },
@@ -61,8 +61,8 @@ export class DrawerPage implements AfterViewInit {
     { name: 'Rate the app', icon: 'share', url: undefined },
     { name: 'About Us', icon: 'info', url: undefined },
   ];
-  drawerWidth: number;
-  rowWidth: number;
+  drawerWidth: number = 280;
+  rowWidth: number = this.drawerWidth - 64;
   activeTab = 'Home';
   isSplitPane = false; // hide menu button if split pane is enabled (desktop, pad etc.)
 
@@ -96,14 +96,14 @@ export class DrawerPage implements AfterViewInit {
   initDrawerAnimation() {
     // Avatar animation
     const avatarAnim = createAnimation()
-      .addElement(this.userAvatarRef.nativeElement)
+      .addElement(this.userAvatarRef?.nativeElement)
       // .easing('cubic-bezier(0.4, 0.0, 0.2, 1.0)')
       .fromTo('transform', 'rotate(36deg) scale(0.8)', 'rotate(0deg) scale(1)');
 
     // Drawer Items active background
     const drawerItems: Animation[] = [];
-    const itemRefArray = this.drawerItemListRef.toArray();
-    for (const itemRef of itemRefArray) {
+    const itemRefArray = this.drawerItemListRef?.toArray();
+    for (const itemRef of itemRefArray!) {
       const element = itemRef.nativeElement;
       const drawerItemAnim = createAnimation()
         .addElement(element.querySelector('.drawerInnerItem'))
@@ -116,7 +116,7 @@ export class DrawerPage implements AfterViewInit {
     }
 
     // Menu -> arrow icon animation
-    const menuElement = this.menuIconRef.nativeElement;
+    const menuElement = this.menuIconRef?.nativeElement;
     // '180.01deg' because particularly in android it's rotating opposite menu open/close (not on drag though)
     // https://stackoverflow.com/a/25694077
     const iconAnim = createAnimation()
