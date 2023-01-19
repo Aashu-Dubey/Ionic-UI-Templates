@@ -9,8 +9,6 @@ import { tabItemsList } from './models/tabs';
   styleUrls: ['./course-rive.page.scss'],
 })
 export class CourseRivePage implements OnInit {
-  // @ViewChild(IonModal) onBoardingModal?: IonModal;
-
   @ViewChild('mainContent', { read: ElementRef }) mainContentRef?: ElementRef;
   @ViewChild('menuToggleBtn', { read: ElementRef })
   menuToggleBtnRef?: ElementRef;
@@ -78,56 +76,7 @@ export class CourseRivePage implements OnInit {
     } else {
       allAnim.direction('reverse').play();
     }
-    /* if (this.showOnBoarding) {
-      this.onBoardingModal?.present();
-    } else {
-      this.onBoardingModal?.dismiss();
-    } */
   }
-
-  /* enterAnimation = (baseEl: HTMLElement) => {
-    const root = baseEl.shadowRoot;
-
-    const wrapperAnimation = this.animationCtrl
-      .create()
-      .addElement(root?.querySelector('.modal-wrapper')!)
-      .fromTo(
-        'transform',
-        'translateY(calc(-1 * (100vh + var(--ion-safe-area-bottom) + 24px)))',
-        'translateY(calc(-1 * (var(--ion-safe-area-bottom) + 24px)))'
-      );
-
-    const contentViewAnim = this.animationCtrl
-      .create()
-      .addElement(this.mainContentRef?.nativeElement)
-      .fromTo('transform', 'none', 'scale(0.92)');
-
-    const bottomTabAnim = this.animationCtrl
-      .create()
-      .addElement(this.bottomTabRef?.nativeElement)
-      .fromTo('transform', 'none', 'translateY(200px)');
-
-    const tabWhiteBgAnim = this.animationCtrl
-      .create()
-      .addElement(this.tabWhiteBgRef?.nativeElement)
-      .fromTo('opacity', '1', '0');
-
-    return this.animationCtrl
-      .create()
-      .addElement(baseEl)
-      .easing('ease-in-out')
-      .duration(500)
-      .addAnimation([
-        contentViewAnim,
-        wrapperAnimation,
-        bottomTabAnim,
-        tabWhiteBgAnim,
-      ]);
-  };
-
-  leaveAnimation = (baseEl: HTMLElement) => {
-    return this.enterAnimation(baseEl).direction('reverse');
-  }; */
 
   onMenuToggle() {
     StatusBar.setStyle({
