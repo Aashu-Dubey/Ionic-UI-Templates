@@ -1,0 +1,76 @@
+.gradient-border {
+  max-width: 768px;
+  position: fixed;
+  left: 24px;
+  right: 24px;
+  bottom: calc(var(--ion-safe-area-bottom) + 8px);
+  margin: auto;
+  box-shadow: 0 20px 20px rgba(var(--cr-color-background2-rgb), 0.3);
+  border: 0.5px solid transparent;
+  border-radius: 24px;
+  background: linear-gradient(
+      90deg,
+      rgb(255 255 255 / 0.5),
+      rgb(255 255 255 / 0)
+    )
+    border-box;
+  //   z-index: 2;
+
+  ion-row.tabs-container {
+    padding: 12px;
+    background-color: rgba(var(--cr-color-background2-rgb), 0.8);
+    border-radius: 24px;
+
+    ion-col {
+      height: 36px;
+      --ion-grid-column-padding: 0px;
+      text-align: center;
+      cursor: pointer;
+
+      div.active-indicator-container {
+        position: absolute;
+        top: -4px;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+
+        .active-indicator {
+          height: 4px;
+          background-color: var(--cr-color-accent);
+          border-radius: 2px;
+          transition: width 2s ease-in-out;
+        }
+
+        .expand {
+          width: 20px;
+          animation: expand 0.3s ease-in-out;
+        }
+      }
+    }
+
+    // item spacing
+    ion-col + ion-col {
+      margin-left: 8px;
+    }
+  }
+
+  @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    ion-row.tabs-container {
+      background-color: rgba(var(--cr-color-background2-rgb), 0.8);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+  }
+}
+
+@keyframes expand {
+  0% {
+    width: 0px;
+  }
+
+  100% {
+    width: 20px;
+  }
+}

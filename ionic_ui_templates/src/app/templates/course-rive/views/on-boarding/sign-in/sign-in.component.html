@@ -1,0 +1,84 @@
+<div class="gradient-border">
+  <div class="sign-in-container">
+    <ion-text class="font-largeTitle">Sign in</ion-text>
+    <ion-text class="font-headline subtitle">
+      <p>
+        Access to 240+ hours of content. Learn design and code, by building real
+        apps with React and Swift.
+      </p>
+    </ion-text>
+
+    <ion-text class="font-subheadline input-title">
+      <p>Email</p>
+    </ion-text>
+    <ion-item class="input-container" lines="none">
+      <ion-img src="assets/course_rive/icon_email.svg"></ion-img>
+      <ion-input
+        type="email"
+        autocomplete="email"
+        inputmode="email"
+        enterkeyhint="next"
+        [(ngModel)]="email"
+      ></ion-input>
+    </ion-item>
+
+    <ion-text class="font-subheadline input-title">
+      <p>Password</p>
+    </ion-text>
+    <ion-item class="input-container" lines="none">
+      <ion-img src="assets/course_rive/icon_lock.svg"></ion-img>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <ion-button
+      class="sign-in-button font-headline"
+      expand="block"
+      type="submit"
+      (click)="
+        signIn(triggerSuccess, triggerError, triggerReset, triggerConfetti)
+      "
+    >
+      <ion-icon class="icon" name="arrow-forward-outline"></ion-icon>
+      Sign In
+    </ion-button>
+
+    <ion-row class="or-divider">
+      <div class="divider"></div>
+      <ion-text class="or-text font-subheadline2">OR</ion-text>
+      <div class="divider"></div>
+    </ion-row>
+
+    <ion-text class="footer-text font-subheadline">
+      <p>Sign up with Email, Apple or Google</p>
+    </ion-text>
+    <ion-row class="footer-container">
+      <ion-img src="assets/course_rive/logos/logo_email.svg"></ion-img>
+      <ion-img src="assets/course_rive/logos/logo_apple.svg"></ion-img>
+      <ion-img src="assets/course_rive/logos/logo_google.svg"></ion-img>
+    </ion-row>
+
+    <div class="close-container">
+      <ion-button (click)="onSignInClose()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="rive-auth-indicator-container">
+      <canvas riv="check" width="100" height="100" [hidden]="!isLoading">
+        <riv-state-machine name="State Machine 1" play>
+          <riv-input #triggerSuccess="rivInput" name="Check"></riv-input>
+          <riv-input #triggerError="rivInput" name="Error"></riv-input>
+          <riv-input #triggerReset="rivInput" name="Reset"></riv-input>
+        </riv-state-machine>
+      </canvas>
+      <canvas class="rive-confetti" riv="confetti" width="1500" height="1500">
+        <riv-state-machine name="State Machine 1" play>
+          <riv-input
+            #triggerConfetti="rivInput"
+            name="Trigger explosion"
+          ></riv-input>
+        </riv-state-machine>
+      </canvas>
+    </div>
+  </div>
+</div>

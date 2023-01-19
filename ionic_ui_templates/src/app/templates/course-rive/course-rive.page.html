@@ -1,0 +1,73 @@
+<div class="screen-background"></div>
+
+<!-- Side Menu -->
+<cr-side-menu #sideMenu></cr-side-menu>
+
+<cr-on-boarding
+  #onBoarding
+  class="on-boarding-container"
+  (closeOnBoardingEvent)="showOnBoardingToggle()"
+></cr-on-boarding>
+
+<ion-content #mainContent>
+  <div class="home-tab-container" [hidden]="selectedTab.id !== tabItems[0].id">
+    <cr-content-view></cr-content-view>
+  </div>
+
+  <div class="other-tabs" [hidden]="selectedTab.id === tabItems[0].id">
+    <ion-text class="font-title">
+      {{selectedTab.artboard.toLowerCase()}}
+    </ion-text>
+  </div>
+
+  <!-- <ion-modal
+    #modal
+    style="
+      --background: transparent;
+      --border-radius: 30px;
+      --box-shadow: 0 40px 40px rgb(0 0 0 / 0.5);
+    "
+    backdropDismiss="false"
+    keepContentsMounted="true"
+    [enterAnimation]="enterAnimation"
+    [leaveAnimation]="leaveAnimation"
+  >
+    <ng-template>
+      <app-on-boarding
+        #onBoarding
+        (closeOnBoardingEvent)="showOnBoardingToggle()"
+      >
+      </app-on-boarding>
+    </ng-template>
+  </ion-modal> -->
+</ion-content>
+
+<div #onBoardingBtn class="on-boarding-btn" (click)="showOnBoardingToggle()">
+  <ion-icon name="person-outline"></ion-icon>
+</div>
+
+<!-- Menu button -->
+<canvas
+  #menuToggleBtn
+  class="side-menu-button"
+  riv="menu_button"
+  width="44"
+  height="44"
+  (click)="onMenuToggle()"
+  *ngIf="showRiveMenuBtn"
+>
+  <riv-state-machine name="State Machine" play>
+    <riv-input name="isOpen" [value]="isMenuOpen"></riv-input>
+  </riv-state-machine>
+</canvas>
+
+<!-- White background behind tab bar that partially shows the tab content -->
+<div #tabWhiteBg class="tabs-white-underlay"></div>
+
+<!-- Custom Tab -->
+<cr-bottom-tab-bar
+  #bottomTabs
+  style="z-index: 2"
+  [selectedTab]="selectedTab"
+  (onTabChange)="selectedTab = $event"
+></cr-bottom-tab-bar>

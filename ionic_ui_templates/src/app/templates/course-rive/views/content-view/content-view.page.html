@@ -1,0 +1,55 @@
+<div>
+  <ion-text class="courses-list-title font-largeTitle">Courses</ion-text>
+  <!-- Course VCard -->
+  <div class="courses-list">
+    <div
+      class="course-container"
+      *ngFor="let course of courses; trackBy: trackCourses"
+      [style.--course-bg]="course.color"
+    >
+      <ion-img class="course-img" [src]="course.image"></ion-img>
+
+      <ion-text class="course-title font-title2">{{course.title}}</ion-text>
+      <ion-text class="course-subtitle font-subtitle">
+        {{course.subtitle}}
+      </ion-text>
+      <ion-text class="course-caption font-footnote2">
+        {{course.caption.toUpperCase()}}
+      </ion-text>
+      <div class="spacer"></div>
+      <ion-row class="avatar-container">
+        <ion-img
+          *ngFor="let number of [1, 2, 3] | shuffleArray; let i = index; trackBy: trackAvatarItems"
+          [style.transform]="'translateX(calc(' + i + ' * -20px))'"
+          src="assets/course_rive/avatars/avatar_{{number}}.svg"
+        ></ion-img>
+      </ion-row>
+    </div>
+  </div>
+
+  <ion-text class="recent-title font-title3">Recent</ion-text>
+  <!-- Recent course Section -->
+  <div class="section-list">
+    <ion-grid class="section-grid">
+      <ion-row>
+        <ion-col
+          *ngFor="let section of courseSections; trackBy: trackCourses"
+          size-lg="6"
+          size="12"
+        >
+          <ion-row class="section-container" [style.background]="section.color">
+            <ion-col>
+              <ion-text class="font-title2">{{section.title}}</ion-text>
+              <br />
+              <div class="spacing"></div>
+              <ion-text class="font-body">{{section.caption}}</ion-text>
+            </ion-col>
+            <ion-col size="auto" class="ion-align-items-center">
+              <ion-img class="section-img" [src]="section.image"></ion-img>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</div>

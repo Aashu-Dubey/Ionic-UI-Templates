@@ -14,6 +14,13 @@ const routes: Routes = [
         (m) => m.HotelBookingPageModule
       ),
   },
+  {
+    path: 'course-rive',
+    loadChildren: () =>
+      import('./templates/course-rive/course-rive.module').then(
+        (m) => m.CourseRivePageModule
+      ),
+  },
 ];
 
 @NgModule({

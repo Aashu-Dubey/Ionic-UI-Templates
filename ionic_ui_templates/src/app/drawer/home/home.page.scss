@@ -24,7 +24,12 @@ ion-title.md {
 ion-item {
   --padding-end: 0px;
   --inner-padding-end: 0px;
-  border-radius: 4px;
+  --border-radius: 4px;
+
+  ion-img {
+    aspect-ratio: 1.5;
+    object-fit: cover;
+  }
 }
 
 .material-icons.darkgrey {

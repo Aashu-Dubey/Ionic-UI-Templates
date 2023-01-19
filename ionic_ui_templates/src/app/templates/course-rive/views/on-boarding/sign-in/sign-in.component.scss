@@ -1,0 +1,174 @@
+.gradient-border {
+  margin: 16px;
+  box-shadow: 0 3px 5px rgba(var(--cr-color-shadow-rgb), 0.3),
+    0 30px 30px rgba(var(--cr-color-shadow-rgb), 0.3);
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background: linear-gradient(
+      90deg,
+      rgb(255 255 255 / 0.8),
+      rgb(255 255 255 / 0.1)
+    )
+    border-box;
+
+  @media only screen and (min-width: 768px) and (min-height: 600px) {
+    margin: 24px;
+  }
+}
+
+div.sign-in-container {
+  text-align: center;
+  padding: 30px;
+  border-radius: 19px; // outer radius - padding
+
+  .subtitle p {
+    margin: 24px 0;
+  }
+
+  .input-title {
+    color: var(--cr-label-color-secondary);
+    text-align: start;
+
+    p {
+      margin-bottom: 8px;
+    }
+  }
+
+  .input-container {
+    --padding-start: 8px;
+    --border-radius: 10px;
+    --border-width: 1px;
+    --border-color: rgb(0 0 0 / 0.1);
+    --background: white;
+
+    // original size of the icons
+    ion-img {
+      width: 36px;
+      height: 40px;
+    }
+
+    ion-input {
+      --padding-start: 8px;
+      --padding-end: 15px;
+      --padding-top: 15px;
+      --padding-bottom: 15px;
+      --color: black;
+      text-align: start;
+      border-radius: 10px;
+    }
+  }
+
+  .sign-in-button {
+    --background: #f77d8e;
+    --background-hover: #f77d8e;
+    --background-activated: pink;
+    --background-focused: pink;
+    --padding-top: 30px;
+    --padding-bottom: 30px;
+    --border-radius: 8px 20px 20px;
+    --box-shadow: 0 10px 20px rgba(247, 125, 142, 0.5);
+    margin: 24px 0;
+    // Setting padding above doesn't shift the ion-button, instead overflow the container, so applying extra margin
+    margin-bottom: 40px;
+
+    .icon {
+      margin-right: 8px;
+    }
+  }
+
+  .or-divider {
+    justify-content: space-around;
+    align-items: center;
+
+    .divider {
+      flex: 1;
+      height: 1px;
+      background-color: rgb(0 0 0 / 0.1);
+    }
+
+    .or-text {
+      color: rgb(0 0 0 / 0.3);
+      margin: 0px 8px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .divider {
+        background-color: rgb(255 255 255 / 0.1);
+      }
+
+      .or-text {
+        color: rgb(255 255 255 / 0.3);
+      }
+    }
+  }
+
+  .footer-text {
+    color: var(--cr-label-color-secondary);
+
+    p {
+      margin: 24px 0;
+    }
+  }
+
+  .footer-container {
+    justify-content: space-between;
+
+    ion-img {
+      width: 64px;
+      height: 70px;
+    }
+  }
+
+  .close-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+
+    ion-button {
+      width: 36px;
+      height: 36px;
+      --background: white;
+      --background-hover: white;
+      --background-activated: lightgrey;
+      --background-focused: lightgrey;
+      --border-radius: 18px;
+      --box-shadow: 0 3px 5px rgba(var(--cr-color-shadow-rgb), 0.3);
+      --padding-top: 0;
+      --padding-start: 0;
+      --padding-end: 0;
+      --padding-bottom: 0;
+
+      ion-icon {
+        color: black;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .rive-auth-indicator-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+
+    .rive-confetti {
+      position: absolute;
+    }
+  }
+}
+
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  div.sign-in-container {
+    background-color: rgba(var(--cr-signin-bg-rgb), 0.8);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}

@@ -1,0 +1,32 @@
+.seperator {
+  height: 1px;
+  background-color: rgb(255 255 255 / 0.1);
+  margin: 0px 16px;
+}
+
+.menu-btn-bg {
+  height: 56px;
+  background: #2196f3;
+  position: absolute;
+  border-radius: 10px;
+}
+
+.menu-btn-container {
+  padding: 12px;
+  align-items: center;
+  cursor: pointer;
+
+  .icon-container {
+    width: 32px;
+    height: 32px;
+    margin-right: 14px;
+
+    canvas {
+      opacity: 0.6;
+    }
+  }
+
+  ion-text {
+    z-index: 1;
+  }
+}

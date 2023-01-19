@@ -1,0 +1,70 @@
+<div class="main-container">
+  <ion-img
+    src="assets/course_rive/spline.svg"
+    class="bg-spline"
+    alt="Spline background for blur effect"
+  ></ion-img>
+
+  <canvas
+    riv="shapes"
+    class="rive-bg"
+    [width]="platform.width()"
+    [height]="platform.height()"
+    *ngIf="showRiveAsset"
+  >
+    <riv-animation name="Animation 1" play></riv-animation>
+  </canvas>
+
+  <!-- Main Content -->
+  <div #container class="content-container">
+    <div class="title">
+      <ion-text>Learn design & code</ion-text>
+    </div>
+    <div class="subtitle font-body">
+      <ion-text>
+        Don’t skip design. Learn design and code, by building real apps with
+        React and Swift. Complete courses about the best tools.
+      </ion-text>
+    </div>
+
+    <div class="spacer"></div>
+
+    <ion-buttons class="startCoursebtn" (click)="startCoursePressed()">
+      <div class="contained shadow"></div>
+      <canvas class="contained" riv="button" width="236" height="64">
+        <riv-player
+          name="active"
+          [(play)]="buttonToggle"
+          autoreset
+          mode="one-shot"
+          *ngIf="showRiveAsset"
+        ></riv-player>
+      </canvas>
+      <div class="contained btnContent">
+        <ion-icon class="arrow" name="arrow-forward-outline"></ion-icon>
+        <ion-text>Start the course</ion-text>
+      </div>
+    </ion-buttons>
+    <ion-text class="footer-text font-footnote">
+      Purchase includes access to 30+ courses, 240+ premium tutorials, 120+
+      hours of videos, source files and certificates.
+    </ion-text>
+  </div>
+
+  <ion-button #closeBtn class="close-btn" (click)="onCloseOnBoarding()">
+    <ion-icon name="close-outline"></ion-icon>
+  </ion-button>
+
+  <ion-modal
+    #modal
+    backdropDismiss="false"
+    [enterAnimation]="enterAnimation"
+    [leaveAnimation]="leaveAnimation"
+  >
+    <ng-template>
+      <div class="ion-page">
+        <cr-sign-in (onClose)="onSignInClose()"></cr-sign-in>
+      </div>
+    </ng-template>
+  </ion-modal>
+</div>

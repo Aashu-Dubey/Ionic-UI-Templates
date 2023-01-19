@@ -1,5 +1,5 @@
 export interface Template {
-  id: number;
+  id: string;
   background: string;
   screenPath?: string;
 }

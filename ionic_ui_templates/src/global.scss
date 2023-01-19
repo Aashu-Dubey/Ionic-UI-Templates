@@ -26,4 +26,7 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 // global app styles
-@import "./app/app.scss";
+@import "./theme/app.scss";
+
+// Course-Rive (./app/templates/course-rive) Template styles
+@import "./theme/course-rive.scss";

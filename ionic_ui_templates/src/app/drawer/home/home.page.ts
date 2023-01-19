@@ -20,18 +20,23 @@ export class HomePage implements AfterViewInit {
 
   templates: Template[] = [
     {
-      id: 0,
+      id: 'course-rive',
+      background: 'assets/course_rive/course_rive.png',
+      screenPath: '/course-rive',
+    },
+    {
+      id: 'hotel-booking',
       background: 'assets/hotel/hotel_booking.png',
       // screenPath: 'hotel-booking',
       screenPath: undefined,
     },
     {
-      id: 1,
+      id: 'fitness-app',
       background: 'assets/fitness_app/fitness_app.png',
       screenPath: undefined,
     },
     {
-      id: 2,
+      id: 'design-course',
       background: 'assets/design_course/design_course.png',
       screenPath: undefined,
     },
@@ -80,7 +85,7 @@ export class HomePage implements AfterViewInit {
     }
   }
 
-  listKeyExtractor(i: number, screen: Template): number {
+  listKeyExtractor(_i: number, screen: Template) {
     return screen.id;
   }
 }

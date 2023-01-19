@@ -1,0 +1,27 @@
+<div class="gradient-border">
+  <ion-row class="tabs-container">
+    <ion-col
+      *ngFor="let tab of tabItems; trackBy: trackTabItems"
+      (click)="onIconPress(tab)"
+    >
+      <div class="active-indicator-container">
+        <div
+          class="active-indicator"
+          [ngClass]="selectedTab.id === tab.id ? 'expand' : ''"
+        ></div>
+      </div>
+      <canvas
+        [ngStyle]="{ opacity: selectedTab.id === tab.id ? 1 : 0.5 }"
+        riv="icons"
+        [artboard]="tab.artboard"
+        width="36"
+        height="36"
+        *ngIf="tab.show"
+      >
+        <riv-state-machine [name]="tab.stateMachine" play>
+          <riv-input name="active" [value]="tab.status"></riv-input>
+        </riv-state-machine>
+      </canvas>
+    </ion-col>
+  </ion-row>
+</div>

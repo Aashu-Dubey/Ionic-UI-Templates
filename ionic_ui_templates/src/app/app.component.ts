@@ -43,6 +43,6 @@ export class AppComponent {
     const barHeight = isAndroid ? statusBarHeight : safeArea;
     elStyle.setProperty('--status-bar-height', barHeight);
 
-    StatusBar.setOverlaysWebView({ overlay: true });
+    StatusBar.setOverlaysWebView({ overlay: true }).catch(() => {});
   }
 }

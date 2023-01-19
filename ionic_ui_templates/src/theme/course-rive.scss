@@ -1,0 +1,86 @@
+:root {
+  --cr-color-accent: #5e9eff;
+  --cr-color-shadow: #4a5367;
+  --cr-color-shadow-rgb: 74, 83, 103;
+  --cr-color-background: #f2f6ff;
+  --cr-color-background2: #17203a;
+  --cr-color-background2-rgb: 23, 32, 58;
+  --cr-label-color-secondary: rgba(60, 60, 67, 0.6);
+  // Sign In
+  --cr-signin-bg-rgb: 242, 242, 247;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cr-color-shadow: #000000;
+    --cr-color-background: #25254b;
+    --cr-label-color-secondary: rgba(235, 235, 245, 0.6);
+    // Sign In
+    --cr-signin-bg-rgb: 28, 28, 30;
+  }
+}
+
+@font-face {
+  font-family: "Inter-Regular";
+  src: url(../assets/fonts/Inter-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Inter-SemiBold";
+  src: url(../assets/fonts/Inter-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: "Poppins-Bold";
+  src: url(../assets/fonts/Poppins-Bold.ttf);
+}
+
+// Typography
+.font-largeTitle {
+  font-size: 34px;
+  font-family: Poppins-Bold;
+}
+.font-title {
+  font-size: 28px;
+  font-family: Poppins-Bold;
+}
+.font-title2 {
+  font-size: 24px;
+  font-family: Poppins-Bold;
+}
+.font-title3 {
+  font-size: 20px;
+  font-family: Poppins-Bold;
+}
+.font-body {
+  font-size: 17px;
+  font-family: Inter-Regular;
+}
+.font-headline {
+  font-size: 17px;
+  font-family: Inter-SemiBold;
+}
+.font-subheadline {
+  font-size: 15px;
+  font-family: Inter-Regular;
+}
+.font-subheadline2 {
+  font-size: 15px;
+  font-family: Inter-SemiBold;
+}
+.font-footnote {
+  font-size: 13px;
+  font-family: Inter-Regular;
+}
+.font-footnote2 {
+  font-size: 13px;
+  font-family: Inter-SemiBold;
+}
+.font-caption {
+  font-size: 12px;
+  font-family: Inter-Regular;
+}
+.font-caption2 {
+  font-size: 12px;
+  font-family: Inter-SemiBold;
+}

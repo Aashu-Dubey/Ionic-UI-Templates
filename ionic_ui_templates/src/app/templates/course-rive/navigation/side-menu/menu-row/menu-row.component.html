@@ -1,0 +1,24 @@
+<div>
+  <div class="seperator"></div>
+  <div
+    class="menu-btn-bg"
+    [style.width.px]="menu.id === 'Home' ? 272 : 0"
+  ></div>
+
+  <ion-row class="menu-btn-container" (click)="onPress.emit()">
+    <div class="icon-container">
+      <canvas
+        riv="icons"
+        [artboard]="menu.artboard"
+        width="32"
+        height="32"
+        *ngIf="menu.show"
+      >
+        <riv-state-machine [name]="menu.stateMachine" play>
+          <riv-input name="active" [value]="menu.status"></riv-input>
+        </riv-state-machine>
+      </canvas>
+    </div>
+    <ion-text class="font-headline">{{ menu.id }}</ion-text>
+  </ion-row>
+</div>

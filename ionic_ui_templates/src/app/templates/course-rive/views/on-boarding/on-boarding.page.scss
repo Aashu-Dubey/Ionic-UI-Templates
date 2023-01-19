@@ -1,0 +1,141 @@
+.main-container {
+  background: white;
+}
+
+ion-img.bg-spline {
+  width: 840px; // x1.5 the original image width dimension (560), just to make it look same as original app
+  align-self: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -50%; // This shift the image to center
+  right: 0;
+  margin: auto;
+  filter: blur(40px);
+  transform: translateX(200px) translateY(100px);
+}
+
+canvas.rive-bg {
+  filter: blur(30px);
+}
+
+div.content-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  padding-top: calc(var(--ion-safe-area-top) + 80px);
+  padding-bottom: calc(var(--ion-safe-area-bottom) + 40px);
+
+  .title {
+    max-width: 260px;
+
+    ion-text {
+      color: black;
+      font-size: 60px;
+      font-family: Poppins-Bold;
+    }
+  }
+
+  .subtitle {
+    margin: 16px 0px;
+
+    ion-text {
+      color: rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  ion-buttons.startCoursebtn {
+    max-width: 236px;
+    max-height: 64px;
+    display: grid;
+    margin: 16px 0px;
+    cursor: pointer;
+
+    // This is just to have all the contents within a dimension, as position absolute wasn't working properly
+    // better approach?
+    .contained {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .shadow {
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      filter: blur(10px);
+      transform: translateY(10px);
+      z-index: -1;
+    }
+    .btnContent {
+      color: black;
+      text-align: center;
+      align-self: center;
+      justify-content: center;
+      display: flex;
+      transform: translateX(4px) translateY(4px);
+      z-index: 1;
+
+      .arrow {
+        width: 24px;
+        height: 24px;
+      }
+      ion-text {
+        align-self: center;
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .footer-text {
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+.close-btn {
+  --background: black;
+  --background-hover: black;
+  --background-activated: darkgrey;
+  --background-focused: darkgrey;
+  --border-radius: 18px;
+  --box-shadow: 0 10px 10px rgba(0 0 0 / 0.3);
+  --padding-top: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-bottom: 0;
+  width: 36px;
+  height: 36px;
+  color: white;
+  position: absolute;
+  top: calc(var(--ion-safe-area-top) + 100px);
+  right: 16px;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 24px;
+  }
+}
+
+// Sign in Modal
+ion-modal {
+  --border-radius: 20px;
+  --background: transparent;
+
+  .ion-page {
+    justify-content: center;
+  }
+
+  @media only screen and (min-width: 768px) and (min-height: 600px) {
+    --height: unset;
+    --box-shadow: none;
+  }
+}
+
+ion-modal::part(backdrop) {
+  background: var(--cr-color-shadow);
+  opacity: 1;
+}

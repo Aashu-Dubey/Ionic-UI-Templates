@@ -1,0 +1,82 @@
+<div class="side-menu">
+  <ion-row class="header">
+    <ion-icon class="user-icon" name="person-outline"></ion-icon>
+    <ion-col>
+      <ion-text class="font-body">Ashu</ion-text>
+      <br />
+      <ion-text class="user-profession font-subheadline">
+        Software Engineer
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <div class="sections-container">
+    <div class="menu-list-section">
+      <ion-text class="browse-heading font-subheadline2">BROWSE</ion-text>
+      <div class="menu-btn-list-container">
+        <cr-menu-row
+          #menuItems
+          *ngFor="let menu of menuItems; let i = index; trackBy: trackMenuItems"
+          [menu]="menu"
+          (onPress)="onMenuItemPress(i, menu)"
+        ></cr-menu-row>
+      </div>
+    </div>
+
+    <div class="menu-list-section">
+      <ion-text class="browse-heading font-subheadline2">HISTORY</ion-text>
+      <div class="menu-btn-list-container">
+        <cr-menu-row
+          #menuItems2
+          *ngFor="
+            let menu of menuItems2;
+            let i = index;
+            trackBy: trackMenuItems
+          "
+          [menu]="menu"
+          (onPress)="onMenuItemPress(i + 4, menu)"
+        ></cr-menu-row>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+  <div>
+    <ion-item
+      class="exit-btn"
+      button="true"
+      lines="none"
+      detail="false"
+      (click)="goBack()"
+      *ngIf="platform.is('capacitor')"
+    >
+      <ion-icon class="exit-icon" name="exit-outline"></ion-icon>
+      <ion-text class="font-headline">Exit</ion-text>
+    </ion-item>
+
+    <ion-item class="dark-mode-container" lines="none">
+      <div class="icon-container">
+        <canvas
+          riv="icons"
+          [artboard]="menuItems3[0].artboard"
+          width="32"
+          height="32"
+          *ngIf="menuItems3[0].show"
+        >
+          <riv-state-machine [name]="menuItems3[0].stateMachine" play>
+            <riv-input name="active" [value]="menuItems3[0].status"></riv-input>
+          </riv-state-machine>
+        </canvas>
+      </div>
+      <ion-label>
+        <ion-text class="font-headline">Dark Mode</ion-text>
+      </ion-label>
+      <ion-toggle
+        slot="end"
+        mode="ios"
+        [(ngModel)]="isDarkMode"
+        (ionChange)="onDarkModeToggle()"
+      ></ion-toggle>
+    </ion-item>
+  </div>
+</div>
