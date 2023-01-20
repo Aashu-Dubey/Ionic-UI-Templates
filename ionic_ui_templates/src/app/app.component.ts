@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonRouterOutlet, Platform } from '@ionic/angular';
-import { StatusBar } from '@capacitor/status-bar';
-import StatusBarAndroid from './myPlugin/StatusBarAndroid';
 import { App } from '@capacitor/app';
+import { StatusBar } from '@capacitor/status-bar';
+import { SafeAreaController } from '@aashu-dubey/capacitor-statusbar-safe-area';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +14,8 @@ export class AppComponent {
   @ViewChild(IonRouterOutlet, { static: true }) routerOutlet?: IonRouterOutlet;
 
   constructor(private platform: Platform) {
-    this.platform.ready().then(() => {
-      this.handleStatusBar();
-    });
+    SafeAreaController.injectCSSVariables();
+    StatusBar.setOverlaysWebView({ overlay: true }).catch(() => {});
 
     // By default Ionic doesn't close app on back click, so we handle that here
     this.platform.backButton.subscribeWithPriority(-1, () => {
@@ -24,25 +23,5 @@ export class AppComponent {
         App.exitApp();
       }
     });
-  }
-
-  /* Overlay Status bar and get it's height (mainly for Android) */
-  async handleStatusBar() {
-    const isAndroid = this.platform.is('android');
-    const el1 = window.getComputedStyle(document.body);
-    const safeArea = el1.getPropertyValue('--ion-safe-area-top');
-
-    let statusBarHeight = '24px';
-    if (isAndroid) {
-      const { height } = await StatusBarAndroid.getHeight();
-      statusBarHeight = `${height / window.devicePixelRatio}px`;
-    }
-
-    // const elStyle = document.querySelector<HTMLElement>(':root').style;
-    const elStyle = document.documentElement.style;
-    const barHeight = isAndroid ? statusBarHeight : safeArea;
-    elStyle.setProperty('--status-bar-height', barHeight);
-
-    StatusBar.setOverlaysWebView({ overlay: true }).catch(() => {});
   }
 }

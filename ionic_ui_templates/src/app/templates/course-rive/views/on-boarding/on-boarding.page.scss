@@ -26,7 +26,7 @@ div.content-container {
   display: flex;
   flex-direction: column;
   padding: 40px;
-  padding-top: calc(var(--ion-safe-area-top) + 80px);
+  padding-top: calc(var(--safe-area-inset-top) + 80px);
   padding-bottom: calc(var(--ion-safe-area-bottom) + 40px);
 
   .title {
@@ -111,7 +111,7 @@ div.content-container {
   height: 36px;
   color: white;
   position: absolute;
-  top: calc(var(--ion-safe-area-top) + 100px);
+  top: calc(var(--safe-area-inset-top) + 100px);
   right: 16px;
   cursor: pointer;
 
