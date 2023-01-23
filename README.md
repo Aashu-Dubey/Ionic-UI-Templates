@@ -1,21 +1,26 @@
-# Ionic-UI-Templates
+# Ionic UI Templates
 
-It's built in **Ionic** + **Angular**.
-<br />
-You can also check my alternate and more complete version of this project in **React-Native** named as [React-Native-UI-Templates](https://github.com/Aashu-Dubey/React-Native-UI-Templates)
+Free UI templates created using **Ionic** & **Angular**.
 
-## Try The App
+<p align="center">
+  <img alt="Ionic UI Templates project github link preview" src="https://repository-images.githubusercontent.com/453946161/610e91dc-8715-4023-a81c-253c7fc7e947" height="200px">
+</p>
 
-### Android
+---
 
-You can run app on Android following [these](ionic_ui_templates/README.md#running-locally) steps or download the latest APK [here](https://github.com/Aashu-Dubey/Ionic_UI_Templates/raw/main/images/31-01-2022.apk).
+- [Animated App with Rive](./ionic_ui_templates/src/app/templates/course-rive#readme):- An application with interactive UI and animations, with custom UI components like Bottom TabBar and SideBar, and using animated assets from [Rive](https://rive.app) | [Demo](https://twitter.com/aashudubey_ad/status/1617186151860948992).
 
-### iOS
+## 💪🏼 Getting Started
 
-You need to build from source, See how to run on iOS [here](ionic_ui_templates/README.md#running-locally).
+Follow the steps [here](./ionic_ui_templates#running-locally) to run the project locally.
 
-![Image](images/custom_drawer.png)
+## 🌻 Motivation
 
-## Some Screenshots
+This project is initially inspired from this Flutter project, [Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates).
 
-<img src="images/design_course_light.gif" height="300em"><img src="images/design_course_dark.gif" height="300em">
+## 🔗 Links
+
+- [Video Playlist](https://youtube.com/playlist?list=PLpnMM6hhRcchVmD6K1xJicQ7dJTa9uUrg): Video tutorials explaining some of the implementations in this project.
+- [Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates): Original Flutter project.
+- [React-Native-UI-Templates](https://github.com/Aashu-Dubey/React-Native-UI-Templates): react-native version of this project.
+- [Twitter Post](https://twitter.com/aashudubey_ad/status/1488243707472416770)
