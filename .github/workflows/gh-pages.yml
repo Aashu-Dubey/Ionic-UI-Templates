@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install packages
+        run: npm install
+
+      - name: Build web
+        run: npx ionic build --prod -- --base-href /Ionic-UI-Templates/
+
+      # Below 3 steps can also be done by this command, but skipping cause of git info requirement
+      # - name: Deploy
+      #   run: npx angular-cli-ghpages --dir=www
+
+      # below 2 steps to avoid 404 error when refreshing on nested routes
+      # ref: https://angular.io/guide/deployment#deploy-to-github-pages
+      - name: Copy index.html
+        run: cp www/index.html www/newIndex.html
+
+      - name: Rename to 404.html
+        run: mv www/newIndex.html www/404.html
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./www
