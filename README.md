@@ -6,7 +6,12 @@ Free UI templates created using **Ionic** & **Angular**.
   <img alt="Ionic UI Templates project github link preview" src="https://repository-images.githubusercontent.com/453946161/610e91dc-8715-4023-a81c-253c7fc7e947" height="200px">
 </p>
 
----
+
+<h2 align="center">
+  <a href="https://aashu-dubey.github.io/Ionic-UI-Templates">
+    Web Demo
+  </a>
+</h2>
 
 - [Animated App with Rive](./ionic_ui_templates/src/app/templates/course-rive#readme):- An application with interactive UI and animations, with custom UI components like Bottom TabBar and SideBar, and using animated assets from [Rive](https://rive.app) | [Demo](https://twitter.com/aashudubey_ad/status/1617186151860948992).
 
