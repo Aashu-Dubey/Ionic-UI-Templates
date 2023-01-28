@@ -19,7 +19,7 @@ jobs:
           node-version: '16'
 
       - name: cd into project and install packages
-        run: cd ionic_ui_templates && npm install
+        run: cd ionic_ui_templates && npm install --legacy-peer-deps
 
       - name: Build web
         run: npx ionic build --prod -- --base-href /Ionic-UI-Templates/
