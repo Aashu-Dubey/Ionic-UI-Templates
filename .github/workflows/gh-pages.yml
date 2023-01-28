@@ -18,11 +18,13 @@ jobs:
         with:
           node-version: '16'
 
-      - name: cd into project and install packages
-        run: cd ionic_ui_templates && npm install --legacy-peer-deps
+      - name: Install packages
+        run: npm install --legacy-peer-deps
+        working-directory: ionic_ui_templates
 
       - name: Build web
         run: npx ionic build --prod -- --base-href /Ionic-UI-Templates/
+        working-directory: ionic_ui_templates
 
       # Below 3 steps can also be done by this command, but skipping cause of git info requirement
       # - name: Deploy
@@ -32,12 +34,14 @@ jobs:
       # ref: https://angular.io/guide/deployment#deploy-to-github-pages
       - name: Copy index.html
         run: cp www/index.html www/newIndex.html
+        working-directory: ionic_ui_templates
 
       - name: Rename to 404.html
         run: mv www/newIndex.html www/404.html
+        working-directory: ionic_ui_templates
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./www
+          publish_dir: ./ionic_ui_templates/www
