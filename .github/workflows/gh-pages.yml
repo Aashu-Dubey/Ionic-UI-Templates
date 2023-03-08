@@ -2,6 +2,10 @@ name: Deploy to GitHub Pages
 
 on:
   push:
+    paths:
+      - '.github/workflows/**'
+      - 'ionic_ui_templates/**'
+      - '!ionic_ui_templates/**/*.md'
     branches:
       - main
 
