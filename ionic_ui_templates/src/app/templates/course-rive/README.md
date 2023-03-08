@@ -6,7 +6,11 @@ An application with interactive UI and animations, with custom UI components lik
   <img alt="Ionic, Angular + Rive UI Preview" src="../../../assets/course_rive/course_rive.png" height="250px">
 </p>
 
----
+<h2 align="center">
+  <a href="https://aashu-dubey.github.io/Ionic-UI-Templates/course-rive">
+    Web Demo
+  </a>
+</h2>
 
 ## 👀 This is how it looks
 
