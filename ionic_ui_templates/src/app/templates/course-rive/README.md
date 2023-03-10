@@ -6,11 +6,11 @@ An application with interactive UI and animations, with custom UI components lik
   <img alt="Ionic, Angular + Rive UI Preview" src="../../../assets/course_rive/course_rive.png" height="250px">
 </p>
 
-<h2 align="center">
+<h3 align="center">
   <a href="https://aashu-dubey.github.io/Ionic-UI-Templates/course-rive">
     Web Demo
   </a>
-</h2>
+</h3>
 
 ## 👀 This is how it looks
 
@@ -33,5 +33,5 @@ This app is a full Ionic + Angular replication of [this SwiftUI course](https://
 ## 🔗 Links
 
 - [SwiftUI + Rive](https://designcode.io/swiftui-rive-animated-app): Original course in SwiftUI.
-- [Flutter Rive](https://github.com/Aashu-Dubey/flutter-samples/tree/main/lib/rive_app): Flutter version for the same.
-- [Twitter Post](https://twitter.com/aashudubey_ad/status/1617186151860948992)
+- [Flutter Rive](https://github.com/Aashu-Dubey/flutter-samples/tree/main/lib/samples/ui/rive_app): Flutter version for the same.
+- **Demo:  [web](https://aashu-dubey.github.io/Ionic-UI-Templates/course-rive) \| [twitter](https://twitter.com/aashudubey_ad/status/1617186151860948992)**

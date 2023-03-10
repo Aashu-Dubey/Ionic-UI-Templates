@@ -3,10 +3,8 @@
 This is Project's starting point.
 
 <p align="center">
-  <img alt="Home screen preview" src="./src/assets/home/custom_drawer.png" height="300px">
+  <img alt="Home screen preview" src="../readme/custom_drawer.png" height="300px">
 </p>
-
----
 
 ## 💪🏼 Getting Started
 

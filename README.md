@@ -7,19 +7,20 @@ Free UI templates created using **Ionic** & **Angular**.
 </p>
 
 
-<h2 align="center">
+<h3 align="center">
   <a href="https://aashu-dubey.github.io/Ionic-UI-Templates">
     Web Demo
   </a>
-</h2>
-
-| 🧬 Samples| |
-| :--- | --- |
-| <h3>Animated App with Rive</h3>An application with interactive UI and animations, with custom UI components like Bottom TabBar and SideBar, and using animated assets from [Rive](https://rive.app)<br><br>**[> Source code](./ionic_ui_templates/src/app/templates/course-rive#readme)**<br>**> Demo:  [web](https://aashu-dubey.github.io/Ionic-UI-Templates/course-rive) \| [twitter](https://twitter.com/aashudubey_ad/status/1617186151860948992)** | <a href="https://github.com/Aashu-Dubey/Ionic-UI-Templates/tree/main/ionic_ui_templates/src/app/templates/course-rive#readme" title="Ionic, Angular + Rive Source code"><img alt="Ionic, Angular + Rive UI Preview Preview" src="./ionic_ui_templates/src/assets/course_rive/course_rive.png" width="320"></a> |
+</h3>
 
 ## 💪🏼 Getting Started
 
-Follow the steps [here](./ionic_ui_templates#running-locally) to run the project locally.
+Follow the steps [here](./ionic_ui_templates#-running-locally) to run the project locally.
+
+## 🧬 Samples
+| Project| |
+| :--- | --- |
+| <h3>Animated App with Rive</h3>An application with interactive UI and animations, with custom UI components like Bottom TabBar and SideBar, and using animated assets from [Rive](https://rive.app)<br><br>**[> Source code](./ionic_ui_templates/src/app/templates/course-rive#readme)**<br>**> Demo:  [web](https://aashu-dubey.github.io/Ionic-UI-Templates/course-rive) \| [twitter](https://twitter.com/aashudubey_ad/status/1617186151860948992)** | <a href="https://github.com/Aashu-Dubey/Ionic-UI-Templates/tree/main/ionic_ui_templates/src/app/templates/course-rive#readme" title="Ionic, Angular + Rive Source code"><img alt="Ionic, Angular + Rive UI Preview Preview" src="./ionic_ui_templates/src/assets/course_rive/course_rive.png" width="320"></a> |
 
 ## 🌻 Motivation
 
