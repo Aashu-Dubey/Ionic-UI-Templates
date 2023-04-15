@@ -10,6 +10,10 @@ on:
     branches:
       - main
 
+defaults:
+  run:
+    working-directory: ionic_ui_templates
+
 jobs:
   build-apk:
     permissions:
@@ -41,11 +45,9 @@ jobs:
         run: npm install -g @ionic/cli
 
       - name: Install packages
-        working-directory: ionic_ui_templates
         run: npm install --legacy-peer-deps
 
       - name: Build the ionic project for Android
-        working-directory: ionic_ui_templates
         run: ionic capacitor build android --prod --no-open
 
       - name: Build Android debug APK
@@ -55,5 +57,5 @@ jobs:
       - name: Save apk file as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ionic-ui-templates
+          name: ionic_ui_templates
           path: ionic_ui_templates/android/app/build/outputs/apk/debug/app-debug.apk

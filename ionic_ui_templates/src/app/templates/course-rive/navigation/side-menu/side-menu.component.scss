@@ -1,6 +1,6 @@
 .side-menu {
   width: 288px;
-  height: 100vh;
+  height: 100dvh; // having only 'vh' causes issues on Safari mobile
   padding-top: var(--safe-area-inset-top);
   padding-bottom: var(--ion-safe-area-bottom);
   background: var(--cr-color-background2);

@@ -6,6 +6,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { MenuController, Platform } from '@ionic/angular';
 import {
   menuController,
@@ -14,6 +15,7 @@ import {
   MenuI,
   Animation,
 } from '@ionic/core';
+import { Observable, Subscription, filter } from 'rxjs';
 import { DrawerScreen } from '../types/drawer';
 
 /*
@@ -65,17 +67,42 @@ export class DrawerPage implements AfterViewInit {
   rowWidth: number = this.drawerWidth - 64;
   activeTab = 'Home';
   isSplitPane = false; // hide menu button if split pane is enabled (desktop, pad etc.)
+  routeChangeEvent?: Subscription;
 
-  constructor(public platform: Platform, private menu: MenuController) {
+  constructor(
+    private router: Router,
+    public platform: Platform,
+    private menu: MenuController
+  ) {
     this.widthCalculations();
 
     this.platform.resize.subscribe(() => {
       this.widthCalculations();
+      this.initDrawerAnimation();
     });
   }
 
   ngAfterViewInit() {
     this.initDrawerAnimation();
+  }
+
+  ionViewDidEnter() {
+    // Listen to screen changes and update 'activeTab', so that it's always in sync when we navigate on browser
+    const routerEvent = this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd)
+    ) as Observable<NavigationEnd>;
+
+    this.routeChangeEvent = routerEvent.subscribe((event) => {
+      for (let i = 0; i < this.appPages.length; i++) {
+        if (event.url === this.appPages[i].url) {
+          this.activeTab = this.appPages[i].name;
+        }
+      }
+    });
+  }
+
+  ionViewWillLeave() {
+    this.routeChangeEvent?.unsubscribe();
   }
 
   // calculate width for drawer item's active background
@@ -87,9 +114,8 @@ export class DrawerPage implements AfterViewInit {
       this.rowWidth = splitPaneWidth - 64;
       this.isSplitPane = true;
     } else {
-      this.rowWidth = deviceWidth * 0.75 - 64;
-      // TODO:- Doesn't reflect as the width changes, need to refresh for proper animations
-      // this.isSplitPane = false; // showing but animations aren't updating according to width, so that needs to be handled
+      this.rowWidth = this.drawerWidth - 64;
+      this.isSplitPane = false;
     }
   }
 
