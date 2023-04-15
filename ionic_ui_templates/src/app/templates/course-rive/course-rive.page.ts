@@ -36,13 +36,17 @@ export class CourseRivePage implements OnInit {
 
   showOnBoardingToggle() {
     this.showOnBoarding = !this.showOnBoarding;
+
+    // calculated space based on screen scale (0.92) + 20px to show home behind modal
+    const transformBottom = 'calc(((100vh - (100vh * 0.92)) / 2) + 20px)';
     const onBoardingAnim = this.animationCtrl
       .create()
       .addElement(this.onBoardingRef?.nativeElement)
       .fromTo(
         'transform',
-        'translateY(calc(-1 * (100vh + var(--ion-safe-area-bottom) + 24px)))',
-        'translateY(calc(-1 * (var(--ion-safe-area-bottom) + 24px)))'
+        // Here 40px is extra shadow area to avoid it being shown when modal is closed
+        `translateY(calc(-1 * (100vh + var(--ion-safe-area-bottom) + ${transformBottom} + 40px)))`,
+        `translateY(calc(-1 * (var(--ion-safe-area-bottom) + ${transformBottom})))`
       );
 
     const contentViewAnim = this.animationCtrl

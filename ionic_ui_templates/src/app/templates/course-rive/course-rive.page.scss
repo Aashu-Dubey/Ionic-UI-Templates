@@ -28,10 +28,20 @@ ion-content::part(scroll) {
   bottom: 0;
 }
 
-.on-boarding-container {
+cr-side-menu {
+  width: fit-content;
+  transform: perspective(700px) translateX(-300px) rotateY(30deg);
+}
+
+cr-on-boarding {
   position: absolute;
+  // It's initially needs to be out of the view till user open the modal
+  // negative(view-port - ios bottom safe area + (calculated space based on screen scale (0.92) + 20px to show home behind modal) + shadow area)
   transform: translateY(
-    calc(-1 * (100vh + var(--ion-safe-area-bottom) + 24px))
+    calc(
+      -1 * (100vh + var(--ion-safe-area-bottom) +
+            (((100vh - (100vh * 0.92)) / 2) + 20px) + 40px)
+    )
   );
   border-radius: 30px;
   overflow: hidden;
