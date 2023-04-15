@@ -45,8 +45,8 @@ export class CourseRivePage implements OnInit {
       .fromTo(
         'transform',
         // Here 40px is extra shadow area to avoid it being shown when modal is closed
-        `translateY(calc(-1 * (100vh + var(--ion-safe-area-bottom) + ${transformBottom} + 40px)))`,
-        `translateY(calc(-1 * (var(--ion-safe-area-bottom) + ${transformBottom})))`
+        `translateY(calc(-1 * (100vh + ${transformBottom} + 40px)))`,
+        `translateY(calc(-1 * ${transformBottom}))`
       );
 
     const contentViewAnim = this.animationCtrl
