@@ -13,7 +13,10 @@
     <cr-content-view></cr-content-view>
   </div>
 
-  <div class="other-tabs" [hidden]="selectedTab.id === tabItems[0].id">
+  <div
+    class="other-tabs"
+    [ngStyle]="{ display: selectedTab.id === tabItems[0].id ? 'none' : 'flex' }"
+  >
     <ion-text class="font-title">
       {{selectedTab.artboard.toLowerCase()}}
     </ion-text>

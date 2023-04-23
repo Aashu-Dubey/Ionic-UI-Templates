@@ -68,15 +68,15 @@
           </riv-state-machine>
         </canvas>
       </div>
-      <ion-label>
-        <ion-text class="font-headline">Dark Mode</ion-text>
-      </ion-label>
       <ion-toggle
-        slot="end"
+        class="font-headline"
+        justify="space-between"
         mode="ios"
         [(ngModel)]="isDarkMode"
         (ionChange)="onDarkModeToggle()"
-      ></ion-toggle>
+      >
+        Dark Mode
+      </ion-toggle>
     </ion-item>
   </div>
 </div>

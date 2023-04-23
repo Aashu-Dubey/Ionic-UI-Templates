@@ -3,7 +3,10 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    // to fix compile issue happening with 'ng-rive' not able to find some canvas types in typescript
+    // also install '@types/offscreencanvas' as dev dependency.
+    // Alternative is too just instead apply 'skipLibCheck: true' as 'compilerOptions' in 'tsconfig.json'
+    "types": ["offscreencanvas"]
   },
   "files": [
     "src/main.ts",

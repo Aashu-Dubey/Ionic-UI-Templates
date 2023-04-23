@@ -134,7 +134,7 @@ ion-modal {
   }
 
   @media only screen and (min-width: 768px) and (min-height: 600px) {
-    --height: unset;
+    --height: 100%;
     --box-shadow: none;
   }
 }
