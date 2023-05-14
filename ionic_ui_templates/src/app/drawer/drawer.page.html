@@ -30,7 +30,7 @@
               lines="none"
               detail="false"
               routerDirection="root"
-              [routerLink]="p.url ? [p.url] : []"
+              [routerLink]="p.url ? [p.url] : undefined"
               (click)="onDrawerNavigate(p)"
             >
               <ion-item

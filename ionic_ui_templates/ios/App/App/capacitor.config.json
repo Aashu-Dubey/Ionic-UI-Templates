@@ -2,5 +2,7 @@
 	"appId": "io.ionic.templates",
 	"appName": "ionic_ui_templates",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"server": {
+		"androidScheme": "https"
+	}
 }

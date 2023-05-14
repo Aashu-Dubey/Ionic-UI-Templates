@@ -30,7 +30,7 @@ jobs:
 
       - name: Install packages
         working-directory: ionic_ui_templates
-        run: npm install --legacy-peer-deps
+        run: npm ci --legacy-peer-deps
 
       - name: Build web
         working-directory: ionic_ui_templates
