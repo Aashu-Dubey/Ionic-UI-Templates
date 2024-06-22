@@ -36,7 +36,7 @@ jobs:
       - name: Restore node_modules from cache
         uses: actions/cache@v4
         with:
-          path: node_modules
+          path: ionic_ui_templates/node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
           restore-keys: ${{ runner.os }}-node-modules-
 
