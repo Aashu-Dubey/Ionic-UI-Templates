@@ -111,8 +111,7 @@ div.content-container {
   --padding-end: 0;
   --padding-bottom: 0;
   width: 36px;
-  height: 36px;
-  min-height: auto;
+  min-height: 36px;
   color: white;
   position: absolute;
   top: calc(var(--safe-area-inset-top) + 100px);
