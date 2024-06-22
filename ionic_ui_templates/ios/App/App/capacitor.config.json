@@ -4,5 +4,12 @@
 	"webDir": "www",
 	"server": {
 		"androidScheme": "https"
-	}
+	},
+	"packageClassList": [
+		"SafeAreaPlugin",
+		"AppPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin",
+		"StatusBarPlugin"
+	]
 }

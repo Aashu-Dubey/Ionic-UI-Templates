@@ -63,8 +63,6 @@ div.sign-in-container {
     --background-hover: #f77d8e;
     --background-activated: pink;
     --background-focused: pink;
-    --padding-top: 30px;
-    --padding-bottom: 30px;
     --border-radius: 8px 20px 20px;
     --box-shadow: 0 10px 20px rgba(247, 125, 142, 0.5);
     margin: 24px 0;
@@ -128,6 +126,7 @@ div.sign-in-container {
     ion-button {
       width: 36px;
       height: 36px;
+      min-height: auto;
       --background: white;
       --background-hover: white;
       --background-activated: lightgrey;
