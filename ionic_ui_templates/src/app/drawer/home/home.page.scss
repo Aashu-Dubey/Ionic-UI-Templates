@@ -32,6 +32,205 @@ ion-item {
   }
 }
 
+ion-grid {
+  .section-list {
+    .section-grid {
+      --ion-grid-padding: 20px;
+      ion-col {
+        --ion-grid-column-padding: 10px;
+      }
+
+      .section-container {
+        height: 150px;
+        color: white;
+        border-radius: 30px;
+        padding: 20px 40px;
+        align-items: center;
+        transition: transform 0.3s ease; /* Ajout de la transition pour l'animation */
+
+        ion-col {
+          --ion-grid-column-padding: 0px;
+        }
+        .spacing {
+          height: 8px;
+        }
+
+        .section-img {
+          width: 60px;
+          height: 60px;
+          margin-left: 20px;
+        }
+
+        &:hover {
+          transform: scale(1.05); /* Agrandir l'élément au survol */
+        }
+      }
+
+      /* Agrandir les éléments adjacents au survol */
+      .section-container:hover ~ .section-container {
+        transform: scale(0.95); /* Réduire légèrement les éléments adjacents */
+      }
+    }
+  }
+}
+
+
 .material-icons.darkgrey {
   color: var(--color-darkgrey);
+}
+
+
+.courses-list-title {
+  padding: 0px 20px;
+}
+
+.recent-title {
+  padding: 0px 20px;
+}
+
+.courses-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 20px;
+  padding-bottom: 30px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .course-container {
+    width: 260px;
+    height: 3100px;
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 30px;
+    color: white;
+    background: linear-gradient(
+      to right bottom,
+      rgb(var(--course-bg)),
+      rgba(var(--course-bg), 0.5)
+    );
+    box-shadow: 0 12px 8px rgba(var(--course-bg), 0.3),
+      0 1px 2px rgba(var(--course-bg), 0.3);
+
+    .course-img {
+      width: 48px;
+      height: 50px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .course-title {
+      max-width: 170px;
+      margin-bottom: 8px;
+    }
+
+    .course-subtitle {
+      opacity: 0.7;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .course-caption {
+      margin: 8px 0;
+    }
+
+    .spacer {
+      flex: 1;
+    }
+
+    ion-row.avatar-container {
+      ion-img {
+        width: 44px;
+        height: 44px;
+        border-radius: 22px;
+        overflow: hidden;
+      }
+      // item spacing
+      ion-img + ion-img {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .course-container + .course-container {
+    margin-left: 20px;
+  }
+}
+
+.section-list {
+  .section-grid {
+    --ion-grid-padding: 10px;
+
+    ion-col {
+      --ion-grid-column-padding: 10px;
+    }
+
+    .section-container {
+      height: 110px;
+      color: white;
+      border-radius: 30px;
+      padding: 10px 30px;
+      align-items: center;
+
+      ion-col {
+        --ion-grid-column-padding: 0px;
+      }
+      .spacing {
+        height: 8px;
+      }
+
+      .section-img {
+        width: 48px;
+        height: 50px;
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+ion-modal {
+  --background: var(--color-notWhite, white);
+  --border-radius: 20px;
+  --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+  ion-header {
+    --background: var(--color-notWhite, white);
+    --border-radius: 20px 20px 0 0;
+  }
+
+  ion-toolbar {
+    --background: var(--color-notWhite, white);
+    --color: var(--color-darkText);
+  }
+
+  ion-title {
+    font-size: 22px;
+    font-family: WorkSans-Bold;
+    color: var(--color-darkText);
+  }
+
+  .modal-close-icon {
+    font-size: 24px;
+    color: var(--color-darkgrey);
+  }
+
+  ion-content {
+    padding: 20px;
+    font-family: WorkSans-Regular;
+    color: var(--color-darkText);
+  }
+}
+
+/* Flouter l'arrière-plan lorsque la modal est ouverte */
+ion-backdrop {
+  backdrop-filter: blur(10px); /* Ajustez la valeur de flou selon vos préférences */
+  --background: rgba(0, 0, 0, 0.4); /* Ajustez l'opacité du fond selon vos préférences */
 }

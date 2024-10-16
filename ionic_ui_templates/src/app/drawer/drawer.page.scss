@@ -2,6 +2,12 @@
 // ref:- 'https://stackoverflow.com/a/52377135'
 ion-menu {
   --ion-background-color: var(--color-notWhite, white);
+  width: 250px; /* Ajustez cette valeur selon vos besoins */
+  background: linear-gradient(135deg, #d3d3d3, #f0f0f0); /* Gris clair */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
 
   ion-toolbar {
     --background: var(--color-notWhite, white);
@@ -16,11 +22,17 @@ ion-item {
 .headerToolbar {
   padding: 56px 16px 16px;
   background-color: var(--color-notWhite, white); // especially for dark mode
+  border-radius: 20px 20px 0 0;
 
   ion-avatar.userImage {
     width: 120px;
     height: 120px;
     box-shadow: 2px 4px 8px 0px var(--shadow-color);
+    transition: transform 0.3s ease;
+  }
+
+  ion-avatar.userImage:hover {
+    transform: scale(1.1);
   }
 
   div.nameContainer {
@@ -48,6 +60,13 @@ ion-item.drawerItem {
   transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
+  transition: background 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+    border-radius: 10px;
+  }
 
   ion-item.drawerInnerItem {
     --background: var(--background);
@@ -89,6 +108,10 @@ ion-item.drawerItem {
   color: red;
 }
 
+.material-icons.colorBlue {
+  color: blue;
+}
+
 $size: 40px;
 $height: 14px;
 $width: 20px;
@@ -102,7 +125,6 @@ $line-radius: $line-size;
   cursor: pointer;
   margin-left: 8px;
   overflow: hidden;
-
   margin-top: calc(var(--status-bar-height) + 4px);
 
   &__icon {
@@ -121,14 +143,17 @@ $line-radius: $line-size;
     width: 100%;
     border-radius: $line-radius;
     pointer-events: none;
+
     &--1 {
       top: 0;
     }
+
     &--2 {
       top: 0;
       bottom: 0;
       margin: auto;
     }
+
     &--3 {
       bottom: 0;
     }
@@ -137,4 +162,24 @@ $line-radius: $line-size;
 
 .ios :host .menu {
   margin-top: calc(var(--ion-safe-area-top) + 4px);
+}
+
+.score-container {
+  text-align: center;
+  padding: 20px;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  ion-progress-bar {
+    margin-bottom: 10px;
+    --progress-background: var(--ion-color-light);
+    --progress-bar-background: var(--ion-color-primary);
+  }
+
+  p {
+    font-size: 18px;
+    font-weight: bold;
+  }
 }

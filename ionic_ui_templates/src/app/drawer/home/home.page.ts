@@ -5,7 +5,8 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { AnimationController, Platform, ToastController } from '@ionic/angular';
+import { AnimationController, ModalController, Platform, ToastController } from '@ionic/angular';
+import { Course, courseSectionsList, coursesList } from 'src/app/templates/course-rive/models/course';
 import { Template } from 'src/app/types/home';
 
 @Component({
@@ -14,6 +15,10 @@ import { Template } from 'src/app/types/home';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements AfterViewInit {
+  isModalOpen = false;
+  selectedSection: any;
+  courses = coursesList;
+  courseSections = courseSectionsList;
   // ref: "https://ionicframework.com/blog/building-interactive-ionic-apps-with-gestures-and-animations/"
   @ViewChildren('templateList', { read: ElementRef })
   templateListRef?: QueryList<ElementRef>;
@@ -46,7 +51,8 @@ export class HomePage implements AfterViewInit {
   constructor(
     public toastController: ToastController,
     private animationCtrl: AnimationController,
-    private platform: Platform
+    private platform: Platform,
+    private modalController: ModalController
   ) {}
 
   ngAfterViewInit() {
@@ -75,6 +81,15 @@ export class HomePage implements AfterViewInit {
     }
   }
 
+
+  trackCourses(i: number, course: Course) {
+    return `${course.title}_${i}`;
+  }
+
+  trackAvatarItems(_i: number, num: number) {
+    return `avatar_${num}`;
+  }
+
   async onScreenClick(temp: Template) {
     if (!temp.screenPath) {
       const toast = await this.toastController.create({
@@ -87,5 +102,15 @@ export class HomePage implements AfterViewInit {
 
   listKeyExtractor(_i: number, screen: Template) {
     return screen.id;
+  }
+
+  openModal(section: any) {
+    this.selectedSection = section;
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedSection = null;
   }
 }

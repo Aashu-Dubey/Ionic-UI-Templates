@@ -1,8 +1,5 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <!-- <ion-buttons slot="start">
-      <ion-menu-button color="dark"></ion-menu-button>
-    </ion-buttons> -->
     <ion-title>Social Guard</ion-title>
     <ion-buttons slot="end" (click)="multiple = !multiple">
       <ion-button>
@@ -16,25 +13,46 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <!-- Initial 'opacity: 0' and timer just to fix list flicker issue especially on Android -->
-      <ion-col
-        style="opacity: 0"
-        [size]="multiple ? 6 : 12"
-        *ngFor="let temp of templates; trackBy: listKeyExtractor"
-        #templateList
-      >
-        <ion-item
-          class="ion-no-padding ion-activatable"
-          lines="none"
-          detail="false"
-          (click)="onScreenClick(temp)"
-          [routerLink]="temp.screenPath ? [temp.screenPath] : []"
-        >
-          <ion-img [src]="temp.background"> </ion-img>
-          <ion-ripple-effect></ion-ripple-effect>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+    <ion-text class="recent-title font-title3">Accueil</ion-text>
+    <div class="section-list">
+      <ion-grid class="section-grid">
+        <ion-row>
+          <ion-col
+            *ngFor="let section of courseSections; trackBy: trackCourses"
+            size-lg="6"
+            size="12"
+          >
+            <ion-row class="section-container" [style.background]="section.color" (click)="openModal(section)">
+              <ion-col>
+                <ion-text class="font-title2">{{section.title}}</ion-text>
+                <br />
+                <div class="spacing"></div>
+                <ion-text class="font-body">{{section.caption}}</ion-text>
+              </ion-col>
+              <ion-col size="auto" class="ion-align-items-center">
+                <ion-img class="section-img" [src]="section.image"></ion-img>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </ion-grid>
+
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{selectedSection?.title}}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">Fermer</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <p>{{selectedSection?.caption}}</p>
+        <!-- Ajoutez ici le contenu de la modal -->
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
