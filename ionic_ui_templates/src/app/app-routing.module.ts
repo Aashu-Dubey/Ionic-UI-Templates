@@ -5,6 +5,11 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginPageModule),
+  },
+  {
+    path: 'drawer',
+    loadChildren: () =>
       import('./drawer/drawer.module').then((m) => m.DrawerPageModule),
   },
   {

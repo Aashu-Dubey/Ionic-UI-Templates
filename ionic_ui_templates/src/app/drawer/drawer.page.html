@@ -10,12 +10,16 @@
       [maxEdgeStart]="platform.width()"
     >
       <div class="headerToolbar">
-        <ion-avatar class="userImage" #userAvatar>
-          <ion-img src="assets/home/userImage.png" alt="User Image"></ion-img>
-        </ion-avatar>
-        <div class="nameContainer">
-          <ion-label class="userName">Chris Hemsworth</ion-label>
-        </div>
+        <!--info users-->
+          <div *ngIf="user$ | async as user" class="profile-container">
+            <ion-avatar class="userImage" #userAvatar>
+              <img [src]="user.picture" [alt]="user.name" />
+            </ion-avatar>
+            <div class="nameContainer">
+              <h2>{{ user.name }}</h2>
+              <p>{{ user.email }}</p>
+            </div>
+          </div>
       </div>
       <div class="divider"></div>
       <ion-content>
@@ -67,7 +71,7 @@
       <ion-footer class="ion-no-border">
         <ion-toolbar class="ion-no-padding">
           <ion-item button="true" detail="false" lines="none">
-            <ion-label class="sign-out-text">Sign Out</ion-label>
+            <ion-label (click)="logout()">Déconnexion</ion-label>
             <i class="material-icons colorRed">power_settings_new</i>
           </ion-item>
         </ion-toolbar>

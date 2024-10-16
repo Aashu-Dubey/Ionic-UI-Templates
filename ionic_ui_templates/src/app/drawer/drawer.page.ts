@@ -5,6 +5,7 @@ import {
   QueryList,
   ViewChild,
   ViewChildren,
+  OnInit,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuController, Platform } from '@ionic/angular';
@@ -15,8 +16,11 @@ import {
   MenuI,
   Animation,
 } from '@ionic/core';
-import { Observable, Subscription, filter } from 'rxjs';
+import { Browser } from '@capacitor/browser';
+import { Observable, Subscription, filter, switchMap } from 'rxjs';
 import { DrawerScreen } from '../types/drawer';
+import { AuthService } from '@auth0/auth0-angular';
+import { callbackUri } from 'src/auth.config';
 
 /*
  took it from main code and added my animations
@@ -42,7 +46,7 @@ export const revealAnimation: AnimationBuilder = (
   templateUrl: './drawer.page.html',
   styleUrls: ['./drawer.page.scss'],
 })
-export class DrawerPage implements AfterViewInit {
+export class DrawerPage implements AfterViewInit, OnInit {
   @ViewChild('userAvatar', { read: ElementRef })
   userAvatarRef?: ElementRef;
   @ViewChild('menuIcon', { read: ElementRef })
@@ -68,8 +72,11 @@ export class DrawerPage implements AfterViewInit {
   activeTab = 'Home';
   isSplitPane = false; // hide menu button if split pane is enabled (desktop, pad etc.)
   routeChangeEvent?: Subscription;
+  user$ = this.auth.isAuthenticated$.pipe(switchMap(() => this.auth.user$));
+  user: any; // Propriété pour stocker les informations utilisateur
 
   constructor(
+    public auth: AuthService,
     private router: Router,
     public platform: Platform,
     private menu: MenuController
@@ -82,8 +89,37 @@ export class DrawerPage implements AfterViewInit {
     });
   }
 
+  ngOnInit() {
+    this.user$.subscribe((user) => {
+      this.user = user;
+    });
+  }
+
   ngAfterViewInit() {
     this.initDrawerAnimation();
+  }
+
+  login() {
+    this.auth
+      .loginWithRedirect({
+        async openUrl(url: string) {
+          return Browser.open({ url, windowName: '_self' });
+        }
+      })
+      .subscribe();
+  }
+
+  logout() {
+    this.auth
+      .logout({
+        logoutParams: {
+          returnTo: callbackUri,
+        },
+        async openUrl(url: string) {
+          return Browser.open({ url, windowName: '_self' });
+        }
+      })
+      .subscribe();
   }
 
   ionViewDidEnter() {
