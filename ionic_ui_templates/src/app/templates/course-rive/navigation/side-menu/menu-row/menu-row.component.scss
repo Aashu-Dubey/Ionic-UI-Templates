@@ -1,20 +1,31 @@
 .seperator {
   height: 1px;
-  background-color: rgb(255 255 255 / 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   margin: 0px 16px;
 }
 
 .menu-btn-bg {
   height: 56px;
-  background: #2196f3;
+  background: linear-gradient(135deg, #2196f3, #21cbf3);
   position: absolute;
   border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+  transition: width 0.3s ease;
 }
 
 .menu-btn-container {
   padding: 12px;
   align-items: center;
   cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, background 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
 
   .icon-container {
     width: 32px;
@@ -22,11 +33,18 @@
     margin-right: 14px;
 
     canvas {
-      opacity: 0.6;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover canvas {
+      opacity: 1;
     }
   }
 
   ion-text {
     z-index: 1;
+    color: white;
+    font-weight: bold;
   }
 }

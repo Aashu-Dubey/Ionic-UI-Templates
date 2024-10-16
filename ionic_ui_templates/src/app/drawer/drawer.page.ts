@@ -21,6 +21,7 @@ import { Observable, Subscription, filter, switchMap } from 'rxjs';
 import { DrawerScreen } from '../types/drawer';
 import { AuthService } from '@auth0/auth0-angular';
 import { callbackUri } from 'src/auth.config';
+import { courseSectionsList, coursesList } from '../templates/course-rive/models/course';
 
 /*
  took it from main code and added my animations
@@ -29,6 +30,7 @@ import { callbackUri } from 'src/auth.config';
 export const revealAnimation: AnimationBuilder = (
   menu: MenuI,
   anims: Animation[]
+
 ) => {
   const openedX = menu.width * (menu.isEndSide ? -1 : 1) + 'px';
   const contentOpen = createAnimation()
@@ -55,17 +57,17 @@ export class DrawerPage implements AfterViewInit, OnInit {
   drawerItemListRef?: QueryList<ElementRef>;
 
   appPages: DrawerScreen[] = [
-    { name: 'Home', icon: 'home', url: '/menu/home' },
+    { name: 'Accueil', icon: 'home', url: '/menu/home' },
     {
-      name: 'Help',
-      icon: 'people-circle-sharp',
+      name: 'Télécharger l\'Application',
+      icon: 'download',
       isAsset: true,
-      url: '/menu/help',
+      url: '/menu/download-app',
     },
-    { name: 'Feedback', icon: 'help', url: '/menu/feedback' },
-    { name: 'Invite Friend', icon: 'group', url: '/menu/invite-friend' },
-    { name: 'Rate the app', icon: 'share', url: undefined },
-    { name: 'About Us', icon: 'info', url: undefined },
+    //{ name: 'Feedback', icon: 'help', url: '/menu/feedback' },
+    //{ name: 'Invite Friend', icon: 'group', url: '/menu/invite-friend' },
+    //{ name: 'Rate the app', icon: 'share', url: undefined },
+    //{ name: 'About Us', icon: 'info', url: undefined },
   ];
   drawerWidth: number = 280;
   rowWidth: number = this.drawerWidth - 64;
@@ -120,6 +122,10 @@ export class DrawerPage implements AfterViewInit, OnInit {
         }
       })
       .subscribe();
+  }
+
+  contactUs() {
+    this.router.navigate(['/course-rive']);
   }
 
   ionViewDidEnter() {

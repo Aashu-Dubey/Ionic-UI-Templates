@@ -3,21 +3,29 @@
   height: 100dvh; // having only 'vh' causes issues on Safari mobile
   padding-top: var(--safe-area-inset-top);
   padding-bottom: var(--ion-safe-area-bottom);
-  background: var(--cr-color-background2);
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
   color: white;
   border-radius: 30px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   .header {
     padding: 12px;
     align-items: center;
 
     .user-icon {
-      background: rgb(255 255 255 / 0.2);
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 24px;
       padding: 12px;
       margin-right: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .user-icon:hover {
+      transform: scale(1.1);
     }
 
     .user-profession {
@@ -44,6 +52,13 @@
         padding: 8px;
         margin-top: 8px;
         position: relative;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        transition: background 0.3s ease;
+      }
+
+      .menu-btn-list-container:hover {
+        background: rgba(255, 255, 255, 0.2);
       }
     }
   }
@@ -68,6 +83,7 @@
     margin-bottom: 0px;
     align-items: center;
     cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
 
     .exit-icon {
       color: white;
@@ -75,6 +91,11 @@
       margin-left: 4px;
       margin-right: 18px;
       opacity: 0.6;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
     }
   }
 
@@ -89,9 +110,7 @@
     ion-toggle {
       --track-background: rgba(255, 255, 255, 0.088);
     }
-  }
 
-  .dark-mode-container {
     .icon-container {
       width: 32px;
       height: 32px;
