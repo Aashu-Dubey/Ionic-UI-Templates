@@ -2,24 +2,32 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  OnInit,
   QueryList,
   ViewChildren,
 } from '@angular/core';
 import { AnimationController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { Course, courseSectionsList, coursesList } from 'src/app/templates/course-rive/models/course';
 import { Template } from 'src/app/types/home';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import frLocale from '@fullcalendar/core/locales/fr'; 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements AfterViewInit {
+export class HomePage implements AfterViewInit, OnInit {
+  calendarPlugins = [dayGridPlugin, interactionPlugin];
   isModalOpen = false;
   selectedSection: any;
+  selectedScore: any;
+  calendarOptions: any;
   courses = coursesList;
   courseSections = courseSectionsList;
-  // ref: "https://ionicframework.com/blog/building-interactive-ionic-apps-with-gestures-and-animations/"
+  events: any[] = [];
+
   @ViewChildren('templateList', { read: ElementRef })
   templateListRef?: QueryList<ElementRef>;
 
@@ -52,16 +60,130 @@ export class HomePage implements AfterViewInit {
     public toastController: ToastController,
     private animationCtrl: AnimationController,
     private platform: Platform,
-    private modalController: ModalController
   ) {}
 
+  headerToolbar = {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'dayGridMonth,dayGridWeek,dayGridDay',
+  };
+
   ngAfterViewInit() {
-    // Workaround just to fix list flicker issue especially on Android
     setTimeout(
       () => this.initListAnimation(),
       this.platform.is('android') ? 500 : 0
     );
-    // this.initListAnimation();
+  }
+
+  ngOnInit() {
+      this.loadEvents(); // Charger les événements lors de l'initialisation
+    this.calendarOptions = {
+      plugins: [dayGridPlugin, interactionPlugin],
+      locale: frLocale, // Spécifiez la locale ici, pas seulement 'fr'
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,dayGridWeek,dayGridDay'
+      },
+      editable: true,
+      selectable: true,
+      dateClick: this.handleDateClick.bind(this), // Lier la méthode de clic de date
+      events: this.events // Lier les événements au calendrier
+    };
+  }
+
+  handleDateClick(arg: any) {
+    const title = prompt('Entrez le titre de l\'événement :');
+    if (title) {
+      const newEvent = {
+        title: title,
+        start: arg.date
+      };
+      this.events.push(newEvent);
+      this.saveEvents();
+    }
+  }
+
+  saveEvents() {
+    localStorage.setItem('calendarEvents', JSON.stringify(this.events));
+  }
+
+  loadEvents() {
+    const savedEvents = localStorage.getItem('calendarEvents');
+    if (savedEvents) {
+      this.events = JSON.parse(savedEvents);
+    }
+  }
+
+  /**
+  handleDateClick(arg: any) {
+    const title = prompt('Entrez le titre de l\'événement :'); // Demander à l'utilisateur de saisir le titre de l'événement
+    if (title) {
+      const newEvent = {
+        title: title,
+        start: arg.date // Utiliser la date cliquée pour l'événement
+      };
+      this.events.push(newEvent);
+      this.saveEventToServer(newEvent); // Envoyer l'événement au serveur
+    }
+  }
+
+  // Méthode pour sauvegarder l'événement sur le serveur
+  saveEventToServer(event: any) {
+    fetch('https://your-api-url/events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(event)
+    }).then(response => response.json())
+      .then(data => console.log('Événement enregistré :', data))
+      .catch(error => console.error('Erreur lors de l\'enregistrement :', error));
+  }
+  */
+
+  getGaugeColor(): string {
+    if (this.selectedScore <= 15) {
+      return 'red';
+    } else if (this.selectedScore <= 30) {
+      return 'orange';
+    } else if (this.selectedScore <= 60) {
+      return 'yellow';
+    } else {
+      return 'green';
+    }
+  }
+
+  getGaugeMessageStyle(): { [klass: string]: any } {
+    if (this.selectedScore <= 15) {
+      return { 'color': 'red' };
+    } else if (this.selectedScore <= 30) {
+      return { 'color': 'orange' };
+    } else if (this.selectedScore <= 60) {
+      return { 'color': 'yellow' };
+    } else if (this.selectedScore <= 85) {
+      return { 'color': 'lightgreen' };
+    } else {
+      return { 'color': 'green' };
+    }
+  }
+
+  getGaugeMessage(): string {
+    if (this.selectedScore <= 15) {
+      return 'Ne vous découragez pas, vous pouvez encore améliorer votre score!';
+    } else if (this.selectedScore <= 30) {
+      return 'Bon effort, continuez à travailler pour progresser davantage!';
+    } else if (this.selectedScore <= 60) {
+      return 'Vous êtes sur la bonne voie, continuez comme ça!';
+    } else if (this.selectedScore <= 85) {
+      return 'Excellent travail, votre score est impressionnant!';
+    } else {
+      return 'Félicitations, vous êtes au top! Continuez à maintenir ce niveau.';
+    }
+  }
+
+  handleEventClick(clickInfo: any) {
+    alert(`Vous avez cliqué sur : ${clickInfo.event.title}`);
   }
 
   initListAnimation() {
@@ -104,13 +226,24 @@ export class HomePage implements AfterViewInit {
     return screen.id;
   }
 
+  convertScoreToPoints(score: number): number {
+    return score * 80; // 1% = 80 points
+  }
+
   openModal(section: any) {
     this.selectedSection = section;
+    if (section.title === 'Votre Score') {
+      this.selectedScore = 10;
+    } else {
+      this.selectedScore = null;
+    }
+
     this.isModalOpen = true;
   }
 
   closeModal() {
     this.isModalOpen = false;
     this.selectedSection = null;
+    this.selectedScore = null;
   }
 }

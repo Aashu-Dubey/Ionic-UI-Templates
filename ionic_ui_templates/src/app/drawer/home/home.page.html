@@ -43,16 +43,56 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>{{selectedSection?.title}}</ion-title>
+          <ion-title>{{ selectedSection?.title }}</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="closeModal()">Fermer</ion-button>
+            <ion-button class="modal-close-button" (click)="closeModal()">X</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content>
-        <p>{{selectedSection?.caption}}</p>
-        <!-- Ajoutez ici le contenu de la modal -->
+      <ion-content class="modal-content">
+        <!-- Afficher le score si c'est la section "Votre Score" -->
+        <ng-container *ngIf="selectedSection?.title === 'Votre Score'">
+          <ngx-gauge
+            [foregroundColor]="getGaugeColor()"
+            type="semi"
+            [value]="selectedScore"
+            [min]="0"
+            [max]="100"
+            [cap]="'round'"
+            [thick]="15"
+            [backgroundColor]="'#e0e0e0'"
+            [label]="'Score'"
+            [append]="'%'">
+          </ngx-gauge>
+          <p [ngStyle]="getGaugeMessageStyle()" class="gauge-message-points">
+            Votre score en points : {{ convertScoreToPoints(selectedScore) }}
+          </p>
+          <p [ngStyle]="getGaugeMessageStyle()" class="gauge-message">
+            {{ getGaugeMessage() }}
+          </p>
+        </ng-container>
+
+        <!-- Afficher le score si c'est la section "Événements" -->
+        <ng-container *ngIf="selectedSection?.title === 'Événements'">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Événements</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <full-calendar [options]="calendarOptions">
+                <ng-template #eventContent let-arg>
+                  <b>{{arg.timeText}}</b>
+                  <i>{{arg.event.title}}</i>
+                </ng-template>
+              </full-calendar>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+
+
       </ion-content>
     </ng-template>
   </ion-modal>
+
+
 </ion-content>
