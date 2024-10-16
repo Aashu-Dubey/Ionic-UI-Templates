@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   constructor(public auth: AuthService, private router: Router) {}
-  user$ = this.auth.isAuthenticated$.pipe(switchMap(() => this.auth.user$));
 
   ngOnInit() {
     this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
