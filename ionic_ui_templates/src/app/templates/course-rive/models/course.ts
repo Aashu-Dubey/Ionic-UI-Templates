@@ -67,10 +67,4 @@ export const courseSectionsList: Course[] = [
     color: '#6E6AE8',
     image: 'assets/course_rive/png/alarm.png',
   },
-  {
-    title: 'Télécharger l\'Application',
-    caption: 'Notre application mobile est disponible sur iOS et Android !',
-    color: '#005FE7',
-    image: 'assets/course_rive/png/download.png',
-  },
 ];

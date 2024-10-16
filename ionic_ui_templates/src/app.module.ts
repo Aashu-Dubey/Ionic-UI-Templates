@@ -8,6 +8,8 @@ import { AppComponent } from './app/app.component';
 import { AppRoutingModule } from './app/app-routing.module';
 import { AuthConfig, AuthModule } from '@auth0/auth0-angular';
 import { domain, clientId, callbackUri } from './auth.config';
+import { NgxGaugeModule } from 'ngx-gauge';
+import { UserScoreModalComponent } from './app/user-score-modal/user-score-modal.component';
 
 const config: AuthConfig = {
   domain,
@@ -22,12 +24,13 @@ const config: AuthConfig = {
 };
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, UserScoreModalComponent],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
         AuthModule.forRoot(config),
+        NgxGaugeModule
     ],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
     bootstrap: [AppComponent]

@@ -8,7 +8,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { MenuController, Platform } from '@ionic/angular';
+import { MenuController, ModalController, Platform } from '@ionic/angular';
 import {
   menuController,
   AnimationBuilder,
@@ -21,7 +21,6 @@ import { Observable, Subscription, filter, switchMap } from 'rxjs';
 import { DrawerScreen } from '../types/drawer';
 import { AuthService } from '@auth0/auth0-angular';
 import { callbackUri } from 'src/auth.config';
-import { courseSectionsList, coursesList } from '../templates/course-rive/models/course';
 
 /*
  took it from main code and added my animations
@@ -81,7 +80,8 @@ export class DrawerPage implements AfterViewInit, OnInit {
     public auth: AuthService,
     private router: Router,
     public platform: Platform,
-    private menu: MenuController
+    private menu: MenuController,
+    private modalController: ModalController
   ) {
     this.widthCalculations();
 
