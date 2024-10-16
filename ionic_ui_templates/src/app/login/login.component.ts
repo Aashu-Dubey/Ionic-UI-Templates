@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Browser } from '@capacitor/browser';
+import { switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 import { RiveSMInput } from 'ng-rive';
 
