@@ -1,2 +1,41 @@
-<ion-button (click)="login()">Login</ion-button>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 
+<div class="login-page">
+  <div class="container">
+    <div class="left-section">
+      <div class="header">
+        <h1>Social Guard</h1>
+        <p class="tagline">Protégez votre expérience sur les réseaux sociaux avec un suivi personnalisé et sécurisé.</p>
+      </div>
+      <div class="contact-action">
+        <button class="btn-contact">Nous contacter</button>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <div class="features">
+        <div class="feature">
+          <i class="fas fa-lock"></i> <!-- Icône Font Awesome -->
+          <p>Suivez efficacement votre activité sur les réseaux sociaux</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-gift"></i> <!-- Icône pour les récompenses -->
+          <p>Gagnez des récompenses et du cashback</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-shield-alt"></i> <!-- Icône pour la sécurité -->
+          <p>Restez en sécurité grâce à notre système de filtrage de contenu</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-user-shield"></i> <!-- Icône pour RGPD -->
+          <p>Conforme au RGPD</p>
+        </div>
+      </div>
+      <div class="login-action">
+        <button class="btn-connexion" (click)="login()">Connexion</button>
+      </div>
+    </div>
+  </div>
+</div>
