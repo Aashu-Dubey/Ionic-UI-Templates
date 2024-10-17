@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChatbotService {
-  private apiUrl = 'https://votre-api-chatbot.com/message';
+  private apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) {}
 
   sendMessage(message: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { message });
+    return this.http.post<any>(this.apiUrl + "nlp/chat",  message );
   }
 }

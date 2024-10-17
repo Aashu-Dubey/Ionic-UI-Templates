@@ -14,6 +14,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import frLocale from '@fullcalendar/core/locales/fr';
 import { Router } from '@angular/router';
 import { CashbackService } from 'src/app/services/cashback.service';
+import { ChatbotService } from 'src/app/services/chatbot.service';
 
 interface ChatMessage {
   text: string;
@@ -71,7 +72,8 @@ export class HomePage implements AfterViewInit, OnInit {
     private animationCtrl: AnimationController,
     private platform: Platform,
     private router: Router,
-    private cashbackService: CashbackService
+    private cashbackService: CashbackService,
+    private chatBotService: ChatbotService
   ) {}
 
   cashbackData = [
@@ -157,10 +159,14 @@ export class HomePage implements AfterViewInit, OnInit {
   sendMessage() {
     if (this.userInput.trim() !== '') {
       this.messages.push({ text: this.userInput, type: 'user' });
+      
+      this.chatBotService.sendMessage(this.userInput).subscribe(response => {
+        this.messages.push({ text: response, type: 'bot' });
+      });
       this.userInput = '';
-      setTimeout(() => {
-        this.messages.push({ text: 'Bonjour !', type: 'bot' });
-      }, 1000);
+      //setTimeout(() => {
+       // this.messages.push({ text: 'Bonjour !', type: 'bot' });
+      //}, 10000);
     }
   }
 
