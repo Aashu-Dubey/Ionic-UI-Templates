@@ -89,6 +89,7 @@
           </ion-card>
         </ng-container>
 
+        <!-- Afficher le score si c'est la section "Cashback" -->
         <ng-container *ngIf="selectedSection?.title === 'Cashback'">
           <ion-card>
             <ion-card-header>
@@ -101,14 +102,37 @@
                     <h2>{{ cashback.title }}</h2>
                     <p>Date: {{ cashback.date }}</p>
                   </ion-label>
-                  <ion-badge slot="end" color="success">{{ cashback.amount | currency:'EUR' }}</ion-badge>
+                  <ion-badge slot="end" color="success">{{ cashback.amount | currency:'%' }}</ion-badge>
                 </ion-item>
               </ion-list>
             </ion-card-content>
           </ion-card>
         </ng-container>
 
-
+        <!-- Afficher le parrainage si c'est la section "Parrainage" -->
+        <ng-container *ngIf="selectedSection?.title === 'Parrainage'">
+          <ion-list>
+            <ion-item *ngFor="let parrainage of parrainageData" lines="none">
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-title>{{ parrainage.title }}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <p>Date: {{ parrainage.date }}</p>
+                  <ion-badge slot="end" color="success">{{ parrainage.title | currency:'EUR' }}</ion-badge>
+                  <div class="parrainage-actions">
+                    <ion-button color="primary" fill="outline" (click)="openParrainage(parrainage.url)">
+                      Voir Détails
+                    </ion-button>
+                    <ion-button color="secondary" fill="solid">
+                      Copier le lien
+                    </ion-button>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-item>
+          </ion-list>
+        </ng-container>
       </ion-content>
     </ng-template>
   </ion-modal>
