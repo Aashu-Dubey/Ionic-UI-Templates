@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ResponseModel } from '../dto/ResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ChatbotService {
 
   constructor(private http: HttpClient) {}
 
-  sendMessage(message: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl + "nlp/chat",  message );
+  sendMessage(message: string): Observable<ResponseModel> {
+    return this.http.post<ResponseModel>(this.apiUrl + "nlp/chat",  message );
   }
 }

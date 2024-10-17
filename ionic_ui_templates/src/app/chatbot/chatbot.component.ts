@@ -14,7 +14,7 @@ export class ChatbotComponent {
 
 
   sendMessage() {
-    if (this.userInput.trim() === '') {
+    if (this.userInput.trim() === '') {      
       return;
     }
 
@@ -22,10 +22,10 @@ export class ChatbotComponent {
     this.messages.push({ text: this.userInput, sender: 'user' });
 
     // Envoyer le message à l'API du chatbot
-    this.chatbotService.sendMessage(this.userInput).subscribe(response => {
-      // Ajouter la réponse du chatbot à la liste des messages
-      this.messages.push({ text: response.message, sender: 'bot' });
-    });
+    //this.chatbotService.sendMessage(this.userInput).subscribe(response => {
+     // // Ajouter la réponse du chatbot à la liste des messages
+      //this.messages.push({ text: response.message, sender: 'bot' });
+    //});
 
     // Réinitialiser l'entrée de l'utilisateur
     this.userInput = '';
