@@ -113,5 +113,35 @@
     </ng-template>
   </ion-modal>
 
+  <!-- Bouton flottant pour le chatbot -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="toggleChat()">
+      <ion-icon name="chatbubbles"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Fenêtre de chat -->
+  <div *ngIf="showChat" class="chat-window">
+    <div class="chat-header">
+      <h4>Chatbot</h4>
+      <button class="close-btn" (click)="toggleChat()">X</button>
+    </div>
+
+    <div class="chat-body">
+      <!-- Boucle pour afficher les messages -->
+      <div *ngFor="let message of messages" class="chat-bubble" [ngClass]="message.type === 'user' ? 'user-message' : 'bot-message'">
+        <p>{{ message.text }}</p>
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <ion-item lines="none">
+        <ion-input class="chat-input" [(ngModel)]="userInput" placeholder="Tapez votre message..."></ion-input>
+        <ion-button color="primary" slot="end" (click)="sendMessage()">
+          <ion-icon name="send"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </div>
+  </div>
 
 </ion-content>

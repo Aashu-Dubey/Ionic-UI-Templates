@@ -15,6 +15,11 @@ import frLocale from '@fullcalendar/core/locales/fr';
 import { Router } from '@angular/router';
 import { CashbackService } from 'src/app/services/cashback.service';
 
+interface ChatMessage {
+  text: string;
+  type: 'user' | 'bot';
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -29,6 +34,9 @@ export class HomePage implements AfterViewInit, OnInit {
   courses = coursesList;
   courseSections = courseSectionsList;
   events: any[] = [];
+  showChat = false;
+  userInput: string = '';
+  messages: ChatMessage[] = [];
 
   @ViewChildren('templateList', { read: ElementRef })
   templateListRef?: QueryList<ElementRef>;
@@ -112,6 +120,10 @@ export class HomePage implements AfterViewInit, OnInit {
     };
   }
 
+  toggleChat() {
+    this.showChat = !this.showChat;
+  }
+
   loadCashbackOffers() {
     this.cashbackService.getCashbackOffers().subscribe({
       next: (data) => {
@@ -126,6 +138,15 @@ export class HomePage implements AfterViewInit, OnInit {
     });
   }
 
+  sendMessage() {
+    if (this.userInput.trim() !== '') {
+      this.messages.push({ text: this.userInput, type: 'user' });
+      this.userInput = '';
+      setTimeout(() => {
+        this.messages.push({ text: 'Bonjour !', type: 'bot' });
+      }, 1000);
+    }
+  }
 
   openUrl(url: string) {
     window.open(url, '_blank');
