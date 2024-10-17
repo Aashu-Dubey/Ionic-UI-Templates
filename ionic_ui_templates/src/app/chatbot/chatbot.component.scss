@@ -1,0 +1,90 @@
+
+
+.chat-window {
+  position: fixed;
+  bottom: 70px; /* Ajustez selon la hauteur du bouton flottant */
+  right: 20px;
+  width: 300px; /* Augmenté pour plus de lisibilité */
+  height: 450px; /* Ajustez la hauteur */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Moins arrondi pour un design plus moderne */
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); /* Ombre pour effet de profondeur */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #ccc;
+  border-radius: 20px 20px 0 0;
+}
+
+.chat-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.close-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #fafafa;
+}
+
+.chat-bubble {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  max-width: 80%;
+  word-wrap: break-word; /* Pour éviter les débordements de texte */
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: #d1e7dd;
+  color: #000;
+  border-radius: 20px 20px 0 20px;
+}
+
+.bot-message {
+  align-self: flex-start;
+  background-color: #f8d7da;
+  color: #000;
+  border-radius: 20px 20px 20px 0;
+}
+
+.chat-footer {
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ccc;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+}
+
+.chat-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  --padding-end: 0;
+}

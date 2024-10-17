@@ -10,6 +10,7 @@ import { HomePage } from './home.page';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { HttpClientModule } from '@angular/common/http';
+import { ChatbotComponent } from 'src/app/chatbot/chatbot.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,6 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
   ],
   providers: [],
-  declarations: [HomePage]
+  declarations: [HomePage, ChatbotComponent]
 })
 export class HomePageModule {}

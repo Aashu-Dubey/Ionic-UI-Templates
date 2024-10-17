@@ -15,6 +15,11 @@ import frLocale from '@fullcalendar/core/locales/fr';
 import { Router } from '@angular/router';
 import { CashbackService } from 'src/app/services/cashback.service';
 
+interface ChatMessage {
+  text: string;
+  type: 'user' | 'bot';
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -29,6 +34,9 @@ export class HomePage implements AfterViewInit, OnInit {
   courses = coursesList;
   courseSections = courseSectionsList;
   events: any[] = [];
+  showChat = false;
+  userInput: string = '';
+  messages: ChatMessage[] = [];
 
   @ViewChildren('templateList', { read: ElementRef })
   templateListRef?: QueryList<ElementRef>;
@@ -67,19 +75,35 @@ export class HomePage implements AfterViewInit, OnInit {
   ) {}
 
   cashbackData = [
-    { title: 'Remboursement Supermarché', amount: 10, date: '2024-10-20' },
-    { title: 'Cashback Essence', amount: 15, date: '2024-10-21' },
-    { title: 'Remboursement Restaurant', amount: 20, date: '2024-10-22' },
-    { title: 'Cashback Cinéma', amount: 5, date: '2024-10-23' },
-    { title: 'Remboursement Électronique', amount: 30, date: '2024-10-24' },
-    { title: 'Cashback Vêtements', amount: 25, date: '2024-10-25' },
-    { title: 'Remboursement Voyage', amount: 50, date: '2024-10-26' },
-    { title: 'Cashback Pharmacie', amount: 8, date: '2024-10-27' },
-    { title: 'Remboursement Loisirs', amount: 12, date: '2024-10-28' },
-    { title: 'Cashback Abonnement', amount: 18, date: '2024-10-29' },
-    { title: 'Remboursement Cadeaux', amount: 22, date: '2024-10-30' },
-    { title: 'Cashback Livraison', amount: 7, date: '2024-10-31' },
+    { title: 'Remboursement Supermarché', amount: 2, date: this.formatDate('2024-10-20') },
+    { title: 'Cashback Essence', amount: 5, date: this.formatDate('2024-10-21') },
+    { title: 'Remboursement Restaurant', amount: 7, date: this.formatDate('2024-10-22') },
+    { title: 'Cashback Cinéma', amount: 5, date: this.formatDate('2024-10-23') },
+    { title: 'Remboursement Électronique', amount: 8, date: this.formatDate('2024-10-24') },
+    { title: 'Cashback Vêtements', amount: 8, date: this.formatDate('2024-10-25') },
+    { title: 'Remboursement Voyage', amount: 5, date: this.formatDate('2024-10-26') },
+    { title: 'Cashback Pharmacie', amount: 8, date: this.formatDate('2024-10-27') },
+    { title: 'Remboursement Loisirs', amount: 10, date: this.formatDate('2024-10-28') },
+    { title: 'Cashback Abonnement', amount: 12, date: this.formatDate('2024-10-29') },
+    { title: 'Remboursement Cadeaux', amount: 6, date: this.formatDate('2024-10-30') },
+    { title: 'Cashback Livraison', amount: 7, date: this.formatDate('2024-10-31') },
   ];
+
+  parrainageData = [
+    { title: 'Rodrigue Bonbon', date: this.formatDate('2024-10-16'), amount: 15, url: 'https://example.com/3' },
+    { title: 'Pierre Krause', date: this.formatDate('2024-10-17'), amount: 25, url: 'https://example.com/4' },
+    // Ajoutez plus de données de parrainage ici
+  ];
+
+
+  formatDate(dateString: string): string {
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('fr-FR', options);
+  }
+
+  openParrainage(url: string) {
+    window.open(url, '_blank');
+  }
 
   headerToolbar = {
     left: 'prev,next today',
@@ -112,6 +136,10 @@ export class HomePage implements AfterViewInit, OnInit {
     };
   }
 
+  toggleChat() {
+    this.showChat = !this.showChat;
+  }
+
   loadCashbackOffers() {
     this.cashbackService.getCashbackOffers().subscribe({
       next: (data) => {
@@ -126,6 +154,15 @@ export class HomePage implements AfterViewInit, OnInit {
     });
   }
 
+  sendMessage() {
+    if (this.userInput.trim() !== '') {
+      this.messages.push({ text: this.userInput, type: 'user' });
+      this.userInput = '';
+      setTimeout(() => {
+        this.messages.push({ text: 'Bonjour !', type: 'bot' });
+      }, 1000);
+    }
+  }
 
   openUrl(url: string) {
     window.open(url, '_blank');

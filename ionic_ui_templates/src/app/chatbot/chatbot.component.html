@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Assistant SocialGuard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}" class="chat-bubble">
+    <ion-item lines="none">
+      <ion-label>{{ message.text }}</ion-label>
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-input [(ngModel)]="userInput" placeholder="Tapez votre message..." class="chat-input"></ion-input>
+      <ion-button (click)="sendMessage()">Envoyer</ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>
