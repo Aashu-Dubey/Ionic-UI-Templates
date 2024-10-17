@@ -89,6 +89,25 @@
           </ion-card>
         </ng-container>
 
+        <ng-container *ngIf="selectedSection?.title === 'Cashback'">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title></ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item *ngFor="let cashback of cashbackData" (click)="openUrl(cashback.title)">
+                  <ion-label>
+                    <h2>{{ cashback.title }}</h2>
+                    <p>Date: {{ cashback.date }}</p>
+                  </ion-label>
+                  <ion-badge slot="end" color="success">{{ cashback.amount | currency:'EUR' }}</ion-badge>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+
 
       </ion-content>
     </ng-template>

@@ -10,6 +10,7 @@ import { AuthConfig, AuthModule } from '@auth0/auth0-angular';
 import { domain, clientId, callbackUri } from './auth.config';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { UserScoreModalComponent } from './app/user-score-modal/user-score-modal.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const config: AuthConfig = {
   domain,
@@ -30,7 +31,9 @@ const config: AuthConfig = {
         IonicModule.forRoot(),
         AppRoutingModule,
         AuthModule.forRoot(config),
-        NgxGaugeModule
+        NgxGaugeModule,
+        HttpClientModule,
+
     ],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
     bootstrap: [AppComponent]

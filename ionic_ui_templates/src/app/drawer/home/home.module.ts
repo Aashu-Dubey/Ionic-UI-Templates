@@ -9,16 +9,17 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
     HomePageRoutingModule,
     NgxGaugeModule,
     FullCalendarModule,
-    IonicModule.forRoot(),
+    IonicModule,
+    HttpClientModule,
   ],
   providers: [],
   declarations: [HomePage]

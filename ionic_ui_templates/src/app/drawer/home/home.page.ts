@@ -11,7 +11,9 @@ import { Course, courseSectionsList, coursesList } from 'src/app/templates/cours
 import { Template } from 'src/app/types/home';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import frLocale from '@fullcalendar/core/locales/fr'; 
+import frLocale from '@fullcalendar/core/locales/fr';
+import { Router } from '@angular/router';
+import { CashbackService } from 'src/app/services/cashback.service';
 
 @Component({
   selector: 'app-home',
@@ -60,7 +62,24 @@ export class HomePage implements AfterViewInit, OnInit {
     public toastController: ToastController,
     private animationCtrl: AnimationController,
     private platform: Platform,
+    private router: Router,
+    private cashbackService: CashbackService
   ) {}
+
+  cashbackData = [
+    { title: 'Remboursement Supermarché', amount: 10, date: '2024-10-20' },
+    { title: 'Cashback Essence', amount: 15, date: '2024-10-21' },
+    { title: 'Remboursement Restaurant', amount: 20, date: '2024-10-22' },
+    { title: 'Cashback Cinéma', amount: 5, date: '2024-10-23' },
+    { title: 'Remboursement Électronique', amount: 30, date: '2024-10-24' },
+    { title: 'Cashback Vêtements', amount: 25, date: '2024-10-25' },
+    { title: 'Remboursement Voyage', amount: 50, date: '2024-10-26' },
+    { title: 'Cashback Pharmacie', amount: 8, date: '2024-10-27' },
+    { title: 'Remboursement Loisirs', amount: 12, date: '2024-10-28' },
+    { title: 'Cashback Abonnement', amount: 18, date: '2024-10-29' },
+    { title: 'Remboursement Cadeaux', amount: 22, date: '2024-10-30' },
+    { title: 'Cashback Livraison', amount: 7, date: '2024-10-31' },
+  ];
 
   headerToolbar = {
     left: 'prev,next today',
@@ -76,7 +95,8 @@ export class HomePage implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-      this.loadEvents(); // Charger les événements lors de l'initialisation
+    this.loadCashbackOffers();
+    this.loadEvents(); // Charger les événements lors de l'initialisation
     this.calendarOptions = {
       plugins: [dayGridPlugin, interactionPlugin],
       locale: frLocale, // Spécifiez la locale ici, pas seulement 'fr'
@@ -87,9 +107,32 @@ export class HomePage implements AfterViewInit, OnInit {
       },
       editable: true,
       selectable: true,
-      dateClick: this.handleDateClick.bind(this), // Lier la méthode de clic de date
-      events: this.events // Lier les événements au calendrier
+      dateClick: this.handleDateClick.bind(this),
+      events: this.events
     };
+  }
+
+  loadCashbackOffers() {
+    this.cashbackService.getCashbackOffers().subscribe({
+      next: (data) => {
+        this.cashbackData = data.offers;
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement des offres de cashback', error);
+      },
+      complete: () => {
+        console.log('Chargement des offres de cashback terminé');
+      }
+    });
+  }
+
+
+  openUrl(url: string) {
+    window.open(url, '_blank');
+  }
+
+  cashback() {
+    this.router.navigate(['/course-rive']);
   }
 
   handleDateClick(arg: any) {
@@ -202,7 +245,6 @@ export class HomePage implements AfterViewInit, OnInit {
         .play();
     }
   }
-
 
   trackCourses(i: number, course: Course) {
     return `${course.title}_${i}`;
