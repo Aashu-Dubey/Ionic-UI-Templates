@@ -5,6 +5,7 @@ import { BottomTabItem, tabItemsList } from '../../models/tabs';
   selector: 'cr-bottom-tab-bar',
   templateUrl: './bottom-tab-bar.component.html',
   styleUrls: ['./bottom-tab-bar.component.scss'],
+  standalone: false,
 })
 export class BottomTabBarComponent implements OnInit {
   tabItems = tabItemsList;

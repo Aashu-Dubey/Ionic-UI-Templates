@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-help',
   templateUrl: './help.page.html',
   styleUrls: ['./help.page.scss'],
+  standalone: false,
 })
 export class HelpPage implements OnInit {
 

@@ -12,6 +12,7 @@ import { Template } from 'src/app/types/home';
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
+  standalone: false,
 })
 export class HomePage implements AfterViewInit {
   // ref: "https://ionicframework.com/blog/building-interactive-ionic-apps-with-gestures-and-animations/"

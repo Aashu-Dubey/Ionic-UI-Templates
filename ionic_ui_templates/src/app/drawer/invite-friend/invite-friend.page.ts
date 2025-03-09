@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-invite-friend',
   templateUrl: './invite-friend.page.html',
   styleUrls: ['./invite-friend.page.scss'],
+  standalone: false,
 })
 export class InviteFriendPage implements OnInit {
 

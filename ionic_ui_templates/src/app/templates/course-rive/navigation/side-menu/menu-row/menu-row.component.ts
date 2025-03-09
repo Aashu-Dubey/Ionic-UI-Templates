@@ -5,6 +5,7 @@ import { MenuItem, menuItemsList } from '../../../models/side-menu';
   selector: 'cr-menu-row',
   templateUrl: './menu-row.component.html',
   styleUrls: ['./menu-row.component.scss'],
+  standalone: false,
 })
 export class MenuRowComponent implements OnInit {
   @Input() menu: MenuItem = menuItemsList[0];

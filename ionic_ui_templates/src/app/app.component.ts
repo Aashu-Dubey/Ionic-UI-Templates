@@ -8,6 +8,7 @@ import { SafeAreaController } from '@aashu-dubey/capacitor-statusbar-safe-area';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
+  standalone: false,
 })
 export class AppComponent {
   // https://github.com/ionic-team/ionic-framework/issues/21630#issuecomment-683007162

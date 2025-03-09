@@ -7,6 +7,7 @@ import { tabItemsList } from './models/tabs';
   selector: 'cr-course-rive',
   templateUrl: './course-rive.page.html',
   styleUrls: ['./course-rive.page.scss'],
+  standalone: false,
 })
 export class CourseRivePage implements OnInit {
   @ViewChild('mainContent', { read: ElementRef }) mainContentRef?: ElementRef;

@@ -12,6 +12,7 @@ import { AnimationController, IonModal, Platform } from '@ionic/angular';
   selector: 'cr-on-boarding',
   templateUrl: './on-boarding.page.html',
   styleUrls: ['./on-boarding.page.scss'],
+  standalone: false,
 })
 export class OnBoardingPage implements OnInit {
   @ViewChild(IonModal) signInModal?: IonModal;
