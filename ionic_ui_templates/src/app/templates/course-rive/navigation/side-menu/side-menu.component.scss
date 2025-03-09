@@ -2,7 +2,7 @@
   width: 288px;
   height: 100dvh; // having only 'vh' causes issues on Safari mobile
   padding-top: var(--safe-area-inset-top);
-  padding-bottom: var(--ion-safe-area-bottom);
+  padding-bottom: var(--safe-area-inset-bottom);
   background: var(--cr-color-background2);
   color: white;
   border-radius: 30px;
@@ -99,6 +99,7 @@
 
       canvas {
         opacity: 0.6;
+        pointer-events: none;
       }
     }
   }

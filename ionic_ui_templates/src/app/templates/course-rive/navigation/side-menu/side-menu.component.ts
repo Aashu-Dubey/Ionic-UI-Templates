@@ -42,13 +42,19 @@ export class SideMenuComponent implements OnInit {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
     for (let i = 0; i < this.menuItems.length; i++) {
-      setTimeout(() => (this.menuItems[i].show = true), 1000);
+      setTimeout(() => (this.menuItems[i].show = true), 1000 + i * 500);
     }
     for (let i = 0; i < this.menuItems2.length; i++) {
-      setTimeout(() => (this.menuItems2[i].show = true), 1000);
+      setTimeout(
+        () => (this.menuItems2[i].show = true),
+        1000 + (i + this.menuItems.length) * 500
+      );
     }
     for (let i = 0; i < this.menuItems3.length; i++) {
-      setTimeout(() => (this.menuItems3[i].show = true), 1000);
+      setTimeout(
+        () => (this.menuItems3[i].show = true),
+        1000 + (i + this.menuItems.length + this.menuItems2.length) * 500
+      );
     }
   }
 

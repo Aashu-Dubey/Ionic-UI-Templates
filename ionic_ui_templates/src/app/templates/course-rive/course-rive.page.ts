@@ -32,7 +32,7 @@ export class CourseRivePage implements OnInit {
   ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
-    setTimeout(() => (this.showRiveMenuBtn = true), 1000);
+    setTimeout(() => (this.showRiveMenuBtn = true), 500);
   }
 
   showOnBoardingToggle() {
