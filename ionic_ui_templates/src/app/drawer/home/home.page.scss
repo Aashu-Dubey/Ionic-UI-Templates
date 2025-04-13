@@ -32,6 +32,387 @@ ion-item {
   }
 }
 
+ion-grid {
+  .section-list {
+    .section-grid {
+      --ion-grid-padding: 20px;
+      ion-col {
+        --ion-grid-column-padding: 10px;
+      }
+
+      .section-container {
+        height: 150px;
+        color: white;
+        border-radius: 30px;
+        padding: 20px 40px;
+        align-items: center;
+        transition: transform 0.3s ease; /* Ajout de la transition pour l'animation */
+
+        ion-col {
+          --ion-grid-column-padding: 0px;
+        }
+        .spacing {
+          height: 8px;
+        }
+
+        .section-img {
+          width: 60px;
+          height: 60px;
+          margin-left: 20px;
+        }
+
+        &:hover {
+          transform: scale(1.05); /* Agrandir l'élément au survol */
+        }
+      }
+
+      /* Agrandir les éléments adjacents au survol */
+      .section-container:hover ~ .section-container {
+        transform: scale(0.95); /* Réduire légèrement les éléments adjacents */
+      }
+    }
+  }
+}
+
+
 .material-icons.darkgrey {
   color: var(--color-darkgrey);
 }
+
+
+.courses-list-title {
+  padding: 0px 20px;
+}
+
+.recent-title {
+  padding: 0px 20px;
+}
+
+.courses-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 20px;
+  padding-bottom: 30px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .course-container {
+    width: 260px;
+    height: 3100px;
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 30px;
+    color: white;
+    background: linear-gradient(
+      to right bottom,
+      rgb(var(--course-bg)),
+      rgba(var(--course-bg), 0.5)
+    );
+    box-shadow: 0 12px 8px rgba(var(--course-bg), 0.3),
+      0 1px 2px rgba(var(--course-bg), 0.3);
+
+    .course-img {
+      width: 48px;
+      height: 50px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .course-title {
+      max-width: 170px;
+      margin-bottom: 8px;
+    }
+
+    .course-subtitle {
+      opacity: 0.7;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .course-caption {
+      margin: 8px 0;
+    }
+
+    .spacer {
+      flex: 1;
+    }
+
+    ion-row.avatar-container {
+      ion-img {
+        width: 44px;
+        height: 44px;
+        border-radius: 22px;
+        overflow: hidden;
+      }
+      // item spacing
+      ion-img + ion-img {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .course-container + .course-container {
+    margin-left: 20px;
+  }
+}
+
+.section-list {
+  .section-grid {
+    --ion-grid-padding: 10px;
+
+    ion-col {
+      --ion-grid-column-padding: 10px;
+    }
+
+    .section-container {
+      height: 110px;
+      color: white;
+      border-radius: 30px;
+      padding: 10px 30px;
+      align-items: center;
+
+      ion-col {
+        --ion-grid-column-padding: 0px;
+      }
+      .spacing {
+        height: 8px;
+      }
+
+      .section-img {
+        width: 48px;
+        height: 50px;
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+ion-modal {
+  --background: rgba(255, 255, 255, 0.95); // Fond semi-transparent
+  --border-radius: 20px;
+  --box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); // Ombre portée
+  overflow: hidden; // Éviter le débordement
+
+  ion-header {
+    --background: var(--ion-color-primary); // Fond coloré
+    --border-radius: 20px 20px 0 0; // Arrondir le haut
+    box-shadow: none; // Pas d'ombre sur l'en-tête
+  }
+
+  ion-toolbar {
+    --background: transparent; // Rendre la barre d'outils transparente
+    --color: var(--ion-color-light); // Couleur du texte de la barre d'outils
+  }
+
+  ion-title {
+    font-size: 20px; // Réduire la taille du titre
+    font-family: 'WorkSans-Bold';
+    color: var(--ion-color-light); // Couleur du texte du titre
+    text-align: center; // Centrer le titre
+  }
+
+  .modal-close-button {
+    color: black; // Couleur du texte du bouton de fermeture
+    margin-right: 10px;
+    font-size: 24px; // Agrandir le bouton de fermeture
+    --border-radius: 50%; // Bouton rond
+    --padding-start: 0.5rem;
+    --padding-end: 0.5rem;
+  }
+
+  ion-content {
+    padding: 20px;
+    font-family: 'WorkSans-Regular';
+    color: var(--color-darkText);
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centrer le contenu
+    text-align: center; // Centrer le texte
+    background-color: var(--ion-color-light);
+  }
+
+  .gauge-message-points,
+  .gauge-message {
+    font-size: 18px;
+    margin-top: 10px;
+    color: var(--color-darkText);
+  }
+}
+
+ion-backdrop {
+  backdrop-filter: blur(15px);
+  --background: rgba(0, 0, 0, 0.5);
+}
+
+ngx-gauge {
+  margin-top: 10%;
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  height: 300px;
+
+  .gauge-foreground {
+    margin-top: 10%;
+    stroke-linecap: round;
+    transition: stroke-dasharray 1.5s ease-in-out;
+  }
+
+  .gauge-background {
+    stroke: #f0f0f0;
+  }
+
+  .gauge-value {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}
+
+  .gauge-label {
+    font-size: 1.2rem;
+    fill: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+.gauge-message {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: color 0.5s ease;
+}
+
+.gauge-message-points {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: color 0.5s ease;
+}
+
+
+
+.chat-window {
+  position: fixed;
+  bottom: 70px; /* Ajustez selon la hauteur du bouton flottant */
+  right: 20px;
+  width: 300px; /* Augmenté pour plus de lisibilité */
+  height: 450px; /* Ajustez la hauteur */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Moins arrondi pour un design plus moderne */
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); /* Ombre pour effet de profondeur */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #ccc;
+  border-radius: 20px 20px 0 0;
+}
+
+.chat-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.close-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #fafafa;
+}
+
+.chat-bubble {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  max-width: 80%;
+  word-wrap: break-word; /* Pour éviter les débordements de texte */
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: #d1e7dd;
+  color: #000;
+  border-radius: 20px 20px 0 20px;
+}
+
+.bot-message {
+  align-self: flex-start;
+  background-color: #f8d7da;
+  color: #000;
+  border-radius: 20px 20px 20px 0;
+}
+
+.chat-footer {
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ccc;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+}
+
+.chat-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  --padding-end: 0;
+}
+
+.parrainage-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+ion-card {
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+ion-card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+ion-badge {
+  font-size: 14px;
+  padding: 6px;
+  margin-top: 10px;
+}
+
+
+
+

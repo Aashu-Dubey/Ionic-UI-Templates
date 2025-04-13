@@ -5,9 +5,10 @@ import {
   QueryList,
   ViewChild,
   ViewChildren,
+  OnInit,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { MenuController, Platform } from '@ionic/angular';
+import { MenuController, ModalController, Platform } from '@ionic/angular';
 import {
   menuController,
   AnimationBuilder,
@@ -15,8 +16,11 @@ import {
   MenuI,
   Animation,
 } from '@ionic/core';
-import { Observable, Subscription, filter } from 'rxjs';
+import { Browser } from '@capacitor/browser';
+import { Observable, Subscription, filter, switchMap } from 'rxjs';
 import { DrawerScreen } from '../types/drawer';
+import { AuthService } from '@auth0/auth0-angular';
+import { callbackUri } from 'src/auth.config';
 
 /*
  took it from main code and added my animations
@@ -25,6 +29,7 @@ import { DrawerScreen } from '../types/drawer';
 export const revealAnimation: AnimationBuilder = (
   menu: MenuI,
   anims: Animation[]
+
 ) => {
   const openedX = menu.width * (menu.isEndSide ? -1 : 1) + 'px';
   const contentOpen = createAnimation()
@@ -42,7 +47,7 @@ export const revealAnimation: AnimationBuilder = (
   templateUrl: './drawer.page.html',
   styleUrls: ['./drawer.page.scss'],
 })
-export class DrawerPage implements AfterViewInit {
+export class DrawerPage implements AfterViewInit, OnInit {
   @ViewChild('userAvatar', { read: ElementRef })
   userAvatarRef?: ElementRef;
   @ViewChild('menuIcon', { read: ElementRef })
@@ -51,28 +56,32 @@ export class DrawerPage implements AfterViewInit {
   drawerItemListRef?: QueryList<ElementRef>;
 
   appPages: DrawerScreen[] = [
-    { name: 'Home', icon: 'home', url: '/menu/home' },
+    { name: 'Accueil', icon: 'home', url: '/menu/home' },
     {
-      name: 'Help',
-      icon: 'people-circle-sharp',
+      name: 'Télécharger l\'Application',
+      icon: 'download',
       isAsset: true,
-      url: '/menu/help',
+      url: '/menu/download-app',
     },
-    { name: 'Feedback', icon: 'help', url: '/menu/feedback' },
-    { name: 'Invite Friend', icon: 'group', url: '/menu/invite-friend' },
-    { name: 'Rate the app', icon: 'share', url: undefined },
-    { name: 'About Us', icon: 'info', url: undefined },
+    //{ name: 'Feedback', icon: 'help', url: '/menu/feedback' },
+    //{ name: 'Invite Friend', icon: 'group', url: '/menu/invite-friend' },
+    //{ name: 'Rate the app', icon: 'share', url: undefined },
+    //{ name: 'About Us', icon: 'info', url: undefined },
   ];
   drawerWidth: number = 280;
   rowWidth: number = this.drawerWidth - 64;
   activeTab = 'Home';
   isSplitPane = false; // hide menu button if split pane is enabled (desktop, pad etc.)
   routeChangeEvent?: Subscription;
+  user$ = this.auth.isAuthenticated$.pipe(switchMap(() => this.auth.user$));
+  user: any; // Propriété pour stocker les informations utilisateur
 
   constructor(
+    public auth: AuthService,
     private router: Router,
     public platform: Platform,
-    private menu: MenuController
+    private menu: MenuController,
+    private modalController: ModalController
   ) {
     this.widthCalculations();
 
@@ -82,8 +91,41 @@ export class DrawerPage implements AfterViewInit {
     });
   }
 
+  ngOnInit() {
+    this.user$.subscribe((user) => {
+      this.user = user;
+    });
+  }
+
   ngAfterViewInit() {
     this.initDrawerAnimation();
+  }
+
+  login() {
+    this.auth
+      .loginWithRedirect({
+        async openUrl(url: string) {
+          return Browser.open({ url, windowName: '_self' });
+        }
+      })
+      .subscribe();
+  }
+
+  logout() {
+    this.auth
+      .logout({
+        logoutParams: {
+          returnTo: callbackUri,
+        },
+        async openUrl(url: string) {
+          return Browser.open({ url, windowName: '_self' });
+        }
+      })
+      .subscribe();
+  }
+
+  contactUs() {
+    this.router.navigate(['/course-rive']);
   }
 
   ionViewDidEnter() {

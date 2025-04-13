@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>User Score</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="gauge-container">
+    <ngx-gauge
+      type="semi"
+      [value]="userScore"
+      [min]="0"
+      [max]="100"
+      label="Score"
+      append="points">
+    </ngx-gauge>
+  </div>
+</ion-content>
