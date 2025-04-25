@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-feedback',
   templateUrl: './feedback.page.html',
   styleUrls: ['./feedback.page.scss'],
+  standalone: false,
 })
 export class FeedbackPage implements OnInit {
 

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RiveModule, RIVE_FOLDER } from 'ng-rive';
 
 import { CourseRivePage } from './course-rive.page';
 
@@ -26,13 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), RiveModule],
-  exports: [RouterModule, RiveModule],
-  providers: [
-    {
-      provide: RIVE_FOLDER,
-      useValue: 'assets/course_rive/rive',
-    },
-  ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class CourseRivePageRoutingModule {}

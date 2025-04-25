@@ -41,6 +41,7 @@ export const revealAnimation: AnimationBuilder = (
   selector: 'app-drawer',
   templateUrl: './drawer.page.html',
   styleUrls: ['./drawer.page.scss'],
+  standalone: false,
 })
 export class DrawerPage implements AfterViewInit {
   @ViewChild('userAvatar', { read: ElementRef })

@@ -28,19 +28,18 @@
 </div>
 
 <!-- Menu button -->
-<canvas
-  #menuToggleBtn
-  class="side-menu-button"
-  riv="menu_button"
-  width="44"
-  height="44"
-  (click)="onMenuToggle()"
-  *ngIf="showRiveMenuBtn"
->
-  <riv-state-machine name="State Machine" play>
-    <riv-input name="isOpen" [value]="isMenuOpen"></riv-input>
-  </riv-state-machine>
-</canvas>
+<div #menuToggleBtn class="side-menu-button" (click)="onMenuToggle()">
+  <canvas
+    riv="menu_button"
+    width="44"
+    height="44"
+    *ngIf="showRiveMenuBtn"
+  >
+    <riv-state-machine name="State Machine" play>
+      <riv-input name="isOpen" [value]="isMenuOpen"></riv-input>
+    </riv-state-machine>
+  </canvas>
+</div>
 
 <!-- White background behind tab bar that partially shows the tab content -->
 <div #tabWhiteBg class="tabs-white-underlay"></div>

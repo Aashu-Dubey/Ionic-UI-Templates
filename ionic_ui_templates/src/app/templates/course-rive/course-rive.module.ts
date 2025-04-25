@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { RiveModule } from 'ng-rive';
 
 import { CourseRivePageRoutingModule } from './course-rive-routing.module';
 
@@ -21,6 +22,7 @@ import { MenuRowComponent } from './navigation/side-menu/menu-row/menu-row.compo
     CourseRivePageRoutingModule,
     OnBoardingPageModule,
     ContentViewPageModule,
+    RiveModule,
   ],
   declarations: [
     CourseRivePage,

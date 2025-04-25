@@ -3,7 +3,7 @@
   position: fixed;
   left: 24px;
   right: 24px;
-  bottom: calc(var(--ion-safe-area-bottom) + 8px);
+  bottom: calc(var(--safe-area-inset-bottom) + 8px);
   margin: auto;
   box-shadow: 0 20px 20px rgba(var(--cr-color-background2-rgb), 0.3);
   border: 0.5px solid transparent;
@@ -47,6 +47,10 @@
           width: 20px;
           animation: expand 0.3s ease-in-out;
         }
+      }
+
+      canvas {
+        pointer-events: none;
       }
     }
 

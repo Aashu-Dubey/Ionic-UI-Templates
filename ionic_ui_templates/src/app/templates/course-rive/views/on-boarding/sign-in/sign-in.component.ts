@@ -5,6 +5,7 @@ import { RiveSMInput } from 'ng-rive';
   selector: 'cr-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
+  standalone: false,
 })
 export class SignInComponent implements OnInit {
   @Output() onClose = new EventEmitter();

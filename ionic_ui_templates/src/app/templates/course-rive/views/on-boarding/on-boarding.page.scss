@@ -28,7 +28,7 @@ div.content-container {
   flex-direction: column;
   padding: 40px;
   padding-top: calc(var(--safe-area-inset-top) + 80px);
-  padding-bottom: calc(var(--ion-safe-area-bottom) + 40px);
+  padding-bottom: calc(var(--safe-area-inset-bottom) + 40px);
   overflow-y: scroll;
 
   .title {

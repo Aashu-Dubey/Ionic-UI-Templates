@@ -1,6 +1,6 @@
 ion-content {
   --background: var(--cr-color-background);
-  --padding-bottom: calc(var(--ion-safe-area-bottom) + 60px);
+  --padding-bottom: calc(var(--safe-area-inset-bottom) + 60px);
   position: absolute;
   z-index: 1;
   border-radius: 30px;
@@ -82,6 +82,7 @@ cr-on-boarding {
 }
 
 .side-menu-button {
+  display: flex;
   background-color: white;
   border-radius: 22px;
   box-shadow: 0 5px 5px rgba(var(--cr-color-shadow-rgb), 0.2);
@@ -90,6 +91,10 @@ cr-on-boarding {
   left: 16px;
   cursor: pointer;
   z-index: 2;
+
+  canvas {
+    pointer-events: none;
+  }
 }
 
 .home-tab-container {

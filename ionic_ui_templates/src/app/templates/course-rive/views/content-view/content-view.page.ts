@@ -5,6 +5,7 @@ import { Course, courseSectionsList, coursesList } from '../../models/course';
   selector: 'cr-content-view',
   templateUrl: './content-view.page.html',
   styleUrls: ['./content-view.page.scss'],
+  standalone: false,
 })
 export class ContentViewPage implements OnInit {
   courses = coursesList;

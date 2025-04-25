@@ -5,6 +5,7 @@ import { BottomTabItem, tabItemsList } from '../../models/tabs';
   selector: 'cr-bottom-tab-bar',
   templateUrl: './bottom-tab-bar.component.html',
   styleUrls: ['./bottom-tab-bar.component.scss'],
+  standalone: false,
 })
 export class BottomTabBarComponent implements OnInit {
   tabItems = tabItemsList;
@@ -17,7 +18,7 @@ export class BottomTabBarComponent implements OnInit {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
     for (let i = 0; i < this.tabItems.length; i++) {
-      setTimeout(() => (this.tabItems[i].show = true), 1000);
+      setTimeout(() => (this.tabItems[i].show = true), 1000 + (i * 500));
     }
   }
 
