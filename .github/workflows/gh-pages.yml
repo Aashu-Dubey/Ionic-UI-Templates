@@ -35,9 +35,12 @@ jobs:
           key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
           restore-keys: ${{ runner.os }}-node-modules-
 
+      - name: Install Ionic CLI
+        run: npm install -g @ionic/cli
+
       - name: Install packages
         working-directory: ionic_ui_templates
-        run: npm ci --legacy-peer-deps
+        run: npm ci
 
       - name: Build web
         working-directory: ionic_ui_templates
