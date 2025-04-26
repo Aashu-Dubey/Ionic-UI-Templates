@@ -6,15 +6,34 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { MenuController, Platform } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import {
   menuController,
   AnimationBuilder,
   createAnimation,
   MenuI,
   Animation,
-} from '@ionic/core';
+} from '@ionic/core/components';
+import {
+  MenuController,
+  Platform,
+  IonContent,
+  IonMenu,
+  IonSplitPane,
+  IonToolbar,
+  IonAvatar,
+  IonImg,
+  IonLabel,
+  IonList,
+  IonMenuToggle,
+  IonItem,
+  IonFooter,
+  IonRouterOutlet,
+  IonRippleEffect,
+  IonRouterLink,
+} from '@ionic/angular/standalone';
 import { Observable, Subscription, filter } from 'rxjs';
 import { DrawerScreen } from '../types/drawer';
 
@@ -41,7 +60,25 @@ export const revealAnimation: AnimationBuilder = (
   selector: 'app-drawer',
   templateUrl: './drawer.page.html',
   styleUrls: ['./drawer.page.scss'],
-  standalone: false,
+  imports: [
+    IonRouterOutlet,
+    IonContent,
+    IonSplitPane,
+    IonMenu,
+    IonMenuToggle,
+    IonAvatar,
+    IonImg,
+    IonLabel,
+    IonList,
+    IonItem,
+    IonRippleEffect,
+    IonToolbar,
+    IonFooter,
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    IonRouterLink,
+  ],
 })
 export class DrawerPage implements AfterViewInit {
   @ViewChild('userAvatar', { read: ElementRef })

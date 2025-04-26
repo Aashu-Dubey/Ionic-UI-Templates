@@ -5,19 +5,46 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { AnimationController, NavController, Platform } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import {
+  AnimationController,
+  IonCol,
+  IonIcon,
+  IonItem,
+  IonRow,
+  IonText,
+  IonToggle,
+  NavController,
+  Platform,
+} from '@ionic/angular/standalone';
+import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 import {
   MenuItem,
   menuItems2List,
   menuItems3List,
   menuItemsList,
 } from '../../models/side-menu';
+import { MenuRowComponent } from './menu-row/menu-row.component';
 
 @Component({
   selector: 'cr-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
-  standalone: false,
+  imports: [
+    IonRow,
+    IonCol,
+    IonText,
+    IonIcon,
+    IonItem,
+    IonToggle,
+    FormsModule,
+    MenuRowComponent,
+    RiveCanvas,
+    RiveStateMachine,
+    RiveSMInput,
+    CommonModule,
+  ],
 })
 export class SideMenuComponent implements OnInit {
   @ViewChildren('menuItems', { read: ElementRef })

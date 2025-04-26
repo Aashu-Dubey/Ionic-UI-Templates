@@ -1,11 +1,21 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IonCol, IonRow } from '@ionic/angular/standalone';
+import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 import { BottomTabItem, tabItemsList } from '../../models/tabs';
 
 @Component({
   selector: 'cr-bottom-tab-bar',
   templateUrl: './bottom-tab-bar.component.html',
   styleUrls: ['./bottom-tab-bar.component.scss'],
-  standalone: false,
+  imports: [
+    CommonModule,
+    IonRow,
+    IonCol,
+    RiveCanvas,
+    RiveStateMachine,
+    RiveSMInput,
+  ],
 })
 export class BottomTabBarComponent implements OnInit {
   tabItems = tabItemsList;
@@ -18,7 +28,7 @@ export class BottomTabBarComponent implements OnInit {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
     for (let i = 0; i < this.tabItems.length; i++) {
-      setTimeout(() => (this.tabItems[i].show = true), 1000 + (i * 500));
+      setTimeout(() => (this.tabItems[i].show = true), 1000 + i * 500);
     }
   }
 

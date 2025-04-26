@@ -1,13 +1,45 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+  IonContent,
+  AnimationController,
+  IonText,
+  IonIcon,
+} from '@ionic/angular/standalone';
 import { StatusBar, Style } from '@capacitor/status-bar';
-import { AnimationController } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import {
+  arrowForwardOutline,
+  closeOutline,
+  exitOutline,
+  personOutline,
+} from 'ionicons/icons';
+import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
+import { SideMenuComponent } from './navigation/side-menu/side-menu.component';
+import { OnBoardingPage } from './views/on-boarding/on-boarding.page';
 import { tabItemsList } from './models/tabs';
+import { ContentViewPage } from './views/content-view/content-view.page';
+import { BottomTabBarComponent } from './navigation/bottom-tab-bar/bottom-tab-bar.component';
 
 @Component({
-  selector: 'cr-course-rive',
+  selector: 'app-course-rive',
   templateUrl: './course-rive.page.html',
   styleUrls: ['./course-rive.page.scss'],
-  standalone: false,
+  imports: [
+    IonContent,
+    IonText,
+    IonIcon,
+    RiveCanvas,
+    RiveSMInput,
+    RiveStateMachine,
+    CommonModule,
+    FormsModule,
+    SideMenuComponent,
+    OnBoardingPage,
+    ContentViewPage,
+    BottomTabBarComponent,
+  ],
 })
 export class CourseRivePage implements OnInit {
   @ViewChild('mainContent', { read: ElementRef }) mainContentRef?: ElementRef;
@@ -27,9 +59,11 @@ export class CourseRivePage implements OnInit {
   showRiveMenuBtn = false; // Temporary
   avatarArr = [1, 2, 3];
 
-  constructor(public animationCtrl: AnimationController) {}
+  constructor(public animationCtrl: AnimationController) {
+    addIcons({ personOutline, exitOutline, arrowForwardOutline, closeOutline });
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
     setTimeout(() => (this.showRiveMenuBtn = true), 500);

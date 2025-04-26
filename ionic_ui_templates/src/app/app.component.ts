@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonRouterOutlet, Platform } from '@ionic/angular';
+import { IonApp, IonRouterOutlet, Platform } from '@ionic/angular/standalone';
 import { App } from '@capacitor/app';
 import { StatusBar } from '@capacitor/status-bar';
 import { SafeAreaController } from '@aashu-dubey/capacitor-statusbar-safe-area';
@@ -7,8 +7,7 @@ import { SafeAreaController } from '@aashu-dubey/capacitor-statusbar-safe-area';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
-  standalone: false,
+  imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
   // https://github.com/ionic-team/ionic-framework/issues/21630#issuecomment-683007162

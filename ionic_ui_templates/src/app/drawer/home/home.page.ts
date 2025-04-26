@@ -5,14 +5,51 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { AnimationController, Platform, ToastController } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+  AnimationController,
+  Platform,
+  ToastController,
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonRippleEffect,
+  IonButtons,
+  IonButton,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonItem,
+  IonImg,
+  IonRouterLink,
+} from '@ionic/angular/standalone';
 import { Template } from 'src/app/types/home';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  standalone: false,
+  imports: [
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonRippleEffect,
+    IonButtons,
+    IonButton,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonImg,
+    IonItem,
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    IonRouterLink,
+  ],
 })
 export class HomePage implements AfterViewInit {
   // ref: "https://ionicframework.com/blog/building-interactive-ionic-apps-with-gestures-and-animations/"
