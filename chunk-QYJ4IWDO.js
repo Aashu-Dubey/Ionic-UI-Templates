@@ -1,0 +1,1 @@
+import{c as e}from"./chunk-7CRFC2TD.js";import{f as t}from"./chunk-RW4GY4BD.js";var r=class extends e{getStatusBarHeight(){return t(this,null,function*(){return{height:0}})}getSafeAreaInsets(){return t(this,null,function*(){return{top:0,bottom:0,left:0,right:0}})}};export{r as SafeAreaWeb};
