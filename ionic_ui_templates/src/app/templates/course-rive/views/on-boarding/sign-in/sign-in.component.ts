@@ -1,11 +1,33 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { RiveSMInput } from 'ng-rive';
+import { FormsModule } from '@angular/forms';
+import {
+  IonButton,
+  IonIcon,
+  IonImg,
+  IonInput,
+  IonItem,
+  IonRow,
+  IonText,
+} from '@ionic/angular/standalone';
+import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 
 @Component({
   selector: 'cr-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
-  standalone: false,
+  imports: [
+    IonText,
+    IonItem,
+    IonImg,
+    IonInput,
+    IonIcon,
+    IonRow,
+    IonButton,
+    FormsModule,
+    RiveCanvas,
+    RiveStateMachine,
+    RiveSMInput,
+  ],
 })
 export class SignInComponent implements OnInit {
   @Output() onClose = new EventEmitter();

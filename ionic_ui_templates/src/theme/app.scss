@@ -57,13 +57,12 @@ $grey: #3a5160;
 }
 
 // ref: 'https://stackoverflow.com/a/50270004', 'https://developers.google.com/fonts/docs/material_icons#setup_method_2_self_hosting'
-$font-path: "../assets/fonts";
 @font-face {
   font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
   src: local("Material Icons"), local("MaterialIcons-Regular"),
-    url($font-path + "/MaterialIcons-Regular.ttf") format("truetype");
+    url("../assets/fonts/MaterialIcons-Regular.ttf") format("truetype");
 }
 
 .material-icons {

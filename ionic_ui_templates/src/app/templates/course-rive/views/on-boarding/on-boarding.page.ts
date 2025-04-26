@@ -6,13 +6,40 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { AnimationController, IonModal, Platform } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+  AnimationController,
+  IonModal,
+  Platform,
+  IonImg,
+  IonText,
+  IonButtons,
+  IonIcon,
+  IonButton,
+} from '@ionic/angular/standalone';
+import { RiveCanvas, RiveLinearAnimation, RivePlayer } from 'ng-rive';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @Component({
   selector: 'cr-on-boarding',
   templateUrl: './on-boarding.page.html',
   styleUrls: ['./on-boarding.page.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [
+    IonImg,
+    IonText,
+    IonButton,
+    IonButtons,
+    IonModal,
+    IonIcon,
+    CommonModule,
+    FormsModule,
+    RiveCanvas,
+    RiveLinearAnimation,
+    RivePlayer,
+    SignInComponent,
+  ],
 })
 export class OnBoardingPage implements OnInit {
   @ViewChild(IonModal) signInModal?: IonModal;
@@ -38,7 +65,7 @@ export class OnBoardingPage implements OnInit {
       this.showRiveBtn = true;
       // after render one-shot animation auto-plays, so doesn't trigger animation when user clicks first time
       // this makes sure it works the first time as well
-      setTimeout(() => (this.resetBtnState()), 1000);
+      setTimeout(() => this.resetBtnState(), 1000);
     }, 1500);
   }
 
