@@ -32,6 +32,7 @@ import {
   IonFooter,
   IonRouterOutlet,
   IonRippleEffect,
+  IonRouterLink,
 } from '@ionic/angular/standalone';
 import { Observable, Subscription, filter } from 'rxjs';
 import { DrawerScreen } from '../types/drawer';
@@ -76,6 +77,7 @@ export const revealAnimation: AnimationBuilder = (
     CommonModule,
     FormsModule,
     RouterLink,
+    IonRouterLink,
   ],
 })
 export class DrawerPage implements AfterViewInit {

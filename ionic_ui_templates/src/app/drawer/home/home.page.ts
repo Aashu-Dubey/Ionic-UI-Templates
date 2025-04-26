@@ -23,6 +23,7 @@ import {
   IonCol,
   IonItem,
   IonImg,
+  IonRouterLink,
 } from '@ionic/angular/standalone';
 import { Template } from 'src/app/types/home';
 import { RouterLink } from '@angular/router';
@@ -47,6 +48,7 @@ import { RouterLink } from '@angular/router';
     CommonModule,
     FormsModule,
     RouterLink,
+    IonRouterLink,
   ],
 })
 export class HomePage implements AfterViewInit {
