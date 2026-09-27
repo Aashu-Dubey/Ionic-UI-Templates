@@ -15,6 +15,7 @@ export class AppComponent {
 
   constructor(private platform: Platform) {
     SafeAreaController.injectCSSVariables();
+    // Doesn't work on Android 15+, as they has edge-to-edge
     StatusBar.setOverlaysWebView({ overlay: true }).catch(() => {});
 
     // By default Ionic doesn't close app on back click, so we handle that here

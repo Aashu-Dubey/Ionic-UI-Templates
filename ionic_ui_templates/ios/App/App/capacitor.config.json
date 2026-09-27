@@ -5,6 +5,11 @@
 	"server": {
 		"androidScheme": "https"
 	},
+	"plugins": {
+		"SystemBars": {
+			"insetsHandling": "disable"
+		}
+	},
 	"packageClassList": [
 		"SafeAreaPlugin",
 		"AppPlugin",
