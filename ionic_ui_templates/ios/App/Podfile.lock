@@ -1,16 +1,16 @@
 PODS:
-  - AashuDubeyCapacitorStatusbarSafeArea (4.0.0):
+  - AashuDubeyCapacitorStatusbarSafeArea (5.0.0):
     - Capacitor
-  - Capacitor (7.2.0):
+  - Capacitor (8.5.2):
     - CapacitorCordova
-  - CapacitorApp (7.0.1):
+  - CapacitorApp (8.1.1):
     - Capacitor
-  - CapacitorCordova (7.2.0)
-  - CapacitorHaptics (7.0.1):
+  - CapacitorCordova (8.5.2)
+  - CapacitorHaptics (8.0.2):
     - Capacitor
-  - CapacitorKeyboard (7.0.1):
+  - CapacitorKeyboard (8.0.5):
     - Capacitor
-  - CapacitorStatusBar (7.0.1):
+  - CapacitorStatusBar (8.0.3):
     - Capacitor
 
 DEPENDENCIES:
@@ -39,14 +39,14 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/status-bar"
 
 SPEC CHECKSUMS:
-  AashuDubeyCapacitorStatusbarSafeArea: fece4dfec79da248e6a88b148456e4d9c034a551
-  Capacitor: 03bc7cbdde6a629a8b910a9d7d78c3cc7ed09ea7
-  CapacitorApp: febecbb9582cb353aed037e18ec765141f880fe9
-  CapacitorCordova: 5967b9ba03915ef1d585469d6e31f31dc49be96f
-  CapacitorHaptics: 1f1e17041f435d8ead9ff2a34edd592c6aa6a8d6
-  CapacitorKeyboard: 09fd91dcde4f8a37313e7f11bde553ad1ed52036
-  CapacitorStatusBar: 6e7af040d8fc4dd655999819625cae9c2d74c36f
+  AashuDubeyCapacitorStatusbarSafeArea: 8265344874d5ae133a02a7ef0a2a984f2c0fe808
+  Capacitor: 89067779e14fb7ea56af07b4817f45d1f0c2a269
+  CapacitorApp: 305bd13c44f6f9d164e2ee66a4faa956ed8c0e06
+  CapacitorCordova: 5bec5648cbd09a176ce34ce5e7b6cdabb2c8a327
+  CapacitorHaptics: 296f771ecd89c7a1bd92a7b6826a7d268e2e70f5
+  CapacitorKeyboard: b6b0744890cdb1d9a96e2cafcc9253fdcc55de3b
+  CapacitorStatusBar: eca7bc2b58d9f886f1ef9edb66e57a9b29c121af
 
-PODFILE CHECKSUM: 9d8148e4dfe13c50a0bf910d1db07c7cc73f4de1
+PODFILE CHECKSUM: 766dd3cb1433b9eab7be5a697972dc5ae7f3dabb
 
 COCOAPODS: 1.16.2
