@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonRow, IonText } from '@ionic/angular/standalone';
+import { IonRow, IonText } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 import { MenuItem, menuItemsList } from '../../../models/side-menu';
 

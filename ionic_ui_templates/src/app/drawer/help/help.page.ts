@@ -6,7 +6,7 @@ import {
   IonContent,
   IonImg,
   IonLabel,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-help',

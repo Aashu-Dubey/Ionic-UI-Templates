@@ -7,7 +7,7 @@ import {
   IonImg,
   IonRow,
   IonText,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { Course, courseSectionsList, coursesList } from '../../models/course';
 import { ShuffleArrayPipe } from '../../helper/shuffle-array/shuffle-array.pipe';
 

@@ -7,7 +7,7 @@ import {
   IonImg,
   IonLabel,
   IonTextarea,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-feedback',

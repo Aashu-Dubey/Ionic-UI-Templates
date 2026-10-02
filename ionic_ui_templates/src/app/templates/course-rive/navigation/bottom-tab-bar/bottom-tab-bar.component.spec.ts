@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { provideIonicAngular } from '@ionic/angular';
 
 import { BottomTabBarComponent } from './bottom-tab-bar.component';
 
@@ -10,7 +10,7 @@ describe('BottomTabBarComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BottomTabBarComponent ],
-      imports: [IonicModule.forRoot()]
+      providers: [provideIonicAngular()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BottomTabBarComponent);

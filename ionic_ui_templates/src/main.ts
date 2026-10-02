@@ -12,15 +12,17 @@ import {
 import {
   IonicRouteStrategy,
   provideIonicAngular,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 
 import { RIVE_FOLDER } from 'ng-rive';
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
+import { provideZoneChangeDetection } from '@angular/core';
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideZoneChangeDetection(),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),

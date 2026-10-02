@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonApp, IonRouterOutlet, Platform } from '@ionic/angular/standalone';
+import { IonApp, IonRouterOutlet, Platform } from '@ionic/angular';
 import { App } from '@capacitor/app';
 import { StatusBar } from '@capacitor/status-bar';
 import { SafeAreaController } from '@aashu-dubey/capacitor-statusbar-safe-area';

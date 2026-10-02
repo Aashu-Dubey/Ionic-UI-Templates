@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { provideIonicAngular } from '@ionic/angular';
 
 import { MenuRowComponent } from './menu-row.component';
 
@@ -10,7 +10,7 @@ describe('MenuRowComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MenuRowComponent ],
-      imports: [IonicModule.forRoot()]
+      providers: [provideIonicAngular()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MenuRowComponent);

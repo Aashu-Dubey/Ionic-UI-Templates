@@ -6,7 +6,7 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-hotel-booking',

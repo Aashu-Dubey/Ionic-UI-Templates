@@ -24,7 +24,7 @@ import {
   IonItem,
   IonImg,
   IonRouterLink,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { Template } from 'src/app/types/home';
 import { RouterLink } from '@angular/router';
 

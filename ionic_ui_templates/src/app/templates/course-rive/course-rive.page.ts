@@ -6,7 +6,7 @@ import {
   AnimationController,
   IonText,
   IonIcon,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { addIcons } from 'ionicons';
 import {

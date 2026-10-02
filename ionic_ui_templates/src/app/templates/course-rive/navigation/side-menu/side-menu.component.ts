@@ -17,7 +17,7 @@ import {
   IonToggle,
   NavController,
   Platform,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 import {
   MenuItem,

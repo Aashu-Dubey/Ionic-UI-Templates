@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonCol, IonRow } from '@ionic/angular/standalone';
+import { IonCol, IonRow } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 import { BottomTabItem, tabItemsList } from '../../models/tabs';
 

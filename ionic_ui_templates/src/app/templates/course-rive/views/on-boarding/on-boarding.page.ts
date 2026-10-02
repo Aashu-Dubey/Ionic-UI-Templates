@@ -17,7 +17,7 @@ import {
   IonButtons,
   IonIcon,
   IonButton,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { RiveCanvas, RiveLinearAnimation, RivePlayer } from 'ng-rive';
 import { SignInComponent } from './sign-in/sign-in.component';
 

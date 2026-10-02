@@ -8,7 +8,7 @@ import {
   IonItem,
   IonRow,
   IonText,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 
 @Component({

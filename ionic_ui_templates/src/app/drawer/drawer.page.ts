@@ -33,7 +33,7 @@ import {
   IonRouterOutlet,
   IonRippleEffect,
   IonRouterLink,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { Observable, Subscription, filter } from 'rxjs';
 import { DrawerScreen } from '../types/drawer';
 
