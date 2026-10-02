@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import {
   IonButton,
   IonContent,
-  IonImg,
   IonLabel,
 } from '@ionic/angular';
 
@@ -12,7 +11,7 @@ import {
   selector: 'app-help',
   templateUrl: './help.page.html',
   styleUrls: ['./help.page.scss'],
-  imports: [IonContent, IonImg, IonLabel, IonButton, CommonModule, FormsModule],
+  imports: [IonContent, IonLabel, IonButton, CommonModule, FormsModule],
 })
 export class HelpPage implements OnInit {
   constructor() {}

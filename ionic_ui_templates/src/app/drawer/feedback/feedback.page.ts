@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import {
   IonButton,
   IonContent,
-  IonImg,
   IonLabel,
   IonTextarea,
 } from '@ionic/angular';
@@ -15,7 +14,6 @@ import {
   styleUrls: ['./feedback.page.scss'],
   imports: [
     IonContent,
-    IonImg,
     IonLabel,
     IonTextarea,
     IonButton,

@@ -66,14 +66,14 @@
     }
 
     ion-row.avatar-container {
-      ion-img {
+      img {
         width: 44px;
         height: 44px;
         border-radius: 22px;
         overflow: hidden;
       }
       // item spacing
-      ion-img + ion-img {
+      img + img {
         margin-left: 8px;
       }
     }

@@ -31,7 +31,12 @@
           (click)="onScreenClick(temp)"
           [routerLink]="temp.screenPath ? [temp.screenPath] : []"
         >
-          <ion-img [src]="temp.background"> </ion-img>
+          <img
+            [src]="temp.background"
+            [alt]="'Template: ' + temp.id.replace('-', ' ')"
+            loading="lazy"
+            decoding="async"
+          />
           <ion-ripple-effect></ion-ripple-effect>
         </ion-item>
       </ion-col>

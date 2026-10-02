@@ -11,7 +11,12 @@
     >
       <div class="headerToolbar">
         <ion-avatar class="userImage" #userAvatar>
-          <ion-img src="assets/home/userImage.png" alt="User Image"></ion-img>
+          <img
+            src="assets/home/userImage.png"
+            alt="User Image"
+            loading="lazy"
+            decoding="async"
+          />
         </ion-avatar>
         <div class="nameContainer">
           <ion-label class="userName">Chris Hemsworth</ion-label>
@@ -46,14 +51,16 @@
               >
                 {{p.icon}}
               </i>
-              <ion-img
+              <img
                 *ngIf="p.isAsset"
                 style="width: 24px; height: 24px"
                 class="icon-margin"
                 [ngClass]="{'imgTintBlue': activeTab === p.name, 'imgTintBlack': activeTab !== p.name}"
                 src="assets/home/supportIcon.png"
                 [alt]="p.name"
-              ></ion-img>
+                loading="lazy"
+                decoding="async"
+              />
               <ion-label
                 style="font-weight: 500; font-size: 16px; margin-left: 8px"
                 [style.color]="activeTab === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"

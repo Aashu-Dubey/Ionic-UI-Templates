@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import {
   IonButton,
   IonIcon,
-  IonImg,
   IonInput,
   IonItem,
   IonRow,
@@ -18,7 +17,6 @@ import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
   imports: [
     IonText,
     IonItem,
-    IonImg,
     IonInput,
     IonIcon,
     IonRow,

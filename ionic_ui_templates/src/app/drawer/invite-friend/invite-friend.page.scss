@@ -23,7 +23,7 @@ ion-toolbar {
   margin-top: calc(var(--ion-safe-area-top) + 8px);
 } */
 
-ion-img {
+img {
   height: 320px;
   padding: 0px 16px;
   margin-top: var(--status-bar-height);
@@ -34,7 +34,7 @@ ion-img {
   }
 }
 
-.ios ion-img {
+.ios img {
   margin-top: var(--ion-safe-area-top);
 }
 

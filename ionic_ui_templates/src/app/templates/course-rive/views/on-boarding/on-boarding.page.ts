@@ -12,7 +12,6 @@ import {
   AnimationController,
   IonModal,
   Platform,
-  IonImg,
   IonText,
   IonButtons,
   IonIcon,
@@ -27,7 +26,6 @@ import { SignInComponent } from './sign-in/sign-in.component';
   styleUrls: ['./on-boarding.page.scss'],
   standalone: true,
   imports: [
-    IonImg,
     IonText,
     IonButton,
     IonButtons,

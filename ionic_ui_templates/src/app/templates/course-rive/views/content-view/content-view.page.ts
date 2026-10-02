@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import {
   IonCol,
   IonGrid,
-  IonImg,
   IonRow,
   IonText,
 } from '@ionic/angular';
@@ -18,7 +17,6 @@ import { ShuffleArrayPipe } from '../../helper/shuffle-array/shuffle-array.pipe'
   standalone: true,
   imports: [
     IonText,
-    IonImg,
     IonGrid,
     IonRow,
     IonCol,
