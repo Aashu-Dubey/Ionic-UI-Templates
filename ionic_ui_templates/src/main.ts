@@ -2,6 +2,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import {
   RouteReuseStrategy,
   provideRouter,
+  withComponentInputBinding,
   withPreloading,
   PreloadAllModules,
 } from '@angular/router';
@@ -9,10 +10,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import {
-  IonicRouteStrategy,
-  provideIonicAngular,
-} from '@ionic/angular';
+import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
 
 import { RIVE_FOLDER } from 'ng-rive';
 
@@ -25,7 +23,11 @@ bootstrapApplication(AppComponent, {
     provideZoneChangeDetection(),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
-    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules),
+      withComponentInputBinding(),
+    ),
     // Below two are needed for ng-rive
     provideHttpClient(withInterceptorsFromDi()),
     {

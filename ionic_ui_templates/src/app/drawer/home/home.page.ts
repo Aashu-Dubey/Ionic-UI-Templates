@@ -24,7 +24,7 @@ import {
   IonItem,
   IonRouterLink,
 } from '@ionic/angular';
-import { Template } from 'src/app/types/home';
+import { Template } from '../../types/home';
 import { RouterLink } from '@angular/router';
 
 @Component({
