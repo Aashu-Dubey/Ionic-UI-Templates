@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonRow, IonText } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
@@ -17,11 +17,7 @@ import { MenuItem, menuItemsList } from '../../../models/side-menu';
     CommonModule,
   ],
 })
-export class MenuRowComponent implements OnInit {
+export class MenuRowComponent {
   @Input() menu: MenuItem = menuItemsList[0];
-  @Output() onPress = new EventEmitter();
-
-  constructor() {}
-
-  ngOnInit() {}
+  @Output() pressed = new EventEmitter();
 }

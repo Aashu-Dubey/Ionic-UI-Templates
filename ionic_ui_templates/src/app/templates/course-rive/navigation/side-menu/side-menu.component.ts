@@ -4,6 +4,7 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  inject,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -47,6 +48,10 @@ import { MenuRowComponent } from './menu-row/menu-row.component';
   ],
 })
 export class SideMenuComponent implements OnInit {
+  private animationCtrl = inject(AnimationController);
+  private navigation = inject(NavController);
+  platform = inject(Platform);
+
   @ViewChildren('menuItems', { read: ElementRef })
   menuItems1Ref?: QueryList<ElementRef>;
   @ViewChildren('menuItems2', { read: ElementRef })
@@ -58,12 +63,6 @@ export class SideMenuComponent implements OnInit {
 
   selectedMenu = this.menuItems[0];
   isDarkMode = false;
-
-  constructor(
-    private animationCtrl: AnimationController,
-    private navigation: NavController,
-    public platform: Platform
-  ) {}
 
   ngOnInit() {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
@@ -128,9 +127,5 @@ export class SideMenuComponent implements OnInit {
 
   goBack() {
     this.navigation.back({ animated: false });
-  }
-
-  trackMenuItems(_i: number, tab: MenuItem) {
-    return tab.id;
   }
 }

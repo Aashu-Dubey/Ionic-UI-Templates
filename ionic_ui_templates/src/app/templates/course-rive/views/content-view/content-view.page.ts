@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -7,7 +7,7 @@ import {
   IonRow,
   IonText,
 } from '@ionic/angular';
-import { Course, courseSectionsList, coursesList } from '../../models/course';
+import { courseSectionsList, coursesList } from '../../models/course';
 import { ShuffleArrayPipe } from '../../helper/shuffle-array/shuffle-array.pipe';
 
 @Component({
@@ -25,19 +25,7 @@ import { ShuffleArrayPipe } from '../../helper/shuffle-array/shuffle-array.pipe'
     ShuffleArrayPipe,
   ],
 })
-export class ContentViewPage implements OnInit {
+export class ContentViewPage {
   courses = coursesList;
   courseSections = courseSectionsList;
-
-  constructor() {}
-
-  ngOnInit() {}
-
-  trackCourses(i: number, course: Course) {
-    return `${course.title}_${i}`;
-  }
-
-  trackAvatarItems(_i: number, num: number) {
-    return `avatar_${num}`;
-  }
 }

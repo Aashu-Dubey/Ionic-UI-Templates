@@ -20,9 +20,7 @@ import { BottomTabItem, tabItemsList } from '../../models/tabs';
 export class BottomTabBarComponent implements OnInit {
   tabItems = tabItemsList;
   @Input() selectedTab: BottomTabItem = this.tabItems[0];
-  @Output() onTabChange = new EventEmitter<BottomTabItem>();
-
-  constructor() {}
+  @Output() tabChanged = new EventEmitter<BottomTabItem>();
 
   ngOnInit() {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
@@ -38,11 +36,7 @@ export class BottomTabBarComponent implements OnInit {
       setTimeout(() => {
         tab.status = false;
       }, 1000);
-      this.onTabChange.emit(tab);
+      this.tabChanged.emit(tab);
     }
-  }
-
-  trackTabItems(_i: number, tab: BottomTabItem) {
-    return tab.id;
   }
 }

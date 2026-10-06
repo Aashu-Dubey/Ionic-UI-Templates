@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   IonButton,
@@ -27,16 +27,12 @@ import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
     RiveSMInput,
   ],
 })
-export class SignInComponent implements OnInit {
-  @Output() onClose = new EventEmitter();
+export class SignInComponent  {
+  @Output() closeClicked = new EventEmitter();
 
   email = '';
   password = '';
   isLoading = false;
-
-  constructor() {}
-
-  ngOnInit() {}
 
   signIn(
     success: RiveSMInput,
@@ -66,6 +62,6 @@ export class SignInComponent implements OnInit {
   }
 
   onSignInClose() {
-    this.onClose.emit();
+    this.closeClicked.emit();
   }
 }

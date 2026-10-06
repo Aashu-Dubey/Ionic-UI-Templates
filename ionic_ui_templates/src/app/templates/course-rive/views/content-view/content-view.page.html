@@ -2,38 +2,40 @@
   <ion-text class="courses-list-title font-largeTitle">Courses</ion-text>
   <!-- Course VCard -->
   <div class="courses-list">
-    <div
-      class="course-container"
-      *ngFor="let course of courses; trackBy: trackCourses"
-      [style.--course-bg]="course.color"
-    >
-      <img
-        class="course-img"
-        [src]="course.image"
-        alt=""
-        loading="lazy"
-        decoding="async"
-      />
-
-      <ion-text class="course-title font-title2">{{course.title}}</ion-text>
-      <ion-text class="course-subtitle font-subtitle">
-        {{course.subtitle}}
-      </ion-text>
-      <ion-text class="course-caption font-footnote2">
-        {{course.caption.toUpperCase()}}
-      </ion-text>
-      <div class="spacer"></div>
-      <ion-row class="avatar-container">
+    @for (course of courses; track `${course.title}_${$index}`) {
+      <div
+        class="course-container"
+        [style.--course-bg]="course.color"
+      >
         <img
-          *ngFor="let number of [1, 2, 3] | shuffleArray; let i = index; trackBy: trackAvatarItems"
-          [style.transform]="'translateX(calc(' + i + ' * -20px))'"
-          src="assets/course_rive/avatars/avatar_{{number}}.svg"
-          alt="Avatar"
+          class="course-img"
+          [src]="course.image"
+          alt=""
           loading="lazy"
           decoding="async"
         />
-      </ion-row>
-    </div>
+
+        <ion-text class="course-title font-title2">{{course.title}}</ion-text>
+        <ion-text class="course-subtitle font-subtitle">
+          {{course.subtitle}}
+        </ion-text>
+        <ion-text class="course-caption font-footnote2">
+          {{course.caption.toUpperCase()}}
+        </ion-text>
+        <div class="spacer"></div>
+        <ion-row class="avatar-container">
+          @for (number of [1, 2, 3] | shuffleArray; track `avatar_${number}`; let i = $index) {
+            <img
+              [style.transform]="'translateX(calc(' + i + ' * -20px))'"
+              src="assets/course_rive/avatars/avatar_{{number}}.svg"
+              alt="Avatar"
+              loading="lazy"
+              decoding="async"
+            />
+          }
+        </ion-row>
+      </div>
+    }
   </div>
 
   <ion-text class="recent-title font-title3">Recent</ion-text>
@@ -41,29 +43,30 @@
   <div class="section-list">
     <ion-grid class="section-grid">
       <ion-row>
-        <ion-col
-          *ngFor="let section of courseSections; trackBy: trackCourses"
-          size-lg="6"
-          size="12"
-        >
-          <ion-row class="section-container" [style.background]="section.color">
-            <ion-col>
-              <ion-text class="font-title2">{{section.title}}</ion-text>
-              <br />
-              <div class="spacing"></div>
-              <ion-text class="font-body">{{section.caption}}</ion-text>
-            </ion-col>
-            <ion-col size="auto" class="ion-align-items-center">
-              <img
-                class="section-img"
-                [src]="section.image"
-                alt=""
-                loading="lazy"
-                decoding="async"
-              />
-            </ion-col>
-          </ion-row>
-        </ion-col>
+        @for (section of courseSections; track `${section.title}_${$index}`) {
+          <ion-col
+            size-lg="6"
+            size="12"
+          >
+            <ion-row class="section-container" [style.background]="section.color">
+              <ion-col>
+                <ion-text class="font-title2">{{section.title}}</ion-text>
+                <br />
+                <div class="spacing"></div>
+                <ion-text class="font-body">{{section.caption}}</ion-text>
+              </ion-col>
+              <ion-col size="auto" class="ion-align-items-center">
+                <img
+                  class="section-img"
+                  [src]="section.image"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        }
       </ion-row>
     </ion-grid>
   </div>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -42,6 +42,8 @@ import { BottomTabBarComponent } from './navigation/bottom-tab-bar/bottom-tab-ba
   ],
 })
 export class CourseRivePage implements OnInit {
+  animationCtrl = inject(AnimationController);
+
   @ViewChild('mainContent', { read: ElementRef }) mainContentRef?: ElementRef;
   @ViewChild('menuToggleBtn', { read: ElementRef })
   menuToggleBtnRef?: ElementRef;
@@ -59,7 +61,7 @@ export class CourseRivePage implements OnInit {
   showRiveMenuBtn = false; // Temporary
   avatarArr = [1, 2, 3];
 
-  constructor(public animationCtrl: AnimationController) {
+  constructor() {
     addIcons({ personOutline, exitOutline, arrowForwardOutline, closeOutline });
   }
 

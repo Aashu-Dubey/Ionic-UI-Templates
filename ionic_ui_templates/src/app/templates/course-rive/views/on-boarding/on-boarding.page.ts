@@ -5,6 +5,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -40,6 +41,9 @@ import { SignInComponent } from './sign-in/sign-in.component';
   ],
 })
 export class OnBoardingPage implements OnInit {
+  private animationCtrl = inject(AnimationController);
+  platform = inject(Platform);
+
   @ViewChild(IonModal) signInModal?: IonModal;
   @ViewChild('container', { read: ElementRef }) containerRef?: ElementRef;
   @ViewChild('closeBtn', { read: ElementRef }) closeBtnRef?: ElementRef;
@@ -49,11 +53,6 @@ export class OnBoardingPage implements OnInit {
   buttonToggle = true;
   showRiveAsset = false;
   showRiveBtn = false;
-
-  constructor(
-    public platform: Platform,
-    private animationCtrl: AnimationController
-  ) {}
 
   ngOnInit() {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
