@@ -25,49 +25,52 @@
       <div class="divider"></div>
       <ion-content>
         <ion-list class="ion-no-padding">
-          <ion-menu-toggle
-            auto-hide="false"
-            *ngFor="let p of appPages"
-            #drawerItemList
-          >
-            <ion-item
-              class="drawerItem"
-              lines="none"
-              detail="false"
-              routerDirection="root"
-              [routerLink]="p.url ? [p.url] : undefined"
-              (click)="onDrawerNavigate(p)"
+          @for (p of appPages; track $index) {
+            <ion-menu-toggle
+              auto-hide="false"
+              #drawerItemList
             >
               <ion-item
-                class="drawerInnerItem"
-                [style.--width]="rowWidth + 'px'"
-                [style.--background]="activeTab === p.name ? 'rgba(33, 150, 243, 0.2)' : 'transparent'"
+                class="drawerItem"
                 lines="none"
-              ></ion-item>
-              <i
-                *ngIf="!p.isAsset"
-                [style.color]="activeTab === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
-                class="material-icons icon-margin"
+                detail="false"
+                routerDirection="root"
+                [routerLink]="p.url ? [p.url] : undefined"
+                (click)="onDrawerNavigate(p)"
               >
-                {{p.icon}}
-              </i>
-              <img
-                *ngIf="p.isAsset"
-                style="width: 24px; height: 24px"
-                class="icon-margin"
-                [ngClass]="{'imgTintBlue': activeTab === p.name, 'imgTintBlack': activeTab !== p.name}"
-                src="assets/home/supportIcon.png"
-                [alt]="p.name"
-                loading="lazy"
-                decoding="async"
-              />
-              <ion-label
-                style="font-weight: 500; font-size: 16px; margin-left: 8px"
-                [style.color]="activeTab === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
-                >{{p.name}}
-              </ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+                <ion-item
+                  class="drawerInnerItem"
+                  [style.--width]="rowWidth + 'px'"
+                  [style.--background]="activeTab === p.name ? 'rgba(33, 150, 243, 0.2)' : 'transparent'"
+                  lines="none"
+                ></ion-item>
+                @if (!p.isAsset) {
+                  <i
+                    [style.color]="activeTab === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
+                    class="material-icons icon-margin"
+                  >
+                    {{p.icon}}
+                  </i>
+                }
+                @if (p.isAsset) {
+                  <img
+                    style="width: 24px; height: 24px"
+                    class="icon-margin"
+                    [ngClass]="{'imgTintBlue': activeTab === p.name, 'imgTintBlack': activeTab !== p.name}"
+                    src="assets/home/supportIcon.png"
+                    [alt]="p.name"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                }
+                <ion-label
+                  style="font-weight: 500; font-size: 16px; margin-left: 8px"
+                  [style.color]="activeTab === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
+                  >{{p.name}}
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          }
         </ion-list>
       </ion-content>
       <div class="divider"></div>

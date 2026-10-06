@@ -5,6 +5,7 @@ import {
   QueryList,
   ViewChild,
   ViewChildren,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -79,6 +80,10 @@ export const revealAnimation: AnimationBuilder = (
   ],
 })
 export class DrawerPage implements AfterViewInit {
+  private router = inject(Router);
+  private menu = inject(MenuController);
+  platform = inject(Platform);
+
   @ViewChild('userAvatar', { read: ElementRef })
   userAvatarRef?: ElementRef;
   @ViewChild('menuIcon', { read: ElementRef })
@@ -105,11 +110,7 @@ export class DrawerPage implements AfterViewInit {
   isSplitPane = false; // hide menu button if split pane is enabled (desktop, pad etc.)
   routeChangeEvent?: Subscription;
 
-  constructor(
-    private router: Router,
-    public platform: Platform,
-    private menu: MenuController
-  ) {
+  constructor() {
     this.widthCalculations();
 
     this.platform.resize.subscribe(() => {

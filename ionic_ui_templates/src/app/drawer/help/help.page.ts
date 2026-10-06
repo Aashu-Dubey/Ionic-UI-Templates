@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  IonButton,
-  IonContent,
-  IonLabel,
-} from '@ionic/angular';
+import { IonButton, IonContent, IonLabel } from '@ionic/angular';
 
 @Component({
   selector: 'app-help',
@@ -13,8 +9,4 @@ import {
   styleUrls: ['./help.page.scss'],
   imports: [IonContent, IonLabel, IonButton, CommonModule, FormsModule],
 })
-export class HelpPage implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class HelpPage {}

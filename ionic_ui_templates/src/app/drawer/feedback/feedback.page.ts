@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  IonButton,
-  IonContent,
-  IonLabel,
-  IonTextarea,
-} from '@ionic/angular';
+import { IonButton, IonContent, IonLabel, IonTextarea } from '@ionic/angular';
 
 @Component({
   selector: 'app-feedback',
@@ -21,8 +16,4 @@ import {
     FormsModule,
   ],
 })
-export class FeedbackPage implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class FeedbackPage {}
