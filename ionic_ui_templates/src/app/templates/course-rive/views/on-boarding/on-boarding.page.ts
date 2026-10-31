@@ -1,12 +1,15 @@
 import {
   Component,
+  DestroyRef,
   ElementRef,
   EventEmitter,
   OnInit,
   Output,
   ViewChild,
   inject,
+  signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -42,7 +45,11 @@ import { SignInComponent } from './sign-in/sign-in.component';
 })
 export class OnBoardingPage implements OnInit {
   private animationCtrl = inject(AnimationController);
+  private destroyRef = inject(DestroyRef);
   platform = inject(Platform);
+
+  readonly viewportWidth = signal(this.platform.width());
+  readonly viewportHeight = signal(this.platform.height());
 
   @ViewChild(IonModal) signInModal?: IonModal;
   @ViewChild('container', { read: ElementRef }) containerRef?: ElementRef;
@@ -53,6 +60,15 @@ export class OnBoardingPage implements OnInit {
   buttonToggle = true;
   showRiveAsset = false;
   showRiveBtn = false;
+
+  constructor() {
+    this.platform.resize
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.viewportWidth.set(this.platform.width());
+        this.viewportHeight.set(this.platform.height());
+      });
+  }
 
   ngOnInit() {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",

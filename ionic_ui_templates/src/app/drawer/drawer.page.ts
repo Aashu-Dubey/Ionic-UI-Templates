@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   QueryList,
@@ -80,6 +81,7 @@ export const revealAnimation: AnimationBuilder = (
   ],
 })
 export class DrawerPage implements AfterViewInit {
+  private cdr = inject(ChangeDetectorRef);
   private router = inject(Router);
   private menu = inject(MenuController);
   platform = inject(Platform);
@@ -146,7 +148,7 @@ export class DrawerPage implements AfterViewInit {
   widthCalculations() {
     const deviceWidth = this.platform.width();
     this.drawerWidth = deviceWidth * 0.75;
-    if (deviceWidth > 992) {
+    if (deviceWidth >= 992) {
       const splitPaneWidth = (deviceWidth * 28) / 100; // default max split pane width is 28% after 992px
       this.rowWidth = splitPaneWidth - 64;
       this.isSplitPane = true;
@@ -154,6 +156,7 @@ export class DrawerPage implements AfterViewInit {
       this.rowWidth = this.drawerWidth - 64;
       this.isSplitPane = false;
     }
+    this.cdr.markForCheck();
   }
 
   initDrawerAnimation() {

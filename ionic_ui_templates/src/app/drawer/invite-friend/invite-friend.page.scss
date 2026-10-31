@@ -24,7 +24,9 @@ ion-toolbar {
 } */
 
 img {
+  display: block;
   height: 320px;
+  width: 100%;
   padding: 0px 16px;
   margin-top: var(--status-bar-height);
   object-fit: cover;
