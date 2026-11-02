@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import type { OnInit} from '@angular/core';
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import {
@@ -44,6 +44,7 @@ import { OnBoardingPage } from './views/on-boarding/on-boarding.page';
   ],
 })
 export class CourseRivePage implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
   animationCtrl = inject(AnimationController);
 
   @ViewChild('mainContent', { read: ElementRef }) mainContentRef?: ElementRef;
@@ -70,7 +71,10 @@ export class CourseRivePage implements OnInit {
   ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
-    setTimeout(() => (this.showRiveMenuBtn = true), 500);
+    setTimeout(() => {
+      this.showRiveMenuBtn = true;
+      this.cdr.markForCheck();
+    }, 500);
   }
 
   showOnBoardingToggle(): void {

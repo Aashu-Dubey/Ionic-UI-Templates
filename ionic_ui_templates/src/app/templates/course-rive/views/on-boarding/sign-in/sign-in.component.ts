@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   IonButton,
@@ -28,6 +28,7 @@ import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
   ],
 })
 export class SignInComponent  {
+  private cdr = inject(ChangeDetectorRef);
   @Output() closeClicked = new EventEmitter();
 
   email = '';
@@ -57,6 +58,7 @@ export class SignInComponent  {
       if (isValid) {
         confetti?.fire();
       }
+      this.cdr.markForCheck();
     }, 3000);
 
     if (isValid) {
@@ -64,6 +66,7 @@ export class SignInComponent  {
         this.onSignInClose();
         this.email = '';
         this.password = '';
+        this.cdr.markForCheck();
       }, 4000);
     }
   }

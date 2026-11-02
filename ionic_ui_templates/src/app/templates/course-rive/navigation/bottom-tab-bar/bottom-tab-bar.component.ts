@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import type { OnInit} from '@angular/core';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { IonCol, IonRow } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 
@@ -21,6 +21,8 @@ import { tabItemsList } from '../../models/tabs';
   ],
 })
 export class BottomTabBarComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   tabItems = tabItemsList;
   @Input() selectedTab: BottomTabItem = this.tabItems[0];
   @Output() tabChanged = new EventEmitter<BottomTabItem>();
@@ -29,7 +31,13 @@ export class BottomTabBarComponent implements OnInit {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
     for (let i = 0; i < this.tabItems.length; i++) {
-      setTimeout(() => (this.tabItems[i].show = true), 1000 + i * 500);
+      setTimeout(
+        () => {
+          this.tabItems[i].show = true;
+          this.cdr.markForCheck();
+        },
+        1000 + i * 500,
+      );
     }
   }
 
@@ -38,6 +46,7 @@ export class BottomTabBarComponent implements OnInit {
       tab.status = true;
       setTimeout(() => {
         tab.status = false;
+        this.cdr.markForCheck();
       }, 1000);
       this.tabChanged.emit(tab);
     }

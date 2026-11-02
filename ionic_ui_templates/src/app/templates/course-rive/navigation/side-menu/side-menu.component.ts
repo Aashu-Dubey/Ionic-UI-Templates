@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import type { OnInit, QueryList } from '@angular/core';
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   ViewChildren,
@@ -49,6 +50,7 @@ import { MenuRowComponent } from './menu-row/menu-row.component';
   ],
 })
 export class SideMenuComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
   private animationCtrl = inject(AnimationController);
   private navigation = inject(NavController);
   platform = inject(Platform);
@@ -69,18 +71,30 @@ export class SideMenuComponent implements OnInit {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
     for (let i = 0; i < this.menuItems.length; i++) {
-      setTimeout(() => (this.menuItems[i].show = true), 1000 + i * 500);
+      setTimeout(
+        () => {
+          this.menuItems[i].show = true;
+          this.cdr.markForCheck();
+        },
+        1000 + i * 500,
+      );
     }
     for (let i = 0; i < this.menuItems2.length; i++) {
       setTimeout(
-        () => (this.menuItems2[i].show = true),
-        1000 + (i + this.menuItems.length) * 500
+        () => {
+          this.menuItems2[i].show = true;
+          this.cdr.markForCheck();
+        },
+        1000 + (i + this.menuItems.length) * 500,
       );
     }
     for (let i = 0; i < this.menuItems3.length; i++) {
       setTimeout(
-        () => (this.menuItems3[i].show = true),
-        1000 + (i + this.menuItems.length + this.menuItems2.length) * 500
+        () => {
+          this.menuItems3[i].show = true;
+          this.cdr.markForCheck();
+        },
+        1000 + (i + this.menuItems.length + this.menuItems2.length) * 500,
       );
     }
   }
@@ -95,6 +109,7 @@ export class SideMenuComponent implements OnInit {
     menu.status = true;
     setTimeout(() => {
       menu.status = false;
+      this.cdr.markForCheck();
     }, 1000);
     this.selectedMenu = menu;
 

@@ -21,5 +21,7 @@ import { menuItemsList } from '../../../models/side-menu';
 })
 export class MenuRowComponent {
   @Input() menu: MenuItem = menuItemsList[0];
+  @Input() show: boolean = false;
+  @Input() status: boolean = false;
   @Output() pressed = new EventEmitter();
 }

@@ -7,7 +7,7 @@
 
   <ion-row class="menu-btn-container" (click)="pressed.emit()">
     <div class="icon-container">
-      @if (menu.show) {
+      @if (show) {
         <canvas
           riv="icons"
           [artboard]="menu.artboard"
@@ -15,7 +15,7 @@
           height="32"
         >
           <riv-state-machine [name]="menu.stateMachine" play>
-            <riv-input name="active" [value]="menu.status"></riv-input>
+            <riv-input name="active" [value]="status"></riv-input>
           </riv-state-machine>
         </canvas>
       }
