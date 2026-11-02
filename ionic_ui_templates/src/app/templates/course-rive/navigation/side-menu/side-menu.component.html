@@ -18,6 +18,8 @@
           <cr-menu-row
             #menuItems
             [menu]="menu"
+            [show]="menu.show"
+            [status]="menu.status"
             (pressed)="onMenuItemPress(i, menu)"
           ></cr-menu-row>
         }
@@ -31,6 +33,8 @@
           <cr-menu-row
             #menuItems2
             [menu]="menu"
+            [show]="menu.show"
+            [status]="menu.status"
             (pressed)="onMenuItemPress(i + 4, menu)"
           ></cr-menu-row>
         }

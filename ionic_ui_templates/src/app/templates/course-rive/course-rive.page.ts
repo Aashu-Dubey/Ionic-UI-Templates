@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -42,6 +42,7 @@ import { BottomTabBarComponent } from './navigation/bottom-tab-bar/bottom-tab-ba
   ],
 })
 export class CourseRivePage implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
   animationCtrl = inject(AnimationController);
 
   @ViewChild('mainContent', { read: ElementRef }) mainContentRef?: ElementRef;
@@ -68,7 +69,10 @@ export class CourseRivePage implements OnInit {
   ngOnInit() {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
-    setTimeout(() => (this.showRiveMenuBtn = true), 500);
+    setTimeout(() => {
+      this.showRiveMenuBtn = true;
+      this.cdr.markForCheck();
+    }, 500);
   }
 
   showOnBoardingToggle() {
