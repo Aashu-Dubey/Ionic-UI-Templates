@@ -1,23 +1,15 @@
+import { CommonModule } from '@angular/common';
+import type { AfterViewInit, QueryList } from '@angular/core';
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
-  QueryList,
   ViewChild,
   ViewChildren,
   inject,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
-import {
-  menuController,
-  AnimationBuilder,
-  createAnimation,
-  MenuI,
-  Animation,
-} from '@ionic/core/components';
 import {
   MenuController,
   Platform,
@@ -35,8 +27,12 @@ import {
   IonRippleEffect,
   IonRouterLink,
 } from '@ionic/angular';
-import { Observable, Subscription, filter } from 'rxjs';
-import { DrawerScreen } from '../types/drawer';
+import type { AnimationBuilder, MenuI, Animation } from '@ionic/core/components';
+import { menuController, createAnimation } from '@ionic/core/components';
+import type { Observable, Subscription} from 'rxjs';
+import { filter } from 'rxjs';
+
+import type { DrawerScreen } from '../types/drawer';
 
 /*
  took it from main code and added my animations
@@ -121,31 +117,31 @@ export class DrawerPage implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.initDrawerAnimation();
   }
 
-  ionViewDidEnter() {
+  ionViewDidEnter(): void {
     // Listen to screen changes and update 'activeTab', so that it's always in sync when we navigate on browser
     const routerEvent = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd)
     ) as Observable<NavigationEnd>;
 
     this.routeChangeEvent = routerEvent.subscribe((event) => {
-      for (let i = 0; i < this.appPages.length; i++) {
-        if (event.url === this.appPages[i].url) {
-          this.activeTab = this.appPages[i].name;
+      for (const page of this.appPages) {
+        if (event.url === page.url) {
+          this.activeTab = page.name;
         }
       }
     });
   }
 
-  ionViewWillLeave() {
+  ionViewWillLeave(): void {
     this.routeChangeEvent?.unsubscribe();
   }
 
   // calculate width for drawer item's active background
-  widthCalculations() {
+  widthCalculations(): void {
     const deviceWidth = this.platform.width();
     this.drawerWidth = deviceWidth * 0.75;
     if (deviceWidth >= 992) {
@@ -159,7 +155,7 @@ export class DrawerPage implements AfterViewInit {
     this.cdr.markForCheck();
   }
 
-  initDrawerAnimation() {
+  initDrawerAnimation(): void {
     // Avatar animation
     const avatarAnim = createAnimation()
       .addElement(this.userAvatarRef?.nativeElement)
@@ -224,13 +220,13 @@ export class DrawerPage implements AfterViewInit {
     );
   }
 
-  onDrawerNavigate(page: DrawerScreen) {
+  onDrawerNavigate(page: DrawerScreen): void {
     if (page.url) {
       this.activeTab = page.name;
     }
   }
 
-  onMenuClick() {
+  onMenuClick(): void {
     this.menu.toggle('main-menu');
   }
 }

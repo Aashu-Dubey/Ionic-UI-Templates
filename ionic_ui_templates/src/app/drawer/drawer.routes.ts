@@ -1,4 +1,5 @@
-import { Routes } from '@angular/router';
+import type { Routes } from '@angular/router';
+
 import { DrawerPage } from './drawer.page';
 
 export const routes: Routes = [

@@ -1,13 +1,13 @@
+import { CommonModule } from '@angular/common';
+import type { AfterViewInit, QueryList } from '@angular/core';
 import {
-  AfterViewInit,
   Component,
   ElementRef,
-  QueryList,
   ViewChildren,
   inject,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import {
   AnimationController,
   Platform,
@@ -25,8 +25,8 @@ import {
   IonItem,
   IonRouterLink,
 } from '@ionic/angular';
-import { Template } from '../../types/home';
-import { RouterLink } from '@angular/router';
+
+import type { Template } from '../../types/home';
 
 @Component({
   selector: 'app-home',
@@ -84,7 +84,7 @@ export class HomePage implements AfterViewInit {
   ];
   multiple = true;
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     // Workaround just to fix list flicker issue especially on Android
     setTimeout(
       () => this.initListAnimation(),
@@ -93,7 +93,7 @@ export class HomePage implements AfterViewInit {
     // this.initListAnimation();
   }
 
-  initListAnimation() {
+  initListAnimation(): void {
     const itemRefArray = this.templateListRef?.toArray();
     for (let i = 0; i < itemRefArray!.length; i++) {
       const element = itemRefArray![i].nativeElement;
@@ -110,7 +110,7 @@ export class HomePage implements AfterViewInit {
     }
   }
 
-  async onScreenClick(temp: Template) {
+  async onScreenClick(temp: Template): Promise<void> {
     if (!temp.screenPath) {
       const toast = await this.toastController.create({
         message: 'Coming soon...',

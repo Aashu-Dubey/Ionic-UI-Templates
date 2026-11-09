@@ -97,6 +97,8 @@ $line-color: var(--color-darkgrey);
 $line-radius: $line-size;
 .menu {
   position: relative;
+  background-color: unset; // removing button element's default background color
+  color: unset; // avoid overriding the ripple's color
   height: $size;
   width: $size;
   cursor: pointer;

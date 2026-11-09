@@ -1,3 +1,8 @@
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import {
   RouteReuseStrategy,
@@ -6,17 +11,11 @@ import {
   withPreloading,
   PreloadAllModules,
 } from '@angular/router';
-import {
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
-
 import { RIVE_FOLDER } from 'ng-rive';
 
-import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
-import { provideZoneChangeDetection } from '@angular/core';
+import { routes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
   providers: [
