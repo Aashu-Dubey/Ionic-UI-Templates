@@ -1,8 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonCol, IonRow } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
-import { BottomTabItem, tabItemsList } from '../../models/tabs';
+
+import type { BottomTabItem} from '../../models/tabs';
+import { tabItemsList } from '../../models/tabs';
 
 @Component({
   selector: 'cr-bottom-tab-bar',
@@ -22,7 +25,7 @@ export class BottomTabBarComponent implements OnInit {
   @Input() selectedTab: BottomTabItem = this.tabItems[0];
   @Output() tabChanged = new EventEmitter<BottomTabItem>();
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
     for (let i = 0; i < this.tabItems.length; i++) {
@@ -30,7 +33,7 @@ export class BottomTabBarComponent implements OnInit {
     }
   }
 
-  onIconPress(tab: BottomTabItem) {
+  onIconPress(tab: BottomTabItem): void {
     if (this.selectedTab !== tab) {
       tab.status = true;
       setTimeout(() => {

@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonRow, IonText } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
-import { MenuItem, menuItemsList } from '../../../models/side-menu';
+
+import type { MenuItem} from '../../../models/side-menu';
+import { menuItemsList } from '../../../models/side-menu';
 
 @Component({
   selector: 'cr-menu-row',

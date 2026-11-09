@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import type { ComponentFixture} from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideIonicAngular } from '@ionic/angular';
 
 import { SignInComponent } from './sign-in.component';

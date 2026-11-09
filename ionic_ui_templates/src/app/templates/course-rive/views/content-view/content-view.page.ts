@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   IonCol,
@@ -7,8 +7,9 @@ import {
   IonRow,
   IonText,
 } from '@ionic/angular';
-import { courseSectionsList, coursesList } from '../../models/course';
+
 import { ShuffleArrayPipe } from '../../helper/shuffle-array/shuffle-array.pipe';
+import { courseSectionsList, coursesList } from '../../models/course';
 
 @Component({
   selector: 'cr-content-view',

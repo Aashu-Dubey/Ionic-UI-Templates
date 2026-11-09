@@ -1,13 +1,12 @@
+import { CommonModule } from '@angular/common';
+import type { OnInit, QueryList } from '@angular/core';
 import {
   Component,
   ElementRef,
-  OnInit,
-  QueryList,
   ViewChildren,
   inject,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import {
   AnimationController,
   IonCol,
@@ -20,12 +19,14 @@ import {
   Platform,
 } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
+
+import type { MenuItem } from '../../models/side-menu';
 import {
-  MenuItem,
   menuItems2List,
   menuItems3List,
   menuItemsList,
 } from '../../models/side-menu';
+
 import { MenuRowComponent } from './menu-row/menu-row.component';
 
 @Component({
@@ -64,7 +65,7 @@ export class SideMenuComponent implements OnInit {
   selectedMenu = this.menuItems[0];
   isDarkMode = false;
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
     for (let i = 0; i < this.menuItems.length; i++) {
@@ -84,7 +85,7 @@ export class SideMenuComponent implements OnInit {
     }
   }
 
-  onMenuItemPress(index: number, menu: MenuItem) {
+  onMenuItemPress(index: number, menu: MenuItem): void {
     let lastSelection = this.menuItems.indexOf(this.selectedMenu);
     if (lastSelection < 0) {
       lastSelection =
@@ -97,11 +98,11 @@ export class SideMenuComponent implements OnInit {
     }, 1000);
     this.selectedMenu = menu;
 
-    const menu1RefArray = this.menuItems1Ref?.toArray();
-    const menu2RefArray = this.menuItems2Ref?.toArray();
-    menu2RefArray && menu1RefArray?.push(...menu2RefArray);
+    const menu1RefArray = this.menuItems1Ref?.toArray() ?? [];
+    const menu2RefArray = this.menuItems2Ref?.toArray() ?? [];
+    menu1RefArray?.push(...menu2RefArray);
 
-    for (let i = 0; i < menu1RefArray?.length!; i++) {
+    for (let i = 0; i < menu1RefArray?.length; i++) {
       const itemRef = menu1RefArray?.[i];
       const element = itemRef?.nativeElement;
 
@@ -121,11 +122,11 @@ export class SideMenuComponent implements OnInit {
     }
   }
 
-  onDarkModeToggle() {
+  onDarkModeToggle(): void {
     this.menuItems3[0].status = this.isDarkMode;
   }
 
-  goBack() {
+  goBack(): void {
     this.navigation.back({ animated: false });
   }
 }

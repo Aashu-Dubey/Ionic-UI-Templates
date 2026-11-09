@@ -39,29 +39,36 @@ export class SignInComponent  {
     failure: RiveSMInput,
     reset: RiveSMInput,
     confetti: RiveSMInput
-  ) {
+  ): void {
     this.isLoading = true;
     const isValid = this.email.trim() !== '' && this.password.trim() !== '';
 
     setTimeout(() => {
-      isValid ? success?.fire() : failure?.fire();
+      if (isValid) {
+        success?.fire();
+      } else {
+        failure?.fire();
+      }
     }, 1000);
 
     setTimeout(() => {
       this.isLoading = false;
       reset?.fire();
-      isValid && confetti?.fire();
+      if (isValid) {
+        confetti?.fire();
+      }
     }, 3000);
 
-    isValid &&
+    if (isValid) {
       setTimeout(() => {
         this.onSignInClose();
         this.email = '';
         this.password = '';
       }, 4000);
+    }
   }
 
-  onSignInClose() {
+  onSignInClose(): void {
     this.closeClicked.emit();
   }
 }

@@ -23,12 +23,12 @@
   </div>
 </ion-content>
 
-<div #onBoardingBtn class="on-boarding-btn" (click)="showOnBoardingToggle()">
+<button #onBoardingBtn class="on-boarding-btn" (click)="showOnBoardingToggle()">
   <ion-icon name="person-outline"></ion-icon>
-</div>
+</button>
 
 <!-- Menu button -->
-<div #menuToggleBtn class="side-menu-button" (click)="onMenuToggle()">
+<button #menuToggleBtn class="side-menu-button" (click)="onMenuToggle()">
   @if (showRiveMenuBtn) {
     <canvas
       riv="menu_button"
@@ -40,7 +40,7 @@
       </riv-state-machine>
     </canvas>
   }
-</div>
+</button>
 
 <!-- White background behind tab bar that partially shows the tab content -->
 <div #tabWhiteBg class="tabs-white-underlay"></div>

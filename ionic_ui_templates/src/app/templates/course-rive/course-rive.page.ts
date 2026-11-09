@@ -1,13 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { OnInit} from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { StatusBar, Style } from '@capacitor/status-bar';
 import {
   IonContent,
   AnimationController,
   IonText,
   IonIcon,
 } from '@ionic/angular';
-import { StatusBar, Style } from '@capacitor/status-bar';
 import { addIcons } from 'ionicons';
 import {
   arrowForwardOutline,
@@ -16,11 +17,12 @@ import {
   personOutline,
 } from 'ionicons/icons';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
-import { SideMenuComponent } from './navigation/side-menu/side-menu.component';
-import { OnBoardingPage } from './views/on-boarding/on-boarding.page';
+
 import { tabItemsList } from './models/tabs';
-import { ContentViewPage } from './views/content-view/content-view.page';
 import { BottomTabBarComponent } from './navigation/bottom-tab-bar/bottom-tab-bar.component';
+import { SideMenuComponent } from './navigation/side-menu/side-menu.component';
+import { ContentViewPage } from './views/content-view/content-view.page';
+import { OnBoardingPage } from './views/on-boarding/on-boarding.page';
 
 @Component({
   selector: 'app-course-rive',
@@ -65,13 +67,13 @@ export class CourseRivePage implements OnInit {
     addIcons({ personOutline, exitOutline, arrowForwardOutline, closeOutline });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
     setTimeout(() => (this.showRiveMenuBtn = true), 500);
   }
 
-  showOnBoardingToggle() {
+  showOnBoardingToggle(): void {
     this.showOnBoarding = !this.showOnBoarding;
 
     // calculated space based on screen scale (0.92) + 20px to show home behind modal
@@ -119,7 +121,7 @@ export class CourseRivePage implements OnInit {
     }
   }
 
-  onMenuToggle() {
+  onMenuToggle(): void {
     StatusBar.setStyle({
       style: this.isMenuOpen ? Style.Dark : Style.Light,
     }).catch(() => {});

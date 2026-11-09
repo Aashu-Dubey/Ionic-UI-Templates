@@ -64,6 +64,7 @@ cr-on-boarding {
 .on-boarding-btn {
   width: 36px;
   height: 36px;
+  font: inherit; // avoid button imposing its own font styles on the icon
   border-radius: 18px;
   background: white;
   position: fixed;

@@ -1,17 +1,18 @@
+import { CommonModule } from '@angular/common';
+import type { OnInit } from '@angular/core';
 import {
   Component,
   DestroyRef,
   ElementRef,
   EventEmitter,
-  OnInit,
   Output,
   ViewChild,
   inject,
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import type { Animation } from '@ionic/angular';
 import {
   AnimationController,
   IonModal,
@@ -22,6 +23,7 @@ import {
   IonButton,
 } from '@ionic/angular';
 import { RiveCanvas, RiveLinearAnimation, RivePlayer } from 'ng-rive';
+
 import { SignInComponent } from './sign-in/sign-in.component';
 
 @Component({
@@ -70,7 +72,7 @@ export class OnBoardingPage implements OnInit {
       });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
     setTimeout(() => (this.showRiveAsset = true), 1000);
@@ -82,7 +84,7 @@ export class OnBoardingPage implements OnInit {
     }, 1500);
   }
 
-  startCoursePressed() {
+  startCoursePressed(): void {
     this.buttonToggle = true;
     setTimeout(() => {
       this.signInModal?.present();
@@ -95,32 +97,31 @@ export class OnBoardingPage implements OnInit {
    * to reset the animation state. buttonToggle false makes sure the animation doesn't auto play after view is re-added.
    * Remove after the issue is fixed!
    */
-  resetBtnState() {
+  resetBtnState(): void {
     this.buttonToggle = false;
     this.showRiveBtn = false;
     setTimeout(() => (this.showRiveBtn = true), 100);
   }
 
-  onCloseOnBoarding() {
+  onCloseOnBoarding(): void {
     this.closeOnBoardingEvent.emit();
   }
 
-  onSignInClose() {
+  onSignInClose(): void {
     this.signInModal?.dismiss();
   }
 
-  enterAnimation = (baseEl: HTMLElement) => {
+  enterAnimation = (baseEl: HTMLElement): Animation => {
     const root = baseEl.shadowRoot;
-    const containerEl = this.containerRef?.nativeElement;
 
     const backdropAnimation = this.animationCtrl
       .create()
-      .addElement(root?.querySelector('ion-backdrop')!)
+      .addElement(root!.querySelector('ion-backdrop')!)
       .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
 
     const wrapperAnimation = this.animationCtrl
       .create()
-      .addElement(root?.querySelector('.modal-wrapper')!)
+      .addElement(root!.querySelector('.modal-wrapper')!)
       .keyframes([
         { offset: 0, opacity: '0.5', transform: 'translateY(-100vh)' },
         { offset: 1, opacity: '1', transform: 'translateY(0vh)' },
@@ -128,14 +129,15 @@ export class OnBoardingPage implements OnInit {
 
     const onBoardingContent = this.animationCtrl
       .create()
-      .addElement(containerEl!)
+      .addElement(this.containerRef?.nativeElement)
       .keyframes([
         { offset: 0, transform: 'translateY(0px)' },
         { offset: 1, transform: 'translateY(-50px)' },
       ]);
+
     const closeBtnAnim = this.animationCtrl
       .create()
-      .addElement(this.closeBtnRef?.nativeElement!)
+      .addElement(this.closeBtnRef?.nativeElement)
       .fromTo('transform', 'translateY(0)', 'translateY(-150px)');
 
     return this.animationCtrl
@@ -151,7 +153,7 @@ export class OnBoardingPage implements OnInit {
       ]);
   };
 
-  leaveAnimation = (baseEl: HTMLElement) => {
+  leaveAnimation = (baseEl: HTMLElement): Animation => {
     return this.enterAnimation(baseEl).direction('reverse');
   };
 }
