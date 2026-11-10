@@ -106,12 +106,13 @@ export class DrawerPage implements AfterViewInit {
   rowWidth: number = this.drawerWidth - 64;
   activeTab = 'Home';
   isSplitPane = false; // hide menu button if split pane is enabled (desktop, pad etc.)
+  windowResizeEvent?: Subscription;
   routeChangeEvent?: Subscription;
 
   constructor() {
     this.widthCalculations();
 
-    this.platform.resize.subscribe(() => {
+    this.windowResizeEvent = this.platform.resize.subscribe(() => {
       this.widthCalculations();
       this.initDrawerAnimation();
     });
@@ -131,12 +132,14 @@ export class DrawerPage implements AfterViewInit {
       for (const page of this.appPages) {
         if (event.url === page.url) {
           this.activeTab = page.name;
+          this.cdr.markForCheck();
         }
       }
     });
   }
 
   ionViewWillLeave(): void {
+    this.windowResizeEvent?.unsubscribe();
     this.routeChangeEvent?.unsubscribe();
   }
 
