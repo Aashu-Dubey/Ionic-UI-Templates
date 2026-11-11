@@ -65,6 +65,9 @@ div.sign-in-container {
     --background-focused: pink;
     --border-radius: 8px 20px 20px;
     --box-shadow: 0 10px 20px rgba(247, 125, 142, 0.5);
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    text-transform: capitalize;
     margin: 24px 0;
     // Setting padding above doesn't shift the ion-button, instead overflow the container, so applying extra margin
     margin-bottom: 40px;
