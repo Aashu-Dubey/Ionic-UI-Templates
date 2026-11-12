@@ -14,12 +14,10 @@
     <div class="menu-list-section">
       <ion-text class="browse-heading font-subheadline2">BROWSE</ion-text>
       <div class="menu-btn-list-container">
-        @for (menu of menuItems; track menu.id; let i = $index) {
+        @for (menu of menuItems(); track menu.id; let i = $index) {
           <cr-menu-row
             #menuItems
             [menu]="menu"
-            [show]="menu.show"
-            [status]="menu.status"
             (pressed)="onMenuItemPress(i, menu)"
           ></cr-menu-row>
         }
@@ -29,13 +27,11 @@
     <div class="menu-list-section">
       <ion-text class="browse-heading font-subheadline2">HISTORY</ion-text>
       <div class="menu-btn-list-container">
-        @for (menu of menuItems2; track menu.id; let i = $index) {
+        @for (menu of menuItems2(); track menu.id; let i = $index) {
           <cr-menu-row
             #menuItems2
             [menu]="menu"
-            [show]="menu.show"
-            [status]="menu.status"
-            (pressed)="onMenuItemPress(i + 4, menu)"
+            (pressed)="onMenuItemPress(i + menuItems().length, menu)"
           ></cr-menu-row>
         }
       </div>
@@ -59,15 +55,15 @@
 
     <ion-item class="dark-mode-container" lines="none">
       <div class="icon-container">
-        @if (menuItems3[0].show) {
+        @if (menuItems3()[0].show) {
           <canvas
             riv="icons"
-            [artboard]="menuItems3[0].artboard"
+            [artboard]="menuItems3()[0].artboard"
             width="32"
             height="32"
           >
-            <riv-state-machine [name]="menuItems3[0].stateMachine" play>
-              <riv-input name="active" [value]="menuItems3[0].status"></riv-input>
+            <riv-state-machine [name]="menuItems3()[0].stateMachine" play>
+              <riv-input name="active" [value]="menuItems3()[0].status"></riv-input>
             </riv-state-machine>
           </canvas>
         }

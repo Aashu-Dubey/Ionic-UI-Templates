@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import type { OnInit, QueryList } from '@angular/core';
 import {
-  ChangeDetectorRef,
   Component,
   ElementRef,
   ViewChildren,
   inject,
+  signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -50,7 +50,6 @@ import { MenuRowComponent } from './menu-row/menu-row.component';
   ],
 })
 export class SideMenuComponent implements OnInit {
-  private cdr = inject(ChangeDetectorRef);
   private animationCtrl = inject(AnimationController);
   private navigation = inject(NavController);
   platform = inject(Platform);
@@ -60,64 +59,65 @@ export class SideMenuComponent implements OnInit {
   @ViewChildren('menuItems2', { read: ElementRef })
   menuItems2Ref?: QueryList<ElementRef>;
 
-  menuItems = menuItemsList;
-  menuItems2 = menuItems2List;
-  menuItems3 = menuItems3List;
+  menuItems = signal(menuItemsList);
+  menuItems2 = signal(menuItems2List);
+  menuItems3 = signal(menuItems3List);
 
-  selectedMenu = this.menuItems[0];
+  selectedMenuId = this.menuItems()[0].id;
   isDarkMode = false;
 
   ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
-    for (let i = 0; i < this.menuItems.length; i++) {
+    for (let i = 0; i < this.menuItems().length; i++) {
       setTimeout(
         () => {
-          this.menuItems[i].show = true;
-          this.cdr.markForCheck();
+          this.menuItems.update((items) => items.map((item, j) => (j === i ? { ...item, show: true } : item)));
         },
         1000 + i * 500,
       );
     }
-    for (let i = 0; i < this.menuItems2.length; i++) {
+    for (let i = 0; i < this.menuItems2().length; i++) {
       setTimeout(
         () => {
-          this.menuItems2[i].show = true;
-          this.cdr.markForCheck();
+          this.menuItems2.update((items) => items.map((item, j) => (j === i ? { ...item, show: true } : item)));
         },
-        1000 + (i + this.menuItems.length) * 500,
+        1000 + (i + this.menuItems().length) * 500,
       );
     }
-    for (let i = 0; i < this.menuItems3.length; i++) {
+    for (let i = 0; i < this.menuItems3().length; i++) {
       setTimeout(
         () => {
-          this.menuItems3[i].show = true;
-          this.cdr.markForCheck();
+          this.menuItems3.update((items) => items.map((item, j) => (j === i ? { ...item, show: true } : item)));
         },
-        1000 + (i + this.menuItems.length + this.menuItems2.length) * 500,
+        1000 + (i + this.menuItems().length + this.menuItems2().length) * 500,
       );
     }
   }
 
   onMenuItemPress(index: number, menu: MenuItem): void {
-    let lastSelection = this.menuItems.indexOf(this.selectedMenu);
-    if (lastSelection < 0) {
-      lastSelection =
-        this.menuItems.length + this.menuItems2.indexOf(this.selectedMenu);
+    let menuItemList = this.menuItems;
+    if (this.menuItems2().some(item => item.id === menu.id)) {
+      menuItemList = this.menuItems2;
     }
 
-    menu.status = true;
+    let lastSelection = this.menuItems().findIndex(item => item.id === this.selectedMenuId);
+    if (lastSelection < 0) {
+      lastSelection =
+        this.menuItems().length + this.menuItems2().findIndex(item => item.id === this.selectedMenuId);
+    }
+
+    menuItemList.update((items) => items.map((item) => (item.id === menu.id ? { ...item, status: true } : item)));
     setTimeout(() => {
-      menu.status = false;
-      this.cdr.markForCheck();
+      menuItemList.update((items) => items.map((item) => (item.id === menu.id ? { ...item, status: false } : item)));
     }, 1000);
-    this.selectedMenu = menu;
+    this.selectedMenuId = menu.id;
 
     const menu1RefArray = this.menuItems1Ref?.toArray() ?? [];
     const menu2RefArray = this.menuItems2Ref?.toArray() ?? [];
-    menu1RefArray?.push(...menu2RefArray);
+    menu1RefArray.push(...menu2RefArray);
 
-    for (let i = 0; i < menu1RefArray?.length; i++) {
+    for (let i = 0; i < menu1RefArray.length; i++) {
       const itemRef = menu1RefArray?.[i];
       const element = itemRef?.nativeElement;
 
@@ -138,7 +138,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   onDarkModeToggle(): void {
-    this.menuItems3[0].status = this.isDarkMode;
+    this.menuItems3.update((items) => items.map((item, j) => (j === 0 ? { ...item, status: this.isDarkMode } : item)));
   }
 
   goBack(): void {

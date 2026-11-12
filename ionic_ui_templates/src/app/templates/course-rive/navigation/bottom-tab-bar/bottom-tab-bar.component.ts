@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import type { OnInit} from '@angular/core';
-import { ChangeDetectorRef, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { IonCol, IonRow } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 
@@ -21,20 +21,17 @@ import { tabItemsList } from '../../models/tabs';
   ],
 })
 export class BottomTabBarComponent implements OnInit {
-  private cdr = inject(ChangeDetectorRef);
-
-  tabItems = tabItemsList;
-  @Input() selectedTab: BottomTabItem = this.tabItems[0];
+  tabItems = signal(tabItemsList);
+  @Input() selectedTab: BottomTabItem = this.tabItems()[0];
   @Output() tabChanged = new EventEmitter<BottomTabItem>();
 
   ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
-    for (let i = 0; i < this.tabItems.length; i++) {
+    for (let i = 0; i < this.tabItems().length; i++) {
       setTimeout(
         () => {
-          this.tabItems[i].show = true;
-          this.cdr.markForCheck();
+          this.tabItems.update((prevTabs) => prevTabs.map((t, i2) => (i2 === i ? { ...t, show: true } : t)));
         },
         1000 + i * 500,
       );
@@ -42,13 +39,14 @@ export class BottomTabBarComponent implements OnInit {
   }
 
   onIconPress(tab: BottomTabItem): void {
-    if (this.selectedTab !== tab) {
-      tab.status = true;
+    if (this.selectedTab.id !== tab.id) {
+      this.tabItems.update((items) => items.map((item) => (item.id === tab.id ? { ...item, status: true } : item)));
       setTimeout(() => {
-        tab.status = false;
-        this.cdr.markForCheck();
+        this.tabItems.update((items) => items.map((item) => (item.id === tab.id ? { ...item, status: false } : item)));
       }, 1000);
-      this.tabChanged.emit(tab);
+
+      const updated = this.tabItems().find(item => item.id === tab.id) ?? tab;
+      this.tabChanged.emit(updated);
     }
   }
 }

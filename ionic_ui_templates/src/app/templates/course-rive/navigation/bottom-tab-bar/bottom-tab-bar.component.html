@@ -1,6 +1,6 @@
 <div class="gradient-border">
   <ion-row class="tabs-container">
-    @for (tab of tabItems; track tab.id) {
+    @for (tab of tabItems(); track tab.id) {
       <ion-col
         (click)="onIconPress(tab)"
       >
