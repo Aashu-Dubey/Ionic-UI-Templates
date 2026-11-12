@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import {
-  ChangeDetectorRef,
   Component,
   DestroyRef,
   ElementRef,
@@ -47,7 +46,6 @@ import { SignInComponent } from './sign-in/sign-in.component';
   ],
 })
 export class OnBoardingPage implements OnInit {
-  private cdr = inject(ChangeDetectorRef);
   private animationCtrl = inject(AnimationController);
   private destroyRef = inject(DestroyRef);
   platform = inject(Platform);
@@ -61,9 +59,9 @@ export class OnBoardingPage implements OnInit {
 
   @Output() closeOnBoardingEvent = new EventEmitter();
 
-  buttonToggle = true;
-  showRiveAsset = false;
-  showRiveBtn = false;
+  buttonToggle = signal(true);
+  showRiveAsset = signal(false);
+  showRiveBtn = signal(false);
 
   constructor() {
     this.platform.resize
@@ -77,26 +75,21 @@ export class OnBoardingPage implements OnInit {
   ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
     // which fails for most if rendered together, so This will load them all with a delay,
+    setTimeout(() => this.showRiveAsset.set(true), 1000);
     setTimeout(() => {
-      this.showRiveAsset = true;
-      this.cdr.markForCheck();
-    }, 1000);
-    setTimeout(() => {
-      this.showRiveBtn = true;
+      this.showRiveBtn.set(true);
       // after render one-shot animation auto-plays, so doesn't trigger animation when user clicks first time
       // this makes sure it works the first time as well
       setTimeout(() => this.resetBtnState(), 1000);
-      this.cdr.markForCheck();
     }, 1500);
   }
 
   startCoursePressed(): void {
-    this.buttonToggle = true;
+    this.buttonToggle.set(true);
     setTimeout(() => {
       this.signInModal?.present();
       this.resetBtnState();
     }, 800);
-    this.cdr.markForCheck();
   }
 
   /**
@@ -105,13 +98,9 @@ export class OnBoardingPage implements OnInit {
    * Remove after the issue is fixed!
    */
   resetBtnState(): void {
-    this.buttonToggle = false;
-    this.showRiveBtn = false;
-    setTimeout(() => {
-      this.showRiveBtn = true;
-      this.cdr.markForCheck();
-    }, 100);
-    this.cdr.markForCheck();
+    this.buttonToggle.set(false);
+    this.showRiveBtn.set(false);
+    setTimeout(() => (this.showRiveBtn.set(true)), 100);
   }
 
   onCloseOnBoarding(): void {

@@ -7,7 +7,7 @@
     decoding="async"
   />
 
-  @if (showRiveAsset) {
+  @if (showRiveAsset()) {
     <canvas
       riv="shapes"
       class="rive-bg"
@@ -35,7 +35,7 @@
     <ion-buttons class="startCoursebtn" (click)="startCoursePressed()">
       <div class="contained shadow"></div>
       <canvas class="contained" riv="button" width="236" height="64">
-        @if (showRiveBtn) {
+        @if (showRiveBtn()) {
           <riv-player
             name="active"
             [(play)]="buttonToggle"
