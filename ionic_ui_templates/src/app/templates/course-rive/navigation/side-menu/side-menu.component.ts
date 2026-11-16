@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import type { OnInit, QueryList } from '@angular/core';
+import type { OnInit } from '@angular/core';
 import {
   Component,
   ElementRef,
-  ViewChildren,
+  computed,
   inject,
   signal,
+  viewChildren,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import {
   AnimationController,
   IonCol,
@@ -19,6 +19,7 @@ import {
   NavController,
   Platform,
 } from '@ionic/angular';
+import type { ToggleChangeEventDetail } from '@ionic/core/components';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 
 import type { MenuItem } from '../../models/side-menu';
@@ -41,7 +42,6 @@ import { MenuRowComponent } from './menu-row/menu-row.component';
     IonIcon,
     IonItem,
     IonToggle,
-    FormsModule,
     MenuRowComponent,
     RiveCanvas,
     RiveStateMachine,
@@ -54,17 +54,21 @@ export class SideMenuComponent implements OnInit {
   private navigation = inject(NavController);
   platform = inject(Platform);
 
-  @ViewChildren('menuItems', { read: ElementRef })
-  menuItems1Ref?: QueryList<ElementRef>;
-  @ViewChildren('menuItems2', { read: ElementRef })
-  menuItems2Ref?: QueryList<ElementRef>;
+  private readonly menuItems1Ref = viewChildren('menuItems', {
+    read: ElementRef,
+  });
+  private readonly menuItems2Ref = viewChildren('menuItems2', {
+    read: ElementRef,
+  });
 
   menuItems = signal(menuItemsList);
   menuItems2 = signal(menuItems2List);
   menuItems3 = signal(menuItems3List);
+  readonly allMenus = computed(() => [...this.menuItems(), ...this.menuItems2()]);
 
+  // Plain field: read synchronously locally, never bound in the template.
   selectedMenuId = this.menuItems()[0].id;
-  isDarkMode = false;
+  readonly isDarkMode = signal(false);
 
   ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
@@ -95,17 +99,16 @@ export class SideMenuComponent implements OnInit {
     }
   }
 
-  onMenuItemPress(index: number, menu: MenuItem): void {
-    let menuItemList = this.menuItems;
-    if (this.menuItems2().some(item => item.id === menu.id)) {
-      menuItemList = this.menuItems2;
+  onMenuItemPress(menu: MenuItem): void {
+    if (menu.id === this.selectedMenuId) {
+      return;
     }
 
-    let lastSelection = this.menuItems().findIndex(item => item.id === this.selectedMenuId);
-    if (lastSelection < 0) {
-      lastSelection =
-        this.menuItems().length + this.menuItems2().findIndex(item => item.id === this.selectedMenuId);
-    }
+    const index = this.allMenus().findIndex((item) => item.id === menu.id);
+    const lastSelection = this.allMenus().findIndex((item) => item.id === this.selectedMenuId);
+
+    // allMenus is menuItems followed by menuItems2, so the index identifies the list.
+    const menuItemList = index < this.menuItems().length ? this.menuItems : this.menuItems2;
 
     menuItemList.update((items) => items.map((item) => (item.id === menu.id ? { ...item, status: true } : item)));
     setTimeout(() => {
@@ -113,13 +116,10 @@ export class SideMenuComponent implements OnInit {
     }, 1000);
     this.selectedMenuId = menu.id;
 
-    const menu1RefArray = this.menuItems1Ref?.toArray() ?? [];
-    const menu2RefArray = this.menuItems2Ref?.toArray() ?? [];
-    menu1RefArray.push(...menu2RefArray);
+    const menuRefs = [...this.menuItems1Ref(), ...this.menuItems2Ref()];
 
-    for (let i = 0; i < menu1RefArray.length; i++) {
-      const itemRef = menu1RefArray?.[i];
-      const element = itemRef?.nativeElement;
+    for (let i = 0; i < menuRefs.length; i++) {
+      const element = menuRefs[i].nativeElement;
 
       if (i === lastSelection || i === index) {
         this.animationCtrl
@@ -137,8 +137,11 @@ export class SideMenuComponent implements OnInit {
     }
   }
 
-  onDarkModeToggle(): void {
-    this.menuItems3.update((items) => items.map((item, j) => (j === 0 ? { ...item, status: this.isDarkMode } : item)));
+  onDarkModeToggle(event: CustomEvent<ToggleChangeEventDetail>): void {
+    this.isDarkMode.set(event.detail.checked);
+    this.menuItems3.update((items) =>
+      items.map((item, j) => (j === 0 ? { ...item, status: event.detail.checked } : item)),
+    );
   }
 
   goBack(): void {

@@ -14,11 +14,11 @@
     <div class="menu-list-section">
       <ion-text class="browse-heading font-subheadline2">BROWSE</ion-text>
       <div class="menu-btn-list-container">
-        @for (menu of menuItems(); track menu.id; let i = $index) {
+        @for (menu of menuItems(); track menu.id) {
           <cr-menu-row
             #menuItems
             [menu]="menu"
-            (pressed)="onMenuItemPress(i, menu)"
+            (pressed)="onMenuItemPress(menu)"
           ></cr-menu-row>
         }
       </div>
@@ -27,11 +27,11 @@
     <div class="menu-list-section">
       <ion-text class="browse-heading font-subheadline2">HISTORY</ion-text>
       <div class="menu-btn-list-container">
-        @for (menu of menuItems2(); track menu.id; let i = $index) {
+        @for (menu of menuItems2(); track menu.id) {
           <cr-menu-row
             #menuItems2
             [menu]="menu"
-            (pressed)="onMenuItemPress(i + menuItems().length, menu)"
+            (pressed)="onMenuItemPress(menu)"
           ></cr-menu-row>
         }
       </div>
@@ -72,8 +72,8 @@
         class="font-headline"
         justify="space-between"
         mode="ios"
-        [(ngModel)]="isDarkMode"
-        (ionChange)="onDarkModeToggle()"
+        [checked]="isDarkMode()"
+        (ionChange)="onDarkModeToggle($event)"
       >
         Dark Mode
       </ion-toggle>

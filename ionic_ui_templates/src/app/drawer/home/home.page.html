@@ -4,10 +4,10 @@
       <ion-menu-button color="dark"></ion-menu-button>
     </ion-buttons> -->
     <ion-title>Ionic UI</ion-title>
-    <ion-buttons slot="end" (click)="multiple = !multiple">
+    <ion-buttons slot="end" (click)="multiple.update((value) => !value)">
       <ion-button>
         <i class="material-icons darkgrey" slot="icon-only">
-          {{multiple ? 'dashboard' : 'view_agenda'}}
+          {{multiple() ? 'dashboard' : 'view_agenda'}}
         </i>
       </ion-button>
     </ion-buttons>
@@ -21,7 +21,7 @@
       @for (temp of templates; track temp.id) {
         <ion-col
           style="opacity: 0"
-          [size]="multiple ? 6 : 12"
+          [size]="multiple() ? 6 : 12"
           #templateList
         >
           <ion-item

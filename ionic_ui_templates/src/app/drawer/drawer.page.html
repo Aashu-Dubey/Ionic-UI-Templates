@@ -2,12 +2,12 @@
   <ion-split-pane contentId="main-content">
     <ion-menu
       class="menu-type-reveal"
-      style="--width: {{drawerWidth}}px"
+      style="--width: {{drawerWidth()}}px"
       side="start"
       menuId="main-menu"
       contentId="main-content"
       type="my-reveal"
-      [maxEdgeStart]="platform.width()"
+      [maxEdgeStart]="viewportWidth()"
     >
       <div class="headerToolbar">
         <ion-avatar class="userImage" #userAvatar>
@@ -39,13 +39,13 @@
               >
                 <ion-item
                   class="drawerInnerItem"
-                  [style.--width]="rowWidth + 'px'"
-                  [style.--background]="activeTab === p.name ? 'rgba(33, 150, 243, 0.2)' : 'transparent'"
+                  [style.--width]="rowWidth() + 'px'"
+                  [style.--background]="activeTab() === p.name ? 'rgba(33, 150, 243, 0.2)' : 'transparent'"
                   lines="none"
                 ></ion-item>
                 @if (!p.isAsset) {
                   <i
-                    [style.color]="activeTab === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
+                    [style.color]="activeTab() === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
                     class="material-icons icon-margin"
                   >
                     {{p.icon}}
@@ -55,7 +55,7 @@
                   <img
                     style="width: 24px; height: 24px"
                     class="icon-margin"
-                    [ngClass]="{'imgTintBlue': activeTab === p.name, 'imgTintBlack': activeTab !== p.name}"
+                    [ngClass]="{'imgTintBlue': activeTab() === p.name, 'imgTintBlack': activeTab() !== p.name}"
                     src="assets/home/supportIcon.png"
                     [alt]="p.name"
                     loading="lazy"
@@ -64,7 +64,7 @@
                 }
                 <ion-label
                   style="font-weight: 500; font-size: 16px; margin-left: 8px"
-                  [style.color]="activeTab === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
+                  [style.color]="activeTab() === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
                   >{{p.name}}
                 </ion-label>
               </ion-item>
@@ -92,7 +92,7 @@
     style="position: absolute"
     class="menu menu--back5 ion-activatable"
     (click)="onMenuClick()"
-    [hidden]="isSplitPane"
+    [hidden]="isSplitPane()"
     #menuIcon
   >
     <div class="menu__icon">

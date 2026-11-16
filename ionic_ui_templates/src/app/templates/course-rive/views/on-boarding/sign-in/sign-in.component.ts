@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   IonButton,
@@ -28,7 +28,7 @@ import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
   ],
 })
 export class SignInComponent  {
-  @Output() closeClicked = new EventEmitter();
+  readonly closeClicked = output<void>();
 
   email = signal('');
   password = signal('');
@@ -41,6 +41,7 @@ export class SignInComponent  {
     confetti: RiveSMInput
   ): void {
     this.isLoading.set(true);
+    // Snapshot at submit time: deliberately not computed(), so later edits don't affect the request.
     const isValid = this.email().trim() !== '' && this.password().trim() !== '';
 
     setTimeout(() => {

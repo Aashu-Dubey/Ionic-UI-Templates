@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { IonRow, IonText } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 
@@ -20,6 +20,6 @@ import { menuItemsList } from '../../../models/side-menu';
   ],
 })
 export class MenuRowComponent {
-  @Input() menu: MenuItem = menuItemsList[0];
-  @Output() pressed = new EventEmitter();
+  readonly menu = input<MenuItem>(menuItemsList[0]);
+  readonly pressed = output<void>();
 }

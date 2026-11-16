@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import type { OnInit} from '@angular/core';
-import { Component, ElementRef, ViewChild, inject, signal } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import {
@@ -46,22 +46,32 @@ import { OnBoardingPage } from './views/on-boarding/on-boarding.page';
 export class CourseRivePage implements OnInit {
   animationCtrl = inject(AnimationController);
 
-  @ViewChild('mainContent', { read: ElementRef }) mainContentRef?: ElementRef;
-  @ViewChild('menuToggleBtn', { read: ElementRef })
-  menuToggleBtnRef?: ElementRef;
-  @ViewChild('sideMenu', { read: ElementRef }) sideMenuRef?: ElementRef;
-  @ViewChild('bottomTabs', { read: ElementRef }) bottomTabRef?: ElementRef;
-  @ViewChild('onBoardingBtn', { read: ElementRef })
-  onBoardingBtnRef?: ElementRef;
-  @ViewChild('onBoarding', { read: ElementRef }) onBoardingRef?: ElementRef;
-  @ViewChild('tabWhiteBg', { read: ElementRef }) tabWhiteBgRef?: ElementRef;
+  private readonly mainContentRef = viewChild('mainContent', {
+    read: ElementRef,
+  });
+  private readonly menuToggleBtnRef = viewChild('menuToggleBtn', {
+    read: ElementRef,
+  });
+  private readonly sideMenuRef = viewChild('sideMenu', { read: ElementRef });
+  private readonly bottomTabRef = viewChild('bottomTabs', {
+    read: ElementRef,
+  });
+  private readonly onBoardingBtnRef = viewChild('onBoardingBtn', {
+    read: ElementRef,
+  });
+  private readonly onBoardingRef = viewChild('onBoarding', {
+    read: ElementRef,
+  });
+  private readonly tabWhiteBgRef = viewChild('tabWhiteBg', {
+    read: ElementRef,
+  });
 
-  selectedTab = tabItemsList[0];
-  isMenuOpen = true;
+  readonly selectedTab = signal(tabItemsList[0]);
+  readonly isMenuOpen = signal(true);
   tabItems = tabItemsList;
+  // Plain field: only read/written locally, never bound in the template.
   showOnBoarding = false;
   showRiveMenuBtn = signal(false); // Temporary
-  avatarArr = [1, 2, 3];
 
   constructor() {
     addIcons({ personOutline, exitOutline, arrowForwardOutline, closeOutline });
@@ -80,7 +90,7 @@ export class CourseRivePage implements OnInit {
     const transformBottom = 'calc(((100vh - (100vh * 0.92)) / 2) + 20px)';
     const onBoardingAnim = this.animationCtrl
       .create()
-      .addElement(this.onBoardingRef?.nativeElement)
+      .addElement(this.onBoardingRef()?.nativeElement)
       .fromTo(
         'transform',
         // Here 40px is extra shadow area to avoid it being shown when modal is closed
@@ -90,17 +100,17 @@ export class CourseRivePage implements OnInit {
 
     const contentViewAnim = this.animationCtrl
       .create()
-      .addElement(this.mainContentRef?.nativeElement)
+      .addElement(this.mainContentRef()?.nativeElement)
       .fromTo('transform', 'none', 'scale(0.92)');
 
     const bottomTabAnim = this.animationCtrl
       .create()
-      .addElement(this.bottomTabRef?.nativeElement)
+      .addElement(this.bottomTabRef()?.nativeElement)
       .fromTo('transform', 'none', 'translateY(200px)');
 
     const tabWhiteBgAnim = this.animationCtrl
       .create()
-      .addElement(this.tabWhiteBgRef?.nativeElement)
+      .addElement(this.tabWhiteBgRef()?.nativeElement)
       .fromTo('opacity', '1', '0');
 
     const allAnim = this.animationCtrl
@@ -123,12 +133,12 @@ export class CourseRivePage implements OnInit {
 
   onMenuToggle(): void {
     StatusBar.setStyle({
-      style: this.isMenuOpen ? Style.Dark : Style.Light,
+      style: this.isMenuOpen() ? Style.Dark : Style.Light,
     }).catch(() => {});
 
     const contentViewAnim = this.animationCtrl
       .create()
-      .addElement(this.mainContentRef?.nativeElement)
+      .addElement(this.mainContentRef()?.nativeElement)
       .fromTo(
         'transform',
         'none',
@@ -138,12 +148,12 @@ export class CourseRivePage implements OnInit {
 
     const menuBtnAnim = this.animationCtrl
       .create()
-      .addElement(this.menuToggleBtnRef?.nativeElement)
+      .addElement(this.menuToggleBtnRef()?.nativeElement)
       .fromTo('transform', 'none', 'translateX(216px)');
 
     const sideMenuAnim = this.animationCtrl
       .create()
-      .addElement(this.sideMenuRef?.nativeElement)
+      .addElement(this.sideMenuRef()?.nativeElement)
       .fromTo(
         'transform',
         'perspective(700px) translateX(-300px) rotateY(30deg)',
@@ -152,17 +162,17 @@ export class CourseRivePage implements OnInit {
 
     const bottomTabAnim = this.animationCtrl
       .create()
-      .addElement(this.bottomTabRef?.nativeElement)
+      .addElement(this.bottomTabRef()?.nativeElement)
       .fromTo('transform', 'none', 'translateY(300px)');
 
     const onBoardingBtnAnim = this.animationCtrl
       .create()
-      .addElement(this.onBoardingBtnRef?.nativeElement)
+      .addElement(this.onBoardingBtnRef()?.nativeElement)
       .fromTo('transform', 'none', 'translateX(100px)');
 
     const tabWhiteBgAnim = this.animationCtrl
       .create()
-      .addElement(this.tabWhiteBgRef?.nativeElement)
+      .addElement(this.tabWhiteBgRef()?.nativeElement)
       .fromTo('opacity', '1', '0');
 
     const allAnim = this.animationCtrl
@@ -177,12 +187,12 @@ export class CourseRivePage implements OnInit {
         tabWhiteBgAnim,
       ]);
 
-    if (this.isMenuOpen) {
+    if (this.isMenuOpen()) {
       allAnim.play();
     } else {
       allAnim.direction('reverse').play();
     }
 
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen.update((isOpen) => !isOpen);
   }
 }

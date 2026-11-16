@@ -1,5 +1,5 @@
 import { SafeAreaController } from '@aashu-dubey/capacitor-statusbar-safe-area';
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, inject, viewChild } from '@angular/core';
 import { App } from '@capacitor/app';
 import { StatusBar } from '@capacitor/status-bar';
 import { IonApp, IonRouterOutlet, Platform } from '@ionic/angular';
@@ -12,8 +12,7 @@ import { IonApp, IonRouterOutlet, Platform } from '@ionic/angular';
 export class AppComponent {
   private platform = inject(Platform);
 
-  // https://github.com/ionic-team/ionic-framework/issues/21630#issuecomment-683007162
-  @ViewChild(IonRouterOutlet, { static: true }) routerOutlet?: IonRouterOutlet;
+  private readonly routerOutlet = viewChild(IonRouterOutlet);
 
   constructor() {
     SafeAreaController.injectCSSVariables();
@@ -22,7 +21,7 @@ export class AppComponent {
 
     // By default Ionic doesn't close app on back click, so we handle that here
     this.platform.backButton.subscribeWithPriority(-1, () => {
-      if (!this.routerOutlet?.canGoBack()) {
+      if (!this.routerOutlet()?.canGoBack()) {
         App.exitApp();
       }
     });

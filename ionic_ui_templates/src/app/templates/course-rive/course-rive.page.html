@@ -9,16 +9,16 @@
 ></cr-on-boarding>
 
 <ion-content #mainContent>
-  <div class="home-tab-container" [hidden]="selectedTab.id !== tabItems[0].id">
+  <div class="home-tab-container" [hidden]="selectedTab().id !== tabItems[0].id">
     <cr-content-view></cr-content-view>
   </div>
 
   <div
     class="other-tabs"
-    [ngStyle]="{ display: selectedTab.id === tabItems[0].id ? 'none' : 'flex' }"
+    [ngStyle]="{ display: selectedTab().id === tabItems[0].id ? 'none' : 'flex' }"
   >
     <ion-text class="font-title">
-      {{selectedTab.artboard.toLowerCase()}}
+      {{selectedTab().artboard.toLowerCase()}}
     </ion-text>
   </div>
 </ion-content>
@@ -36,7 +36,7 @@
       height="44"
     >
       <riv-state-machine name="State Machine" play>
-        <riv-input name="isOpen" [value]="isMenuOpen"></riv-input>
+        <riv-input name="isOpen" [value]="isMenuOpen()"></riv-input>
       </riv-state-machine>
     </canvas>
   }
@@ -49,6 +49,5 @@
 <cr-bottom-tab-bar
   #bottomTabs
   style="z-index: 2"
-  [selectedTab]="selectedTab"
-  (tabChanged)="selectedTab = $event"
+  [(selectedTab)]="selectedTab"
 ></cr-bottom-tab-bar>

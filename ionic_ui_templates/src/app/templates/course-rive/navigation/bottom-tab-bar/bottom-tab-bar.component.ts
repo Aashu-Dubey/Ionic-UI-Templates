@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import type { OnInit} from '@angular/core';
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, model, signal } from '@angular/core';
 import { IonCol, IonRow } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 
@@ -22,8 +22,7 @@ import { tabItemsList } from '../../models/tabs';
 })
 export class BottomTabBarComponent implements OnInit {
   tabItems = signal(tabItemsList);
-  @Input() selectedTab: BottomTabItem = this.tabItems()[0];
-  @Output() tabChanged = new EventEmitter<BottomTabItem>();
+  readonly selectedTab = model<BottomTabItem>(this.tabItems()[0]);
 
   ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",
@@ -39,14 +38,14 @@ export class BottomTabBarComponent implements OnInit {
   }
 
   onIconPress(tab: BottomTabItem): void {
-    if (this.selectedTab.id !== tab.id) {
+    if (this.selectedTab().id !== tab.id) {
       this.tabItems.update((items) => items.map((item) => (item.id === tab.id ? { ...item, status: true } : item)));
       setTimeout(() => {
         this.tabItems.update((items) => items.map((item) => (item.id === tab.id ? { ...item, status: false } : item)));
       }, 1000);
 
-      const updated = this.tabItems().find(item => item.id === tab.id) ?? tab;
-      this.tabChanged.emit(updated);
+      const updated = this.tabItems().find((item) => item.id === tab.id) ?? tab;
+      this.selectedTab.set(updated);
     }
   }
 }

@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import type { AfterViewInit, QueryList } from '@angular/core';
 import {
-  ChangeDetectorRef,
   Component,
   ElementRef,
-  ViewChild,
-  ViewChildren,
+  computed,
   inject,
+  signal,
+  viewChild,
+  viewChildren,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
@@ -76,18 +76,18 @@ export const revealAnimation: AnimationBuilder = (
     IonRouterLink,
   ],
 })
-export class DrawerPage implements AfterViewInit {
-  private cdr = inject(ChangeDetectorRef);
+export class DrawerPage {
   private router = inject(Router);
   private menu = inject(MenuController);
   platform = inject(Platform);
 
-  @ViewChild('userAvatar', { read: ElementRef })
-  userAvatarRef?: ElementRef;
-  @ViewChild('menuIcon', { read: ElementRef })
-  menuIconRef?: ElementRef;
-  @ViewChildren('drawerItemList', { read: ElementRef })
-  drawerItemListRef?: QueryList<ElementRef>;
+  private readonly userAvatarRef = viewChild('userAvatar', {
+    read: ElementRef,
+  });
+  private readonly menuIconRef = viewChild('menuIcon', { read: ElementRef });
+  private readonly drawerItemListRef = viewChildren('drawerItemList', {
+    read: ElementRef,
+  });
 
   appPages: DrawerScreen[] = [
     { name: 'Home', icon: 'home', url: '/menu/home' },
@@ -102,28 +102,35 @@ export class DrawerPage implements AfterViewInit {
     { name: 'Rate the app', icon: 'share', url: undefined },
     { name: 'About Us', icon: 'info', url: undefined },
   ];
-  drawerWidth: number = 280;
-  rowWidth: number = this.drawerWidth - 64;
-  activeTab = 'Home';
-  isSplitPane = false; // hide menu button if split pane is enabled (desktop, pad etc.)
+  readonly viewportWidth = signal(this.platform.width());
+  readonly drawerWidth = computed(() => this.viewportWidth() * 0.75);
+  // Hide the menu button when the split pane is enabled (desktop, tablet, ...)
+  readonly isSplitPane = computed(() => this.viewportWidth() >= 992);
+  readonly rowWidth = computed(() =>
+    this.isSplitPane()
+      ? (this.viewportWidth() * 28) / 100 - 64
+      : this.drawerWidth() - 64,
+  );
+
+  readonly activeTab = signal('Home');
   windowResizeEvent?: Subscription;
   routeChangeEvent?: Subscription;
 
-  constructor() {
-    this.widthCalculations();
+  ionViewDidEnter(): void {
+    // Refresh the layout in case the window was resized while this page was cached
+    this.viewportWidth.set(this.platform.width());
+    this.initDrawerAnimation();
 
+    // Page-lifecycle scoped (Ionic caches pages), not component-destroy scoped,
+    // so these stay manual instead of using toSignal().
+    this.windowResizeEvent?.unsubscribe();
     this.windowResizeEvent = this.platform.resize.subscribe(() => {
-      this.widthCalculations();
+      this.viewportWidth.set(this.platform.width());
       this.initDrawerAnimation();
     });
-  }
 
-  ngAfterViewInit(): void {
-    this.initDrawerAnimation();
-  }
-
-  ionViewDidEnter(): void {
     // Listen to screen changes and update 'activeTab', so that it's always in sync when we navigate on browser
+    this.routeChangeEvent?.unsubscribe();
     const routerEvent = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd)
     ) as Observable<NavigationEnd>;
@@ -131,8 +138,7 @@ export class DrawerPage implements AfterViewInit {
     this.routeChangeEvent = routerEvent.subscribe((event) => {
       for (const page of this.appPages) {
         if (event.url === page.url) {
-          this.activeTab = page.name;
-          this.cdr.markForCheck();
+          this.activeTab.set(page.name);
         }
       }
     });
@@ -143,45 +149,30 @@ export class DrawerPage implements AfterViewInit {
     this.routeChangeEvent?.unsubscribe();
   }
 
-  // calculate width for drawer item's active background
-  widthCalculations(): void {
-    const deviceWidth = this.platform.width();
-    this.drawerWidth = deviceWidth * 0.75;
-    if (deviceWidth >= 992) {
-      const splitPaneWidth = (deviceWidth * 28) / 100; // default max split pane width is 28% after 992px
-      this.rowWidth = splitPaneWidth - 64;
-      this.isSplitPane = true;
-    } else {
-      this.rowWidth = this.drawerWidth - 64;
-      this.isSplitPane = false;
-    }
-    this.cdr.markForCheck();
-  }
-
   initDrawerAnimation(): void {
     // Avatar animation
     const avatarAnim = createAnimation()
-      .addElement(this.userAvatarRef?.nativeElement)
+      .addElement(this.userAvatarRef()?.nativeElement)
       // .easing('cubic-bezier(0.4, 0.0, 0.2, 1.0)')
       .fromTo('transform', 'rotate(36deg) scale(0.8)', 'rotate(0deg) scale(1)');
 
     // Drawer Items active background
     const drawerItems: Animation[] = [];
-    const itemRefArray = this.drawerItemListRef?.toArray();
-    for (const itemRef of itemRefArray!) {
+    const itemRefArray = this.drawerItemListRef();
+    for (const itemRef of itemRefArray) {
       const element = itemRef.nativeElement;
       const drawerItemAnim = createAnimation()
         .addElement(element.querySelector('.drawerInnerItem'))
         .fromTo(
           'transform',
-          `translateX(-${this.rowWidth}px)`,
+          `translateX(-${this.rowWidth()}px)`,
           'translateX(0px)'
         );
       drawerItems.push(drawerItemAnim);
     }
 
     // Menu -> arrow icon animation
-    const menuElement = this.menuIconRef?.nativeElement;
+    const menuElement = this.menuIconRef()?.nativeElement;
     // '180.01deg' because particularly in android it's rotating opposite menu open/close (not on drag though)
     // https://stackoverflow.com/a/25694077
     const iconAnim = createAnimation()
@@ -212,7 +203,7 @@ export class DrawerPage implements AfterViewInit {
       .fromTo(
         'transform',
         'translateX(0px)',
-        `translateX(${this.drawerWidth}px)`
+        `translateX(${this.drawerWidth()}px)`
       )
       .addAnimation(iconAnim)
       .addAnimation(line1Anim)
@@ -225,7 +216,7 @@ export class DrawerPage implements AfterViewInit {
 
   onDrawerNavigate(page: DrawerScreen): void {
     if (page.url) {
-      this.activeTab = page.name;
+      this.activeTab.set(page.name);
     }
   }
 

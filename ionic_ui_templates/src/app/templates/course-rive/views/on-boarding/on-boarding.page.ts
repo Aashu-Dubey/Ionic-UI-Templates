@@ -2,15 +2,13 @@ import { CommonModule } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import {
   Component,
-  DestroyRef,
   ElementRef,
-  EventEmitter,
-  Output,
-  ViewChild,
   inject,
+  output,
   signal,
+  viewChild,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import type { Animation } from '@ionic/angular';
 import {
@@ -23,6 +21,7 @@ import {
   IonButton,
 } from '@ionic/angular';
 import { RiveCanvas, RiveLinearAnimation, RivePlayer } from 'ng-rive';
+import { map } from 'rxjs';
 
 import { SignInComponent } from './sign-in/sign-in.component';
 
@@ -47,29 +46,25 @@ import { SignInComponent } from './sign-in/sign-in.component';
 })
 export class OnBoardingPage implements OnInit {
   private animationCtrl = inject(AnimationController);
-  private destroyRef = inject(DestroyRef);
   platform = inject(Platform);
 
-  readonly viewportWidth = signal(this.platform.width());
-  readonly viewportHeight = signal(this.platform.height());
+  readonly viewport = toSignal(
+    this.platform.resize.pipe(map(() => this.getViewport())),
+    { initialValue: this.getViewport() },
+  );
 
-  @ViewChild(IonModal) signInModal?: IonModal;
-  @ViewChild('container', { read: ElementRef }) containerRef?: ElementRef;
-  @ViewChild('closeBtn', { read: ElementRef }) closeBtnRef?: ElementRef;
+  private readonly signInModal = viewChild(IonModal);
+  private readonly containerRef = viewChild('container', { read: ElementRef });
+  private readonly closeBtnRef = viewChild('closeBtn', { read: ElementRef });
 
-  @Output() closeOnBoardingEvent = new EventEmitter();
+  readonly closeOnBoardingEvent = output<void>();
 
   buttonToggle = signal(true);
   showRiveAsset = signal(false);
   showRiveBtn = signal(false);
 
-  constructor() {
-    this.platform.resize
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.viewportWidth.set(this.platform.width());
-        this.viewportHeight.set(this.platform.height());
-      });
+  private getViewport() {
+    return { width: this.platform.width(), height: this.platform.height() };
   }
 
   ngOnInit(): void {
@@ -87,7 +82,7 @@ export class OnBoardingPage implements OnInit {
   startCoursePressed(): void {
     this.buttonToggle.set(true);
     setTimeout(() => {
-      this.signInModal?.present();
+      this.signInModal()?.present();
       this.resetBtnState();
     }, 800);
   }
@@ -100,7 +95,7 @@ export class OnBoardingPage implements OnInit {
   resetBtnState(): void {
     this.buttonToggle.set(false);
     this.showRiveBtn.set(false);
-    setTimeout(() => (this.showRiveBtn.set(true)), 100);
+    setTimeout(() => this.showRiveBtn.set(true), 100);
   }
 
   onCloseOnBoarding(): void {
@@ -108,7 +103,7 @@ export class OnBoardingPage implements OnInit {
   }
 
   onSignInClose(): void {
-    this.signInModal?.dismiss();
+    this.signInModal()?.dismiss();
   }
 
   enterAnimation = (baseEl: HTMLElement): Animation => {
@@ -129,7 +124,7 @@ export class OnBoardingPage implements OnInit {
 
     const onBoardingContent = this.animationCtrl
       .create()
-      .addElement(this.containerRef?.nativeElement)
+      .addElement(this.containerRef()?.nativeElement)
       .keyframes([
         { offset: 0, transform: 'translateY(0px)' },
         { offset: 1, transform: 'translateY(-50px)' },
@@ -137,7 +132,7 @@ export class OnBoardingPage implements OnInit {
 
     const closeBtnAnim = this.animationCtrl
       .create()
-      .addElement(this.closeBtnRef?.nativeElement)
+      .addElement(this.closeBtnRef()?.nativeElement)
       .fromTo('transform', 'translateY(0)', 'translateY(-150px)');
 
     return this.animationCtrl

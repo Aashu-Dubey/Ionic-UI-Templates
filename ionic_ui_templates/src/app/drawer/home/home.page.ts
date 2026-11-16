@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import type { AfterViewInit, QueryList } from '@angular/core';
+import type { AfterViewInit } from '@angular/core';
 import {
   Component,
   ElementRef,
-  ViewChildren,
   inject,
+  signal,
+  viewChildren,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -56,8 +57,9 @@ export class HomePage implements AfterViewInit {
   toastController = inject(ToastController);
 
   // ref: "https://ionicframework.com/blog/building-interactive-ionic-apps-with-gestures-and-animations/"
-  @ViewChildren('templateList', { read: ElementRef })
-  templateListRef?: QueryList<ElementRef>;
+  private readonly templateListRef = viewChildren('templateList', {
+    read: ElementRef,
+  });
 
   templates: Template[] = [
     {
@@ -82,7 +84,7 @@ export class HomePage implements AfterViewInit {
       screenPath: undefined,
     },
   ];
-  multiple = true;
+  readonly multiple = signal(true);
 
   ngAfterViewInit(): void {
     // Workaround just to fix list flicker issue especially on Android
@@ -94,9 +96,9 @@ export class HomePage implements AfterViewInit {
   }
 
   initListAnimation(): void {
-    const itemRefArray = this.templateListRef?.toArray();
-    for (let i = 0; i < itemRefArray!.length; i++) {
-      const element = itemRefArray![i].nativeElement;
+    const itemRefArray = this.templateListRef();
+    for (let i = 0; i < itemRefArray.length; i++) {
+      const element = itemRefArray[i].nativeElement;
 
       this.animationCtrl
         .create()
