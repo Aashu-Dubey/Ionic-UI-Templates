@@ -1,11 +1,9 @@
 import type { Routes } from '@angular/router';
 
-import { DrawerPage } from './drawer.page';
-
 export const routes: Routes = [
   {
     path: 'menu',
-    component: DrawerPage,
+    loadComponent: () => import('./drawer.page').then((m) => m.DrawerPage),
     children: [
       {
         path: 'home',
