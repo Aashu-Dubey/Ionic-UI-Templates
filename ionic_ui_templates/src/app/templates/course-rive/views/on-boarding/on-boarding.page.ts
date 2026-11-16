@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import {
   Component,
@@ -36,7 +35,6 @@ import { SignInComponent } from './sign-in/sign-in.component';
     IonButtons,
     IonModal,
     IonIcon,
-    CommonModule,
     FormsModule,
     RiveCanvas,
     RiveLinearAnimation,

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -21,7 +20,6 @@ import { courseSectionsList, coursesList } from '../../models/course';
     IonGrid,
     IonRow,
     IonCol,
-    CommonModule,
     FormsModule,
     ShuffleArrayPipe,
   ],

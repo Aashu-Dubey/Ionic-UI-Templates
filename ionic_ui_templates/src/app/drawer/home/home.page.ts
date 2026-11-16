@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import type { AfterViewInit } from '@angular/core';
 import {
   Component,
@@ -45,7 +44,6 @@ import type { Template } from '../../types/home';
     IonRow,
     IonCol,
     IonItem,
-    CommonModule,
     FormsModule,
     RouterLink,
     IonRouterLink,

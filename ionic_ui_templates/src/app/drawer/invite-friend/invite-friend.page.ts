@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonButton, IonContent, IonLabel } from '@ionic/angular';
@@ -7,6 +6,6 @@ import { IonButton, IonContent, IonLabel } from '@ionic/angular';
   selector: 'app-invite-friend',
   templateUrl: './invite-friend.page.html',
   styleUrls: ['./invite-friend.page.scss'],
-  imports: [IonContent, IonLabel, IonButton, CommonModule, FormsModule],
+  imports: [IonContent, IonLabel, IonButton, FormsModule],
 })
 export class InviteFriendPage {}

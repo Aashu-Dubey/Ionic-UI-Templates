@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { IonRow, IonText } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 
-import type { MenuItem} from '../../../models/side-menu';
+import type { MenuItem } from '../../../models/side-menu';
 import { menuItemsList } from '../../../models/side-menu';
 
 @Component({
@@ -16,7 +15,6 @@ import { menuItemsList } from '../../../models/side-menu';
     RiveCanvas,
     RiveStateMachine,
     RiveSMInput,
-    CommonModule,
   ],
 })
 export class MenuRowComponent {

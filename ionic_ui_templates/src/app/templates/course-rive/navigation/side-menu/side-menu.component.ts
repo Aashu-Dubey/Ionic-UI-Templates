@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import {
   Component,
@@ -46,7 +45,6 @@ import { MenuRowComponent } from './menu-row/menu-row.component';
     RiveCanvas,
     RiveStateMachine,
     RiveSMInput,
-    CommonModule,
   ],
 })
 export class SideMenuComponent implements OnInit {
