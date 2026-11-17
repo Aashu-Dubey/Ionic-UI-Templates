@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -35,7 +34,6 @@ import { OnBoardingPage } from './views/on-boarding/on-boarding.page';
     RiveCanvas,
     RiveSMInput,
     RiveStateMachine,
-    CommonModule,
     FormsModule,
     SideMenuComponent,
     OnBoardingPage,

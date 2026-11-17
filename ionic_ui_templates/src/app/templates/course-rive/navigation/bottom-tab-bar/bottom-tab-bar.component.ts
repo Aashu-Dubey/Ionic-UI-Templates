@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import type { OnInit} from '@angular/core';
 import { Component, model, signal } from '@angular/core';
 import { IonCol, IonRow } from '@ionic/angular';
@@ -12,7 +11,6 @@ import { tabItemsList } from '../../models/tabs';
   templateUrl: './bottom-tab-bar.component.html',
   styleUrls: ['./bottom-tab-bar.component.scss'],
   imports: [
-    CommonModule,
     IonRow,
     IonCol,
     RiveCanvas,

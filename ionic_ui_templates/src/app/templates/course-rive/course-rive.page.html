@@ -15,7 +15,7 @@
 
   <div
     class="other-tabs"
-    [ngStyle]="{ display: selectedTab().id === tabItems[0].id ? 'none' : 'flex' }"
+    [style.display]="selectedTab().id === tabItems[0].id ? 'none' : 'flex'"
   >
     <ion-text class="font-title">
       {{selectedTab().artboard.toLowerCase()}}

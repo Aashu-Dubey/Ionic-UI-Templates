@@ -12,7 +12,7 @@
         </div>
         @if (tab.show) {
           <canvas
-            [ngStyle]="{ opacity: selectedTab().id === tab.id ? 1 : 0.5 }"
+            [style.opacity]="selectedTab().id === tab.id ? 1 : 0.5"
             riv="icons"
             [artboard]="tab.artboard"
             width="36"
