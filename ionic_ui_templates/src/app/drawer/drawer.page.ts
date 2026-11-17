@@ -7,7 +7,6 @@ import {
   viewChild,
   viewChildren,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import {
   MenuController,
@@ -24,7 +23,6 @@ import {
   IonFooter,
   IonRouterOutlet,
   IonRippleEffect,
-  IonRouterLink,
 } from '@ionic/angular';
 import type { AnimationBuilder, MenuI, Animation } from '@ionic/core/components';
 import { menuController, createAnimation } from '@ionic/core/components';
@@ -69,9 +67,7 @@ export const revealAnimation: AnimationBuilder = (
     IonRippleEffect,
     IonToolbar,
     IonFooter,
-    FormsModule,
     RouterLink,
-    IonRouterLink,
   ],
 })
 export class DrawerPage {

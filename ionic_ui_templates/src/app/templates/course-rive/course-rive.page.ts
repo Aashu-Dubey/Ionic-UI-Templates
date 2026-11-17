@@ -1,6 +1,5 @@
 import type { OnInit } from '@angular/core';
 import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import {
   IonContent,
@@ -34,7 +33,6 @@ import { OnBoardingPage } from './views/on-boarding/on-boarding.page';
     RiveCanvas,
     RiveSMInput,
     RiveStateMachine,
-    FormsModule,
     SideMenuComponent,
     OnBoardingPage,
     ContentViewPage,

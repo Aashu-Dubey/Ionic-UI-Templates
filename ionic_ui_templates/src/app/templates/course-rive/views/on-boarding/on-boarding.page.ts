@@ -8,7 +8,6 @@ import {
   viewChild,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { FormsModule } from '@angular/forms';
 import type { Animation } from '@ionic/angular';
 import {
   AnimationController,
@@ -35,7 +34,6 @@ import { SignInComponent } from './sign-in/sign-in.component';
     IonButtons,
     IonModal,
     IonIcon,
-    FormsModule,
     RiveCanvas,
     RiveLinearAnimation,
     RivePlayer,

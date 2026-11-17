@@ -6,7 +6,6 @@ import {
   signal,
   viewChildren,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import {
   AnimationController,
@@ -23,7 +22,6 @@ import {
   IonRow,
   IonCol,
   IonItem,
-  IonRouterLink,
 } from '@ionic/angular';
 
 import type { Template } from '../../types/home';
@@ -44,9 +42,7 @@ import type { Template } from '../../types/home';
     IonRow,
     IonCol,
     IonItem,
-    FormsModule,
     RouterLink,
-    IonRouterLink,
   ],
 })
 export class HomePage implements AfterViewInit {

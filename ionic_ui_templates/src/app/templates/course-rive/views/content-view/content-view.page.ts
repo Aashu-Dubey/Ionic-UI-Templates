@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import {
   IonCol,
   IonGrid,
@@ -20,7 +19,6 @@ import { courseSectionsList, coursesList } from '../../models/course';
     IonGrid,
     IonRow,
     IonCol,
-    FormsModule,
     ShuffleArrayPipe,
   ],
 })

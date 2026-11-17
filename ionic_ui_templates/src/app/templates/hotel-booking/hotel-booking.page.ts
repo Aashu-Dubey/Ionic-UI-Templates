@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 
 @Component({
@@ -12,7 +11,6 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
     IonHeader,
     IonTitle,
     IonToolbar,
-    FormsModule,
   ],
 })
 export class HotelBookingPage {}
