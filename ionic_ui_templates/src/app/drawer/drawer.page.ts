@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -70,7 +69,6 @@ export const revealAnimation: AnimationBuilder = (
     IonRippleEffect,
     IonToolbar,
     IonFooter,
-    CommonModule,
     FormsModule,
     RouterLink,
     IonRouterLink,

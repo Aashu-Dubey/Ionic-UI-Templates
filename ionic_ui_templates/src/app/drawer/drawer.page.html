@@ -55,7 +55,7 @@
                   <img
                     style="width: 24px; height: 24px"
                     class="icon-margin"
-                    [ngClass]="{'imgTintBlue': activeTab() === p.name, 'imgTintBlack': activeTab() !== p.name}"
+                    [class]="activeTab() === p.name ? 'imgTintBlue' : 'imgTintBlack'"
                     src="assets/home/supportIcon.png"
                     [alt]="p.name"
                     loading="lazy"
@@ -87,7 +87,6 @@
   </ion-split-pane>
 
   <!-- Reference:- https://codepen.io/carlosriera/pen/qNgAEo/ -->
-  <!-- [ngClass]="{'open': isMenuActive === true}" -->
   <button
     style="position: absolute"
     class="menu menu--back5 ion-activatable"

@@ -7,7 +7,7 @@
         <div class="active-indicator-container">
           <div
             class="active-indicator"
-            [ngClass]="selectedTab().id === tab.id ? 'expand' : ''"
+            [class.expand]="selectedTab().id === tab.id"
           ></div>
         </div>
         @if (tab.show) {
