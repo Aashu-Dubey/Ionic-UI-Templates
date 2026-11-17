@@ -42,7 +42,7 @@
                   [style.--width]="rowWidth() + 'px'"
                   [style.--background]="activeTab() === p.name ? 'rgba(33, 150, 243, 0.2)' : 'transparent'"
                   lines="none"
-                ></ion-item>
+                />
                 @if (!p.isAsset) {
                   <i
                     [style.color]="activeTab() === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
@@ -83,7 +83,7 @@
       </ion-footer>
     </ion-menu>
 
-    <ion-router-outlet id="main-content"></ion-router-outlet>
+    <ion-router-outlet id="main-content" />
   </ion-split-pane>
 
   <!-- Reference:- https://codepen.io/carlosriera/pen/qNgAEo/ -->
@@ -100,6 +100,6 @@
       <div class="menu__line menu__line--2"></div>
       <div class="menu__line menu__line--3"></div>
     </div>
-    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+    <ion-ripple-effect type="unbounded" />
   </button>
 </div>

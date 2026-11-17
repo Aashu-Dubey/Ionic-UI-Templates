@@ -24,7 +24,7 @@
         inputmode="email"
         enterkeyhint="next"
         [(ngModel)]="email"
-      ></ion-input>
+      />
     </ion-item>
 
     <ion-text class="font-subheadline input-title">
@@ -37,7 +37,7 @@
         loading="lazy"
         decoding="async"
       />
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="password" />
     </ion-item>
 
     <ion-button
@@ -48,7 +48,7 @@
         signIn(triggerSuccess, triggerError, triggerReset, triggerConfetti)
       "
     >
-      <ion-icon class="icon" name="arrow-forward-outline"></ion-icon>
+      <ion-icon class="icon" name="arrow-forward-outline" />
       Sign In
     </ion-button>
 
@@ -84,16 +84,16 @@
 
     <div class="close-container">
       <ion-button (click)="onSignInClose()">
-        <ion-icon name="close-outline"></ion-icon>
+        <ion-icon name="close-outline" />
       </ion-button>
     </div>
 
     <div class="rive-auth-indicator-container">
       <canvas riv="check" width="100" height="100" [hidden]="!isLoading()">
         <riv-state-machine name="State Machine 1" play>
-          <riv-input #triggerSuccess="rivInput" name="Check"></riv-input>
-          <riv-input #triggerError="rivInput" name="Error"></riv-input>
-          <riv-input #triggerReset="rivInput" name="Reset"></riv-input>
+          <riv-input #triggerSuccess="rivInput" name="Check" />
+          <riv-input #triggerError="rivInput" name="Error" />
+          <riv-input #triggerReset="rivInput" name="Reset" />
         </riv-state-machine>
       </canvas>
       <canvas class="rive-confetti" riv="confetti" width="1500" height="1500">
@@ -101,7 +101,7 @@
           <riv-input
             #triggerConfetti="rivInput"
             name="Trigger explosion"
-          ></riv-input>
+          />
         </riv-state-machine>
       </canvas>
     </div>

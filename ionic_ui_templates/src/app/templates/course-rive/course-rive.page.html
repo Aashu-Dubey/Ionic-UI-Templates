@@ -1,16 +1,16 @@
 <div class="screen-background"></div>
 
 <!-- Side Menu -->
-<cr-side-menu #sideMenu></cr-side-menu>
+<cr-side-menu #sideMenu />
 
 <cr-on-boarding
   #onBoarding
   (closeOnBoardingEvent)="showOnBoardingToggle()"
-></cr-on-boarding>
+/>
 
 <ion-content #mainContent>
   <div class="home-tab-container" [hidden]="selectedTab().id !== tabItems[0].id">
-    <cr-content-view></cr-content-view>
+    <cr-content-view />
   </div>
 
   <div
@@ -24,7 +24,7 @@
 </ion-content>
 
 <button #onBoardingBtn class="on-boarding-btn" (click)="showOnBoardingToggle()">
-  <ion-icon name="person-outline"></ion-icon>
+  <ion-icon name="person-outline" />
 </button>
 
 <!-- Menu button -->
@@ -36,7 +36,7 @@
       height="44"
     >
       <riv-state-machine name="State Machine" play>
-        <riv-input name="isOpen" [value]="isMenuOpen()"></riv-input>
+        <riv-input name="isOpen" [value]="isMenuOpen()" />
       </riv-state-machine>
     </canvas>
   }
@@ -50,4 +50,4 @@
   #bottomTabs
   style="z-index: 2"
   [(selectedTab)]="selectedTab"
-></cr-bottom-tab-bar>
+/>

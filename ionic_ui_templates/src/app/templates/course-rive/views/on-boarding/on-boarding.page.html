@@ -14,7 +14,7 @@
       [width]="viewport().width"
       [height]="viewport().height"
     >
-      <riv-animation name="Animation 1" play></riv-animation>
+      <riv-animation name="Animation 1" play />
     </canvas>
   }
 
@@ -41,11 +41,11 @@
             [(play)]="buttonToggle"
             autoreset
             mode="one-shot"
-          ></riv-player>
+          />
         }
       </canvas>
       <div class="contained btnContent">
-        <ion-icon class="arrow" name="arrow-forward-outline"></ion-icon>
+        <ion-icon class="arrow" name="arrow-forward-outline" />
         <ion-text>Start the course</ion-text>
       </div>
     </ion-buttons>
@@ -56,7 +56,7 @@
   </div>
 
   <ion-button #closeBtn class="close-btn" (click)="onCloseOnBoarding()">
-    <ion-icon name="close-outline"></ion-icon>
+    <ion-icon name="close-outline" />
   </ion-button>
 
   <ion-modal
@@ -67,7 +67,7 @@
   >
     <ng-template>
       <div class="ion-page">
-        <cr-sign-in (closeClicked)="onSignInClose()"></cr-sign-in>
+        <cr-sign-in (closeClicked)="onSignInClose()" />
       </div>
     </ng-template>
   </ion-modal>

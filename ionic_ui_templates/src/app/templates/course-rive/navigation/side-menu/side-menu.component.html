@@ -1,6 +1,6 @@
 <div class="side-menu">
   <ion-row class="header">
-    <ion-icon class="user-icon" name="person-outline"></ion-icon>
+    <ion-icon class="user-icon" name="person-outline" />
     <ion-col>
       <ion-text class="font-body">Ashu</ion-text>
       <br />
@@ -19,7 +19,7 @@
             #menuItems
             [menu]="menu"
             (pressed)="onMenuItemPress(menu)"
-          ></cr-menu-row>
+          />
         }
       </div>
     </div>
@@ -32,7 +32,7 @@
             #menuItems2
             [menu]="menu"
             (pressed)="onMenuItemPress(menu)"
-          ></cr-menu-row>
+          />
         }
       </div>
     </div>
@@ -48,7 +48,7 @@
         detail="false"
         (click)="goBack()"
       >
-        <ion-icon class="exit-icon" name="exit-outline"></ion-icon>
+        <ion-icon class="exit-icon" name="exit-outline" />
         <ion-text class="font-headline">Exit</ion-text>
       </ion-item>
     }
@@ -63,7 +63,7 @@
             height="32"
           >
             <riv-state-machine [name]="menuItems3()[0].stateMachine" play>
-              <riv-input name="active" [value]="menuItems3()[0].status"></riv-input>
+              <riv-input name="active" [value]="menuItems3()[0].status" />
             </riv-state-machine>
           </canvas>
         }
