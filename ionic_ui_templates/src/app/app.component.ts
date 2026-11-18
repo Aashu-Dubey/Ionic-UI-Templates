@@ -12,7 +12,7 @@ import { IonApp, IonRouterOutlet, Platform } from '@ionic/angular';
 export class AppComponent {
   private platform = inject(Platform);
 
-  private readonly routerOutlet = viewChild(IonRouterOutlet);
+  private readonly routerOutlet = viewChild.required(IonRouterOutlet);
 
   constructor() {
     SafeAreaController.injectCSSVariables();
@@ -21,7 +21,7 @@ export class AppComponent {
 
     // By default Ionic doesn't close app on back click, so we handle that here
     this.platform.backButton.subscribeWithPriority(-1, () => {
-      if (!this.routerOutlet()?.canGoBack()) {
+      if (!this.routerOutlet().canGoBack()) {
         App.exitApp();
       }
     });

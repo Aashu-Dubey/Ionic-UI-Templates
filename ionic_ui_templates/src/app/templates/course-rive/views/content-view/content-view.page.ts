@@ -13,7 +13,6 @@ import { courseSectionsList, coursesList } from '../../models/course';
   selector: 'cr-content-view',
   templateUrl: './content-view.page.html',
   styleUrls: ['./content-view.page.scss'],
-  standalone: true,
   imports: [
     IonText,
     IonGrid,

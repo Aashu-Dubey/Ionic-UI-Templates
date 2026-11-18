@@ -23,6 +23,7 @@ import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 
 import type { MenuItem } from '../../models/side-menu';
 import {
+  DEFAULT_MENU_ID,
   menuItems2List,
   menuItems3List,
   menuItemsList,
@@ -65,7 +66,7 @@ export class SideMenuComponent implements OnInit {
   readonly allMenus = computed(() => [...this.menuItems(), ...this.menuItems2()]);
 
   // Plain field: read synchronously locally, never bound in the template.
-  selectedMenuId = this.menuItems()[0].id;
+  selectedMenuId = DEFAULT_MENU_ID;
   readonly isDarkMode = signal(false);
 
   ngOnInit(): void {

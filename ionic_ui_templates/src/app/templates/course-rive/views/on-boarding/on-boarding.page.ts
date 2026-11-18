@@ -27,7 +27,6 @@ import { SignInComponent } from './sign-in/sign-in.component';
   selector: 'cr-on-boarding',
   templateUrl: './on-boarding.page.html',
   styleUrls: ['./on-boarding.page.scss'],
-  standalone: true,
   imports: [
     IonText,
     IonButton,
@@ -49,9 +48,9 @@ export class OnBoardingPage implements OnInit {
     { initialValue: this.getViewport() },
   );
 
-  private readonly signInModal = viewChild(IonModal);
-  private readonly containerRef = viewChild('container', { read: ElementRef });
-  private readonly closeBtnRef = viewChild('closeBtn', { read: ElementRef });
+  private readonly signInModal = viewChild.required(IonModal);
+  private readonly containerRef = viewChild.required('container', { read: ElementRef });
+  private readonly closeBtnRef = viewChild.required('closeBtn', { read: ElementRef });
 
   readonly closeOnBoardingEvent = output<void>();
 
@@ -78,7 +77,7 @@ export class OnBoardingPage implements OnInit {
   startCoursePressed(): void {
     this.buttonToggle.set(true);
     setTimeout(() => {
-      this.signInModal()?.present();
+      this.signInModal().present();
       this.resetBtnState();
     }, 800);
   }
@@ -99,7 +98,7 @@ export class OnBoardingPage implements OnInit {
   }
 
   onSignInClose(): void {
-    this.signInModal()?.dismiss();
+    this.signInModal().dismiss();
   }
 
   enterAnimation = (baseEl: HTMLElement): Animation => {
@@ -120,7 +119,7 @@ export class OnBoardingPage implements OnInit {
 
     const onBoardingContent = this.animationCtrl
       .create()
-      .addElement(this.containerRef()?.nativeElement)
+      .addElement(this.containerRef().nativeElement)
       .keyframes([
         { offset: 0, transform: 'translateY(0px)' },
         { offset: 1, transform: 'translateY(-50px)' },
@@ -128,7 +127,7 @@ export class OnBoardingPage implements OnInit {
 
     const closeBtnAnim = this.animationCtrl
       .create()
-      .addElement(this.closeBtnRef()?.nativeElement)
+      .addElement(this.closeBtnRef().nativeElement)
       .fromTo('transform', 'translateY(0)', 'translateY(-150px)');
 
     return this.animationCtrl

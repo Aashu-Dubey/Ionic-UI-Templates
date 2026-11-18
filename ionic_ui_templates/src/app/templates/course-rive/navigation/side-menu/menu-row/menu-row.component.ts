@@ -3,7 +3,7 @@ import { IonRow, IonText } from '@ionic/angular';
 import { RiveCanvas, RiveSMInput, RiveStateMachine } from 'ng-rive';
 
 import type { MenuItem } from '../../../models/side-menu';
-import { menuItemsList } from '../../../models/side-menu';
+import { DEFAULT_MENU_ID } from '../../../models/side-menu';
 
 @Component({
   selector: 'cr-menu-row',
@@ -18,6 +18,7 @@ import { menuItemsList } from '../../../models/side-menu';
   ],
 })
 export class MenuRowComponent {
-  readonly menu = input<MenuItem>(menuItemsList[0]);
+  readonly defaultMenuId = DEFAULT_MENU_ID;
+  readonly menu = input.required<MenuItem>();
   readonly pressed = output<void>();
 }

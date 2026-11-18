@@ -9,13 +9,14 @@
 />
 
 <ion-content #mainContent>
-  <div class="home-tab-container" [hidden]="selectedTab().id !== tabItems[0].id">
+  @let isHomeTab = selectedTab().id === tabItems[0].id;
+  <div class="home-tab-container" [hidden]="!isHomeTab">
     <cr-content-view />
   </div>
 
   <div
     class="other-tabs"
-    [style.display]="selectedTab().id === tabItems[0].id ? 'none' : 'flex'"
+    [style.display]="isHomeTab ? 'none' : 'flex'"
   >
     <ion-text class="font-title">
       {{selectedTab().artboard.toLowerCase()}}

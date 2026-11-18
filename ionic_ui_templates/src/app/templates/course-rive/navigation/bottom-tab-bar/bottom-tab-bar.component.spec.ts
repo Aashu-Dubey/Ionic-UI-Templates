@@ -1,6 +1,8 @@
 import type { ComponentFixture} from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
+import { tabItemsList } from '../../models/tabs';
+
 import { BottomTabBarComponent } from './bottom-tab-bar.component';
 
 describe('BottomTabBarComponent', () => {
@@ -9,6 +11,7 @@ describe('BottomTabBarComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BottomTabBarComponent);
+    fixture.componentRef.setInput('selectedTab', tabItemsList[0]);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

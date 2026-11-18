@@ -25,6 +25,7 @@
       <ion-content>
         <ion-list class="ion-no-padding">
           @for (p of appPages; track $index) {
+            @let isActive = activeTab() === p.name;
             <ion-menu-toggle
               auto-hide="false"
               #drawerItemList
@@ -40,12 +41,12 @@
                 <ion-item
                   class="drawerInnerItem"
                   [style.--width]="rowWidth() + 'px'"
-                  [style.--background]="activeTab() === p.name ? 'rgba(33, 150, 243, 0.2)' : 'transparent'"
+                  [style.--background]="isActive ? 'rgba(33, 150, 243, 0.2)' : 'transparent'"
                   lines="none"
                 />
                 @if (!p.isAsset) {
                   <i
-                    [style.color]="activeTab() === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
+                    [style.color]="isActive ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
                     class="material-icons icon-margin"
                   >
                     {{p.icon}}
@@ -55,7 +56,7 @@
                   <img
                     style="width: 24px; height: 24px"
                     class="icon-margin"
-                    [class]="activeTab() === p.name ? 'imgTintBlue' : 'imgTintBlack'"
+                    [class]="isActive ? 'imgTintBlue' : 'imgTintBlack'"
                     src="assets/home/supportIcon.png"
                     [alt]="p.name"
                     loading="lazy"
@@ -64,7 +65,7 @@
                 }
                 <ion-label
                   style="font-weight: 500; font-size: 16px; margin-left: 8px"
-                  [style.color]="activeTab() === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
+                  [style.color]="isActive ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
                   >{{p.name}}
                 </ion-label>
               </ion-item>

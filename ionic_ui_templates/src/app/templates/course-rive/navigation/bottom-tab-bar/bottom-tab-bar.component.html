@@ -1,18 +1,19 @@
 <div class="gradient-border">
   <ion-row class="tabs-container">
     @for (tab of tabItems(); track tab.id) {
+      @let isActive = selectedTab().id === tab.id;
       <ion-col
         (click)="onIconPress(tab)"
       >
         <div class="active-indicator-container">
           <div
             class="active-indicator"
-            [class.expand]="selectedTab().id === tab.id"
+            [class.expand]="isActive"
           ></div>
         </div>
         @if (tab.show) {
           <canvas
-            [style.opacity]="selectedTab().id === tab.id ? 1 : 0.5"
+            [style.opacity]="isActive ? 1 : 0.5"
             riv="icons"
             [artboard]="tab.artboard"
             width="36"

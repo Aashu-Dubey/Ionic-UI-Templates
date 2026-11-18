@@ -1,7 +1,7 @@
-import type { AfterViewInit } from '@angular/core';
 import {
   Component,
   ElementRef,
+  afterNextRender,
   inject,
   signal,
   viewChildren,
@@ -45,17 +45,17 @@ import type { Template } from '../../types/home';
     RouterLink,
   ],
 })
-export class HomePage implements AfterViewInit {
+export class HomePage {
   private animationCtrl = inject(AnimationController);
   private platform = inject(Platform);
-  toastController = inject(ToastController);
+  private toastController = inject(ToastController);
 
   // ref: "https://ionicframework.com/blog/building-interactive-ionic-apps-with-gestures-and-animations/"
   private readonly templateListRef = viewChildren('templateList', {
     read: ElementRef,
   });
 
-  templates: Template[] = [
+  readonly templates: Template[] = [
     {
       id: 'course-rive',
       background: 'assets/course_rive/course_rive.png',
@@ -80,13 +80,14 @@ export class HomePage implements AfterViewInit {
   ];
   readonly multiple = signal(true);
 
-  ngAfterViewInit(): void {
-    // Workaround just to fix list flicker issue especially on Android
-    setTimeout(
-      () => this.initListAnimation(),
-      this.platform.is('android') ? 500 : 0
-    );
-    // this.initListAnimation();
+  constructor() {
+    afterNextRender(() => {
+      // Workaround just to fix list flicker issue especially on Android
+      setTimeout(
+        () => this.initListAnimation(),
+        this.platform.is('android') ? 500 : 0
+      );
+    });
   }
 
   initListAnimation(): void {

@@ -36,6 +36,7 @@ export const menuItemsList: MenuItem[] = [
     show: false,
   },
 ];
+export const DEFAULT_MENU_ID = menuItemsList[0].id;
 export const menuItems2List: MenuItem[] = [
   {
     id: 'History',

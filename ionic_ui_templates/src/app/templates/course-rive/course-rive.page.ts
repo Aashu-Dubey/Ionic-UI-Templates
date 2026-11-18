@@ -42,23 +42,23 @@ import { OnBoardingPage } from './views/on-boarding/on-boarding.page';
 export class CourseRivePage implements OnInit {
   animationCtrl = inject(AnimationController);
 
-  private readonly mainContentRef = viewChild('mainContent', {
+  private readonly mainContentRef = viewChild.required('mainContent', {
     read: ElementRef,
   });
-  private readonly menuToggleBtnRef = viewChild('menuToggleBtn', {
+  private readonly menuToggleBtnRef = viewChild.required('menuToggleBtn', {
     read: ElementRef,
   });
-  private readonly sideMenuRef = viewChild('sideMenu', { read: ElementRef });
-  private readonly bottomTabRef = viewChild('bottomTabs', {
+  private readonly sideMenuRef = viewChild.required('sideMenu', { read: ElementRef });
+  private readonly bottomTabRef = viewChild.required('bottomTabs', {
     read: ElementRef,
   });
-  private readonly onBoardingBtnRef = viewChild('onBoardingBtn', {
+  private readonly onBoardingBtnRef = viewChild.required('onBoardingBtn', {
     read: ElementRef,
   });
-  private readonly onBoardingRef = viewChild('onBoarding', {
+  private readonly onBoardingRef = viewChild.required('onBoarding', {
     read: ElementRef,
   });
-  private readonly tabWhiteBgRef = viewChild('tabWhiteBg', {
+  private readonly tabWhiteBgRef = viewChild.required('tabWhiteBg', {
     read: ElementRef,
   });
 
@@ -86,7 +86,7 @@ export class CourseRivePage implements OnInit {
     const transformBottom = 'calc(((100vh - (100vh * 0.92)) / 2) + 20px)';
     const onBoardingAnim = this.animationCtrl
       .create()
-      .addElement(this.onBoardingRef()?.nativeElement)
+      .addElement(this.onBoardingRef().nativeElement)
       .fromTo(
         'transform',
         // Here 40px is extra shadow area to avoid it being shown when modal is closed
@@ -96,17 +96,17 @@ export class CourseRivePage implements OnInit {
 
     const contentViewAnim = this.animationCtrl
       .create()
-      .addElement(this.mainContentRef()?.nativeElement)
+      .addElement(this.mainContentRef().nativeElement)
       .fromTo('transform', 'none', 'scale(0.92)');
 
     const bottomTabAnim = this.animationCtrl
       .create()
-      .addElement(this.bottomTabRef()?.nativeElement)
+      .addElement(this.bottomTabRef().nativeElement)
       .fromTo('transform', 'none', 'translateY(200px)');
 
     const tabWhiteBgAnim = this.animationCtrl
       .create()
-      .addElement(this.tabWhiteBgRef()?.nativeElement)
+      .addElement(this.tabWhiteBgRef().nativeElement)
       .fromTo('opacity', '1', '0');
 
     const allAnim = this.animationCtrl
@@ -134,7 +134,7 @@ export class CourseRivePage implements OnInit {
 
     const contentViewAnim = this.animationCtrl
       .create()
-      .addElement(this.mainContentRef()?.nativeElement)
+      .addElement(this.mainContentRef().nativeElement)
       .fromTo(
         'transform',
         'none',
@@ -144,12 +144,12 @@ export class CourseRivePage implements OnInit {
 
     const menuBtnAnim = this.animationCtrl
       .create()
-      .addElement(this.menuToggleBtnRef()?.nativeElement)
+      .addElement(this.menuToggleBtnRef().nativeElement)
       .fromTo('transform', 'none', 'translateX(216px)');
 
     const sideMenuAnim = this.animationCtrl
       .create()
-      .addElement(this.sideMenuRef()?.nativeElement)
+      .addElement(this.sideMenuRef().nativeElement)
       .fromTo(
         'transform',
         'perspective(700px) translateX(-300px) rotateY(30deg)',
@@ -158,17 +158,17 @@ export class CourseRivePage implements OnInit {
 
     const bottomTabAnim = this.animationCtrl
       .create()
-      .addElement(this.bottomTabRef()?.nativeElement)
+      .addElement(this.bottomTabRef().nativeElement)
       .fromTo('transform', 'none', 'translateY(300px)');
 
     const onBoardingBtnAnim = this.animationCtrl
       .create()
-      .addElement(this.onBoardingBtnRef()?.nativeElement)
+      .addElement(this.onBoardingBtnRef().nativeElement)
       .fromTo('transform', 'none', 'translateX(100px)');
 
     const tabWhiteBgAnim = this.animationCtrl
       .create()
-      .addElement(this.tabWhiteBgRef()?.nativeElement)
+      .addElement(this.tabWhiteBgRef().nativeElement)
       .fromTo('opacity', '1', '0');
 
     const allAnim = this.animationCtrl

@@ -20,7 +20,7 @@ import { tabItemsList } from '../../models/tabs';
 })
 export class BottomTabBarComponent implements OnInit {
   tabItems = signal(tabItemsList);
-  readonly selectedTab = model<BottomTabItem>(this.tabItems()[0]);
+  readonly selectedTab = model.required<BottomTabItem>();
 
   ngOnInit(): void {
     // Temporary solution to fix the rive asset loading issue causing "Binding Error",

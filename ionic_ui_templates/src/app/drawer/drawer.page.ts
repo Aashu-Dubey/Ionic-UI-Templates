@@ -75,15 +75,17 @@ export class DrawerPage {
   private menu = inject(MenuController);
   platform = inject(Platform);
 
-  private readonly userAvatarRef = viewChild('userAvatar', {
+  private readonly userAvatarRef = viewChild.required('userAvatar', {
     read: ElementRef,
   });
-  private readonly menuIconRef = viewChild('menuIcon', { read: ElementRef });
+  private readonly menuIconRef = viewChild.required('menuIcon', {
+    read: ElementRef,
+  });
   private readonly drawerItemListRef = viewChildren('drawerItemList', {
     read: ElementRef,
   });
 
-  appPages: DrawerScreen[] = [
+  readonly appPages: DrawerScreen[] = [
     { name: 'Home', icon: 'home', url: '/menu/home' },
     {
       name: 'Help',
@@ -146,7 +148,7 @@ export class DrawerPage {
   initDrawerAnimation(): void {
     // Avatar animation
     const avatarAnim = createAnimation()
-      .addElement(this.userAvatarRef()?.nativeElement)
+      .addElement(this.userAvatarRef().nativeElement)
       // .easing('cubic-bezier(0.4, 0.0, 0.2, 1.0)')
       .fromTo('transform', 'rotate(36deg) scale(0.8)', 'rotate(0deg) scale(1)');
 
@@ -166,7 +168,7 @@ export class DrawerPage {
     }
 
     // Menu -> arrow icon animation
-    const menuElement = this.menuIconRef()?.nativeElement;
+    const menuElement = this.menuIconRef().nativeElement;
     // '180.01deg' because particularly in android it's rotating opposite menu open/close (not on drag though)
     // https://stackoverflow.com/a/25694077
     const iconAnim = createAnimation()

@@ -2,7 +2,7 @@
   <div class="seperator"></div>
   <div
     class="menu-btn-bg"
-    [style.width.px]="menu().id === 'Home' ? 272 : 0"
+    [style.width.px]="menu().id === defaultMenuId ? 272 : 0"
   ></div>
 
   <ion-row class="menu-btn-container" (click)="pressed.emit()">
